@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import { suit } from "./fonts/suit";
 
 export const metadata: Metadata = {
   title: "hayoung.dev",
@@ -15,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className={`antialiased ${suit.variable} font-sans`}>
         {children}
         <Analytics />
         <SpeedInsights />
