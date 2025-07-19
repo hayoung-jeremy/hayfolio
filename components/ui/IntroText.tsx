@@ -48,7 +48,7 @@ const IntroText = () => {
   return (
     <div
       ref={containerRef}
-      className="w-screen xl:w-full h-screen flex flex-col items-center justify-center text-center"
+      className="IntroText w-screen xl:w-full h-screen flex flex-col items-center justify-center text-center"
     >
       <h1 className="split-text-main text-4xl md:text-5xl xl:text-7xl font-bold leading-tight">
         안녕하세요, <br className="md:hidden" /> 하영입니다.
