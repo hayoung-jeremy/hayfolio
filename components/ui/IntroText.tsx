@@ -15,7 +15,7 @@ const IntroText = () => {
         y: 40,
         rotateX: 90,
         transformOrigin: "0% 50% -20px",
-        ease: "back.out(1.9)",
+        ease: "power3.out",
         stagger: 0.06,
         duration: 0.7,
       });
@@ -34,12 +34,12 @@ const IntroText = () => {
       const guideSplit = new SplitText(".scroll-guide", { type: "lines" });
       gsap.from(guideSplit.lines, {
         rotationX: -100,
-        transformOrigin: "50% 50% -160px",
+        transformOrigin: "50% 50% -30px",
         opacity: 0,
         duration: 0.8,
         ease: "power3.out",
         stagger: 0.2,
-        delay: 1.1,
+        delay: 1.7,
       });
     },
     { scope: containerRef }
