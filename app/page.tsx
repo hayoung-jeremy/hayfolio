@@ -1,3 +1,9 @@
+import IntroText from "@/components/ui/IntroText";
+
 export default function Home() {
-  return <main className="">Hay</main>;
+  return (
+    <main className="">
+      <IntroText />
+    </main>
+  );
 }
