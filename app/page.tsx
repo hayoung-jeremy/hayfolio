@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import IntroText from "@/components/ui/IntroText";
-import CanvasWrapper from "@/components/3d/CanvasWrapper";
+import { ScenesContainer } from "@/components/3d/scenes";
 
 export default function Home() {
   useGSAP(() => {
@@ -20,11 +20,11 @@ export default function Home() {
       },
     });
 
-    gsap.to(".ThreeScene", {
+    gsap.to(".ScenesContainer", {
       opacity: 1,
       scrollTrigger: {
-        trigger: ".ThreeScene",
-        start: "top center",
+        trigger: ".ScenesContainer",
+        start: "top 40%",
         end: "top top",
         scrub: true,
       },
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <main className="">
       <IntroText />
-      <CanvasWrapper />
+      <ScenesContainer />
     </main>
   );
 }

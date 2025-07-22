@@ -1,14 +1,12 @@
 "use client";
-import React from "react";
+import useDisplay from "@/hooks/useDisplay";
 import { Canvas } from "@react-three/fiber";
-import { Box } from "@react-three/drei";
 
-const CanvasWrapper = () => {
+const CanvasWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { isDesktop } = useDisplay();
   return (
-    <div className="ThreeScene opacity-0 pointer-events-none w-screen xl:w-full h-screen">
-      <Canvas>
-        <Box />
-      </Canvas>
+    <div className="w-screen xl:w-full h-screen touch-pan-y">
+      <Canvas style={{ pointerEvents: isDesktop ? "auto" : "none" }}>{children}</Canvas>
     </div>
   );
 };
