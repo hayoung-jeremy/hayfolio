@@ -1,5 +1,6 @@
 import CanvasWrapper from "../CanvasWrapper";
 import CreateYourEpicCarPreviewScene from "./CreateYourEpicCarPreviewScene";
+import Xperiencemor3PreviewScene from "./Xperiencemor3PreviewScene";
 
 const ScenesContainer = () => {
   return (
@@ -7,6 +8,7 @@ const ScenesContainer = () => {
       <div className="sticky top-0 h-screen">
         <CanvasWrapper>
           <CreateYourEpicCarPreviewScene />
+          <Xperiencemor3PreviewScene />
         </CanvasWrapper>
       </div>
     </div>
