@@ -1,11 +1,43 @@
+import { useRef } from "react";
+import { Group, Mesh } from "three";
+import { useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
-import { XM3_container } from "../assets/XM3";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { KernelSize } from "postprocessing";
-import useDisplay from "@/hooks/useDisplay";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { animated, useSpring } from "@react-spring/three";
 
-const CreateYourEpicCarPreviewScene = () => {
+import { XM3_container } from "../assets/XM3";
+import useDisplay from "@/hooks/useDisplay";
+import { SceneProps } from "@/types/scene";
+
+const CreateYourEpicCarPreviewScene = ({ visible }: SceneProps) => {
+  const groupRef = useRef<Group>(null);
+
   const { isDesktop } = useDisplay();
+
+  const { opacity, scale } = useSpring({
+    opacity: visible ? 0.2 : 0,
+    scale: visible ? 1 : 0.85,
+    config: { tension: 180, friction: 26 },
+  });
+
+  useFrame(() => {
+    if (!groupRef.current) return;
+
+    groupRef.current.traverse(child => {
+      if ("material" in child) {
+        const mesh = child as Mesh;
+        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+
+        materials.forEach(mat => {
+          mat.transparent = true;
+          mat.opacity = opacity.get();
+        });
+      }
+    });
+  });
+
+  if (!visible && opacity.get() < 0.01) return null;
 
   return (
     <>
@@ -17,7 +49,9 @@ const CreateYourEpicCarPreviewScene = () => {
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 3}
       />
-      <XM3_container />
+      <animated.group ref={groupRef} scale={scale}>
+        <XM3_container />
+      </animated.group>
 
       <Environment>
         <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, -9]} scale={[10, 1, 1]} />

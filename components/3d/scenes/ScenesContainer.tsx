@@ -32,8 +32,8 @@ const ScenesContainer = () => {
     <div className="ScenesContainer opacity-0 h-[300vh] relative z-10">
       <div className="sticky top-0 h-screen">
         <CanvasWrapper>
-          {progress < 0.5 && <CreateYourEpicCarPreviewScene />}
-          {progress >= 0.5 && <Xperiencemor3PreviewScene />}
+          <CreateYourEpicCarPreviewScene visible={progress < 0.45} />
+          <Xperiencemor3PreviewScene visible={progress >= 0.55} />
         </CanvasWrapper>
       </div>
     </div>
