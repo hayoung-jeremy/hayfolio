@@ -3,10 +3,12 @@ import CreateYourEpicCarPreviewScene from "./CreateYourEpicCarPreviewScene";
 
 const ScenesContainer = () => {
   return (
-    <div className="ScenesContainer opacity-0 z-10">
-      <CanvasWrapper>
-        <CreateYourEpicCarPreviewScene />
-      </CanvasWrapper>
+    <div className="ScenesContainer opacity-0 h-[300vh] relative z-10">
+      <div className="sticky top-0 h-screen">
+        <CanvasWrapper>
+          <CreateYourEpicCarPreviewScene />
+        </CanvasWrapper>
+      </div>
     </div>
   );
 };

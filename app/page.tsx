@@ -34,6 +34,7 @@ export default function Home() {
     <main className="">
       <IntroText />
       <ScenesContainer />
+      <div className="h-screen flex items-center justify-center">dummy Footer</div>
     </main>
   );
 }
