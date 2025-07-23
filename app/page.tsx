@@ -2,6 +2,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,10 +32,15 @@ export default function Home() {
     });
   }, []);
   return (
-    <main className="">
+    <motion.main
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 1 }}
+    >
       <IntroText />
       <ScenesContainer />
       <div className="h-screen flex items-center justify-center">dummy Footer</div>
-    </main>
+    </motion.main>
   );
 }
