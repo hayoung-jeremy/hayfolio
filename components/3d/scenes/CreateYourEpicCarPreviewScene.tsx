@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
 import { KernelSize } from "postprocessing";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { animated, useSpring } from "@react-spring/three";
+import { animated, useSpring, config } from "@react-spring/three";
 
 import { XM3_container } from "../assets/XM3";
 import useDisplay from "@/hooks/useDisplay";
@@ -18,7 +18,7 @@ const CreateYourEpicCarPreviewScene = ({ visible }: SceneProps) => {
   const { opacity, scale } = useSpring({
     opacity: visible ? 0.2 : 0,
     scale: visible ? 1 : 0.85,
-    config: { tension: 180, friction: 26 },
+    config: config.gentle,
   });
 
   useFrame(() => {

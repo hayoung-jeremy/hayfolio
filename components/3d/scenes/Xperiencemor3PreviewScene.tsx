@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Box } from "@react-three/drei";
 import { Group, Mesh } from "three";
-import { useSpring, animated } from "@react-spring/three";
+import { useSpring, animated, config } from "@react-spring/three";
 
 import { SceneProps } from "@/types/scene";
 
@@ -12,7 +12,7 @@ const Xperiencemor3PreviewScene = ({ visible }: SceneProps) => {
   const { opacity, scale } = useSpring({
     opacity: visible ? 0.3 : 0,
     scale: visible ? 1 : 0.85,
-    config: { tension: 180, friction: 26 },
+    config: config.gentle,
   });
 
   useFrame(() => {
