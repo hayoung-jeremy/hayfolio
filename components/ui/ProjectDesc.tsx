@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 
@@ -15,8 +15,9 @@ const ProjectDescription = ({ title, description, visible, id }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLDivElement>(null);
+  const prevVisible = useRef(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!containerRef.current || !titleRef.current || !descRef.current) return;
 
     const splitTitle = new SplitText(titleRef.current, {
@@ -28,7 +29,10 @@ const ProjectDescription = ({ title, description, visible, id }: Props) => {
       preserveSpaces: true,
     });
 
-    if (visible) {
+    const shouldAnimateIn = visible && prevVisible.current !== true;
+    const shouldAnimateOut = !visible && prevVisible.current !== false;
+
+    if (shouldAnimateIn) {
       gsap.set(containerRef.current, { autoAlpha: 1 });
 
       gsap.fromTo(
@@ -56,13 +60,17 @@ const ProjectDescription = ({ title, description, visible, id }: Props) => {
           stagger: 0.015,
         }
       );
-    } else {
+    }
+
+    if (shouldAnimateOut) {
       gsap.to(containerRef.current, {
         autoAlpha: 0,
         duration: 0.4,
         ease: "power2.out",
       });
     }
+
+    prevVisible.current = visible;
 
     return () => {
       splitTitle.revert();
