@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-import IntroText from "@/components/ui/IntroText";
+import { IntroText } from "@/components/ui";
 import { ScenesContainer } from "@/components/3d/scenes";
 
 export default function Home() {
