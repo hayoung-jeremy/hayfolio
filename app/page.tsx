@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-import { IntroText } from "@/components/ui";
+import { IntroText, Navigation } from "@/components/ui";
 import { ScenesContainer } from "@/components/3d/scenes";
 
 export default function Home() {
@@ -42,6 +42,7 @@ export default function Home() {
       <div className="ScenesContainer opacity-0 h-[300vh] relative z-10">
         <div className="sticky top-0 h-screen">
           <ScenesContainer />
+          <Navigation />
         </div>
       </div>
       <div className="h-screen flex items-center justify-center">dummy Footer</div>
