@@ -39,7 +39,11 @@ export default function Home() {
       transition={{ duration: 1 }}
     >
       <IntroText />
-      <ScenesContainer />
+      <div className="ScenesContainer opacity-0 h-[300vh] relative z-10">
+        <div className="sticky top-0 h-screen">
+          <ScenesContainer />
+        </div>
+      </div>
       <div className="h-screen flex items-center justify-center">dummy Footer</div>
     </motion.main>
   );
