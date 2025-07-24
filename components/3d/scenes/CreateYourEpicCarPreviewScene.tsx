@@ -1,12 +1,11 @@
 import { useRef } from "react";
 import { Group, Mesh } from "three";
 import { useFrame } from "@react-three/fiber";
-import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
-import { KernelSize } from "postprocessing";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { OrbitControls } from "@react-three/drei";
 import { animated, useSpring, config } from "@react-spring/three";
 
 import { XM3_container } from "../assets/XM3";
+import EnvironmentSettings from "../EnvironmentSettings";
 import useDisplay from "@/hooks/useDisplay";
 import { SceneProps } from "@/types/scene";
 
@@ -53,21 +52,7 @@ const CreateYourEpicCarPreviewScene = ({ visible }: SceneProps) => {
         <XM3_container />
       </animated.group>
 
-      <Environment>
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, -9]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, -6]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, -3]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, 0]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, 3]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, 6]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, 9]} scale={[10, 1, 1]} />
-        <Lightformer intensity={1.2} rotation-y={Math.PI / 2} position={[-50, 2, 0]} scale={[100, 2, 1]} />
-        <Lightformer intensity={1.2} rotation-y={-Math.PI / 2} position={[50, 2, 0]} scale={[100, 2, 1]} />
-      </Environment>
-
-      <EffectComposer multisampling={10}>
-        <Bloom kernelSize={KernelSize.HUGE} luminanceThreshold={0} luminanceSmoothing={0.85} intensity={0.5} />
-      </EffectComposer>
+      <EnvironmentSettings />
     </>
   );
 };
