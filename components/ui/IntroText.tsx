@@ -28,7 +28,7 @@ const IntroText = () => {
         duration: 0.8,
         ease: "power3.out",
         stagger: 0.2,
-        delay: 0.9,
+        delay: 1.0,
       });
 
       const guideSplit = new SplitText(".scroll-guide", { type: "lines" });
@@ -39,7 +39,7 @@ const IntroText = () => {
         duration: 0.8,
         ease: "power3.out",
         stagger: 0.2,
-        delay: 1.7,
+        delay: 1.34,
       });
     },
     { scope: containerRef }
