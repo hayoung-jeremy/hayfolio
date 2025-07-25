@@ -8,7 +8,7 @@ import { useGLTF } from "@react-three/drei";
 
 export default function XM3_bumper_transparent({ ...props }: any) {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF("/models/XM3/XM3_bumper_transparent.glb") as any;
+  const { nodes, materials } = useGLTF("/api/model-url?name=XM3/XM3_bumper_transparent.glb") as any;
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh
@@ -123,4 +123,4 @@ export default function XM3_bumper_transparent({ ...props }: any) {
   );
 }
 
-useGLTF.preload("/models/XM3/XM3_bumper_transparent.glb");
+useGLTF.preload("/api/model-url?name=XM3/XM3_bumper_transparent.glb");

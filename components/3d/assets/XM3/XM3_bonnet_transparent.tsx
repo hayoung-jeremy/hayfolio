@@ -6,7 +6,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function XM3_bonnet_transparent({ ...props }: any) {
-  const { nodes, materials } = useGLTF("/models/XM3/XM3_bonnet_transparent.glb") as any;
+  const { nodes, materials } = useGLTF("/api/model-url?name=XM3/XM3_bonnet_transparent.glb") as any;
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -21,4 +21,4 @@ export default function XM3_bonnet_transparent({ ...props }: any) {
     </group>
   );
 }
-useGLTF.preload("/models/XM3/XM3_bonnet_transparent.glb");
+useGLTF.preload("/api/model-url?name=XM3/XM3_bonnet_transparent.glb");
