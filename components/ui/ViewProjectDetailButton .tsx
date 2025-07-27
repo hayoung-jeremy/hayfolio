@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { useScrollStore } from "@/store/useScrollStore";
+import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
 
 const ViewProjectDetailButton = () => {
   const progress = useScrollStore(s => s.progress);
@@ -8,10 +9,10 @@ const ViewProjectDetailButton = () => {
   const router = useRouter();
 
   const navigateToSceneDetailPage = () => {
-    if (progress < 0.45) {
-      router.push("/garage"); // 첫 번째 씬: XM3 차고
-    } else if (progress >= 0.55) {
-      router.push("/xperiencemor3"); // 두 번째 씬: Xperiencemor3 본 페이지
+    if (progress < SCROLL_THRESHOLDS.createYourEpicCar.max) {
+      router.push("/garage");
+    } else if (progress >= SCROLL_THRESHOLDS.xperiencemor3.min) {
+      router.push("/xperiencemor3");
     }
   };
 
