@@ -22,8 +22,10 @@ const ViewProjectDetailButton = () => {
         "fixed top-[80dvh] left-1/2 -translate-x-1/2",
         "backdrop-blur-md bg-white/5 border border-white/20",
         "px-10 py-3 rounded-md font-semibold shadow-lg",
-        "font-bold"
+        "font-bold",
+        "cursor-pointer"
       )}
+      onClick={navigateToSceneDetailPage}
     >
       자세히 살펴보기
     </button>
