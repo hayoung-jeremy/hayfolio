@@ -1,4 +1,3 @@
-// hooks/useLenis.ts
 "use client";
 
 import { useEffect } from "react";
@@ -13,12 +12,12 @@ export const useLenis = () => {
 
     if (!lenis) {
       lenis = new Lenis({
-        lerp: 0.1, // 0 ~ 1 (감속 정도)
+        lerp: 0.1,
       });
 
       const raf = (time: number) => {
         lenis?.raf(time);
-        ScrollTrigger.update(); // ← 꼭 필요함!
+        ScrollTrigger.update();
         requestAnimationFrame(raf);
       };
 
