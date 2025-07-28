@@ -8,7 +8,7 @@ import useDisplay from "@/hooks/useDisplay";
 const GarageScene = () => {
   const { isDesktop } = useDisplay();
   return (
-    <Canvas>
+    <Canvas style={{ height: "100svh" }}>
       <CameraControls
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 3}

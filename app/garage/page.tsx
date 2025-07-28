@@ -12,7 +12,7 @@ const Garage = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 1 }}
-      className="h-screen flex items-center justify-center overflow-hidden"
+      className="min-h-svh overflow-hidden"
     >
       <GarageScene />
       {isMobile ? <MobileBottomSheet /> : <SideBar />}
