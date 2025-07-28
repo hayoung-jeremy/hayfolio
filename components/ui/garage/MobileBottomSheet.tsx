@@ -12,11 +12,25 @@ const MobileBottomSheet = () => {
   const controls = useAnimation();
 
   useEffect(() => {
-    const sheetHeight = window.innerHeight * 0.5;
-    const closed = sheetHeight - HANDLE_HEIGHT;
-    setClosedY(closed);
-    y.set(closed);
-    controls.set({ y: closed });
+    const updateSheetPosition = () => {
+      const viewportHeight =
+        typeof window !== "undefined" && window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+      const sheetHeight = viewportHeight * 0.5;
+      const closed = sheetHeight - HANDLE_HEIGHT;
+
+      setClosedY(closed);
+      y.set(closed);
+      controls.set({ y: closed });
+    };
+
+    updateSheetPosition();
+
+    window.visualViewport?.addEventListener("resize", updateSheetPosition);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", updateSheetPosition);
+    };
   }, []);
 
   const onDragStart = () => {
@@ -49,7 +63,7 @@ const MobileBottomSheet = () => {
       onDragEnd={onDragEnd}
       style={{ y }}
       animate={controls}
-      className="fixed bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] rounded-t-2xl"
+      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] rounded-t-2xl"
     >
       <div className="w-full h-7 flex justify-center items-center">
         <div
