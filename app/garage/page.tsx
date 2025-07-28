@@ -1,9 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import { GarageScene } from "@/components/3d/scenes";
-import { SideBar } from "@/components/ui/garage";
+import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
+import useDisplay from "@/hooks/useDisplay";
 
 const Garage = () => {
+  const { isMobile } = useDisplay();
   return (
     <motion.main
       initial={{ opacity: 0, y: 30 }}
@@ -13,7 +15,7 @@ const Garage = () => {
       className="h-screen flex items-center justify-center overflow-hidden"
     >
       <GarageScene />
-      <SideBar />
+      {isMobile ? <MobileBottomSheet /> : <SideBar />}
     </motion.main>
   );
 };
