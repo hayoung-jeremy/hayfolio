@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 
@@ -7,6 +7,11 @@ import useDisplay from "@/hooks/useDisplay";
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isMobile } = useDisplay();
+  const [sidebarKey, setSidebarKey] = useState("mobile");
+
+  useEffect(() => {
+    setSidebarKey(isMobile ? "mobile" : "desktop");
+  }, [isMobile]);
 
   const sidebarVariants = {
     open: ({ isMobile }: { isMobile: boolean }) => (isMobile ? { y: 0, x: 0 } : { x: 0 }),
@@ -15,7 +20,7 @@ const SideBar = () => {
 
   return (
     <motion.aside
-      key="sidebar"
+      key={sidebarKey}
       custom={{ isMobile }}
       initial="closed"
       animate={isOpen ? "open" : "closed"}

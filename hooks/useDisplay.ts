@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const useDisplay = () => {
@@ -10,7 +10,7 @@ const useDisplay = () => {
   const [showTabletUI, setShowTabletUI] = useState(false);
   const [showPCUI, setShowPCUI] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setShowMobileUI(isMobile);
     setShowTabletUI(isTablet);
     setShowPCUI(isDesktop);
