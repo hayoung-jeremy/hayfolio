@@ -63,7 +63,7 @@ const MobileBottomSheet = () => {
       onDragEnd={onDragEnd}
       style={{ y }}
       animate={controls}
-      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] rounded-t-2xl"
+      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] rounded-t-2xl touch-pan-y"
     >
       <div className="w-full h-7 flex justify-center items-center">
         <div

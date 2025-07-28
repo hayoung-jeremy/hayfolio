@@ -7,16 +7,18 @@ import useDisplay from "@/hooks/useDisplay";
 const Garage = () => {
   const { isMobile } = useDisplay();
   return (
-    <motion.main
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 1 }}
-      className="min-h-svh overflow-hidden"
-    >
-      <GarageScene />
+    <>
+      <motion.main
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -30 }}
+        transition={{ duration: 1 }}
+        className="min-h-svh z-0"
+      >
+        <GarageScene />
+      </motion.main>
       {isMobile ? <MobileBottomSheet /> : <SideBar />}
-    </motion.main>
+    </>
   );
 };
 
