@@ -37,6 +37,18 @@ const MobileBottomSheet = () => {
     setIsDragging(true);
   };
 
+  const onDrag = (_: any, info: PanInfo) => {
+    const nextY = y.get() + info.delta.y;
+
+    if (nextY < HANDLE_HEIGHT) {
+      y.set(HANDLE_HEIGHT);
+    } else if (nextY > closedY) {
+      y.set(closedY);
+    } else {
+      y.set(nextY);
+    }
+  };
+
   const onDragEnd = (_: any, info: PanInfo) => {
     setIsDragging(false);
     const currentY = y.get();
@@ -58,8 +70,10 @@ const MobileBottomSheet = () => {
   return (
     <motion.aside
       drag="y"
-      dragConstraints={{ top: 0 }}
+      dragConstraints={{ top: HANDLE_HEIGHT, bottom: closedY }}
+      dragElastic={0.2}
       onDragStart={onDragStart}
+      onDrag={onDrag}
       onDragEnd={onDragEnd}
       style={{ y }}
       animate={controls}
