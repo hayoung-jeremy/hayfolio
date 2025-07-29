@@ -21,7 +21,11 @@ const MobileBottomSheet = () => {
 
       setClosedY(closed);
       y.set(closed);
-      controls.set({ y: closed });
+      controls.set({
+        y: closed,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
+      });
     };
 
     updateSheetPosition();
@@ -35,6 +39,15 @@ const MobileBottomSheet = () => {
 
   const onDragStart = () => {
     setIsDragging(true);
+
+    controls.start({
+      borderTopLeftRadius: 32,
+      borderTopRightRadius: 32,
+      transition: {
+        borderTopLeftRadius: { duration: 0.2, ease: "easeInOut" },
+        borderTopRightRadius: { duration: 0.2, ease: "easeInOut" },
+      },
+    });
   };
 
   const onDrag = (_: any, info: PanInfo) => {
@@ -61,7 +74,13 @@ const MobileBottomSheet = () => {
 
     controls.start({
       y: targetY,
-      transition: { type: "spring", stiffness: 400, damping: 40 },
+      borderTopLeftRadius: 16,
+      borderTopRightRadius: 16,
+      transition: {
+        y: { type: "spring", stiffness: 400, damping: 40 },
+        borderTopLeftRadius: { duration: 0.2, ease: "easeInOut" },
+        borderTopRightRadius: { duration: 0.2, ease: "easeInOut" },
+      },
     });
 
     setIsOpen(shouldOpen);
@@ -77,7 +96,7 @@ const MobileBottomSheet = () => {
       onDragEnd={onDragEnd}
       style={{ y }}
       animate={controls}
-      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] rounded-t-2xl touch-pan-y"
+      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] touch-pan-y"
     >
       <div className="w-full h-7 flex justify-center items-center">
         <div
