@@ -20,8 +20,9 @@ const ViewProjectDetailButton = () => {
     <button
       className={clsx(
         "fixed top-[80dvh] left-1/2 -translate-x-1/2",
-        "backdrop-blur-md bg-white/5 border border-white/20",
+        "w-full max-w-[88vw] md:max-w-[360px]",
         "px-10 py-3 rounded-md font-semibold shadow-lg",
+        "backdrop-blur-md bg-white/5 border border-white/20",
         "font-bold",
         "cursor-pointer"
       )}
