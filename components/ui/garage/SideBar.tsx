@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import PartsCarousel from "./PartsCarousel";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ const SideBar = () => {
       >
         {isOpen ? "▶" : "◀"}
       </button>
-      SideBar
+      <PartsCarousel />
     </motion.aside>
   );
 };
