@@ -1,0 +1,65 @@
+import type { PartsType } from "@/types/garage";
+
+export const partThumbnails: Record<PartsType, string[]> = {
+  Body: ["/assets/thumbs/xm3.png", "/assets/thumbs/qm6.png", "/assets/thumbs/sm6.png"],
+  Bonnet: [
+    "/assets/thumbs/thumb_bonnet_futuristic_A.png",
+    "/assets/thumbs/thumb_bonnet_futuristic_B.png",
+    "/assets/thumbs/thumb_bonnet_motorsport_A.png",
+    "/assets/thumbs/thumb_bonnet_motorsport_B.png",
+    "/assets/thumbs/thumb_bonnet_motorsport_C.png",
+    "/assets/thumbs/thumb_bonnet_offroad_A.png",
+    "/assets/thumbs/thumb_bonnet_offroad_B.png",
+  ],
+  Bumper: [
+    "/assets/thumbs/thumb_bumper_futuristic_A.png",
+    "/assets/thumbs/thumb_bumper_futuristic_B.png",
+    "/assets/thumbs/thumb_bumper_motorsport_A.png",
+    "/assets/thumbs/thumb_bumper_motorsport_B.png",
+    "/assets/thumbs/thumb_bumper_motorsport_C.png",
+    "/assets/thumbs/thumb_bumper_offroad_A.png",
+    "/assets/thumbs/thumb_bumper_offroad_B.png",
+  ],
+  Wheel: [
+    "/assets/thumbs/thumb_wheel_futuristic_A.png",
+    "/assets/thumbs/thumb_wheel_futuristic_B.png",
+    "/assets/thumbs/thumb_wheel_motorsport_A.png",
+    "/assets/thumbs/thumb_wheel_motorsport_B.png",
+    "/assets/thumbs/thumb_wheel_motorsport_C.png",
+    "/assets/thumbs/thumb_wheel_offroad_A.png",
+    "/assets/thumbs/thumb_wheel_offroad_B.png",
+  ],
+  "Head light": [
+    "/assets/thumbs/thumb_headlight_futuristic_A.png",
+    "/assets/thumbs/thumb_headlight_futuristic_B.png",
+    "/assets/thumbs/thumb_headlight_motorsport_A.png",
+    "/assets/thumbs/thumb_headlight_motorsport_B.png",
+    "/assets/thumbs/thumb_headlight_motorsport_C.png",
+    "/assets/thumbs/thumb_headlight_offroad_A.png",
+    "/assets/thumbs/thumb_headlight_offroad_B.png",
+  ],
+  "Tail lamp": [
+    "/assets/thumbs/thumb_tailLamp_futuristic_A.png",
+    "/assets/thumbs/thumb_tailLamp_futuristic_B.png",
+    "/assets/thumbs/thumb_tailLamp_motorsport_A.png",
+    "/assets/thumbs/thumb_tailLamp_motorsport_B.png",
+    "/assets/thumbs/thumb_tailLamp_motorsport_C.png",
+    "/assets/thumbs/thumb_tailLamp_offroad_A.png",
+    "/assets/thumbs/thumb_tailLamp_offroad_B.png",
+  ],
+  "Roof carrier": [
+    "/assets/thumbs/thumb_roofcarrier_futuristic.png",
+    "/assets/thumbs/thumb_roofcarrier_motorsport.png",
+    "/assets/thumbs/thumb_roofcarrier_offroad.png",
+  ],
+  Spoiler: [
+    "/assets/thumbs/thumb_spoiler_futuristic.png",
+    "/assets/thumbs/thumb_spoiler_motorsport.png",
+    "/assets/thumbs/thumb_spoiler_offroad.png",
+  ],
+  Pattern: [
+    "/assets/thumbs/thumb_decal_futuristic.png",
+    "/assets/thumbs/thumb_decal_motorsport.png",
+    "/assets/thumbs/thumb_decal_offroad.png",
+  ],
+};
