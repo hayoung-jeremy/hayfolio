@@ -10,7 +10,6 @@ import { partsTypes } from "@/types/garage";
 
 const PartsCarousel = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const [mainSwiper, setMainSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -54,7 +53,6 @@ const PartsCarousel = () => {
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Thumbs]}
           mousewheel={false}
-          onSwiper={setMainSwiper}
           onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
           className="w-full h-full"
         >
