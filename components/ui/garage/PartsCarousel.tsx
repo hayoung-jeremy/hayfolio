@@ -7,37 +7,36 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 
+import { partsTypes } from "@/types/garage";
+
 const PartsCarousel = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [mainSwiper, setMainSwiper] = useState<any>(null);
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 w-full flex-wrap">
+      {/* Thumbs */}
       <Swiper
-        spaceBetween={12}
-        slidesPerView={4}
+        spaceBetween={0}
+        slidesPerView={"auto"}
         freeMode
         watchSlidesProgress
         modules={[FreeMode, Thumbs]}
         onSwiper={setThumbsSwiper}
-        className="w-full px-4 mb-2"
+        className="w-full"
       >
-        <SwiperSlide key="cat1" className="text-center py-2 px-2">
-          Category 1
-        </SwiperSlide>
-        <SwiperSlide key="cat2" className="text-center py-2 px-2">
-          Category 2
-        </SwiperSlide>
-        <SwiperSlide key="cat3" className="text-center py-2 px-2">
-          Category 3
-        </SwiperSlide>
-        <SwiperSlide key="cat4" className="text-center py-2 px-2">
-          Category 4
-        </SwiperSlide>
-        <SwiperSlide key="cat5" className="text-center py-2 px-2">
-          Category 5
-        </SwiperSlide>
+        {partsTypes.map(type => (
+          <SwiperSlide
+            key={type}
+            className="text-center py-2 px-6 whitespace-nowrap inline-flex items-center justify-center !w-fit"
+          >
+            {type}
+          </SwiperSlide>
+        ))}
       </Swiper>
+
+      {/* Main Swiper */}
+      
     </div>
   );
 };
