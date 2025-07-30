@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { motion, useAnimation, useMotionValue, PanInfo } from "framer-motion";
+import { motion, useAnimation, useMotionValue, PanInfo, useDragControls } from "framer-motion";
 import clsx from "clsx";
+import PartsCarousel from "./PartsCarousel";
 
 const MobileBottomSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ const MobileBottomSheet = () => {
   const HANDLE_HEIGHT = 32;
   const y = useMotionValue(0);
   const controls = useAnimation();
+  const dragControls = useDragControls();
 
   useEffect(() => {
     const updateSheetPosition = () => {
@@ -29,9 +31,7 @@ const MobileBottomSheet = () => {
     };
 
     updateSheetPosition();
-
     window.visualViewport?.addEventListener("resize", updateSheetPosition);
-
     return () => {
       window.visualViewport?.removeEventListener("resize", updateSheetPosition);
     };
@@ -39,7 +39,6 @@ const MobileBottomSheet = () => {
 
   const onDragStart = () => {
     setIsDragging(true);
-
     controls.start({
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
@@ -52,25 +51,41 @@ const MobileBottomSheet = () => {
 
   const onDrag = (_: any, info: PanInfo) => {
     const nextY = y.get() + info.delta.y;
-
-    if (nextY < HANDLE_HEIGHT) {
-      y.set(HANDLE_HEIGHT);
-    } else if (nextY > closedY) {
-      y.set(closedY);
-    } else {
-      y.set(nextY);
-    }
+    if (nextY < HANDLE_HEIGHT) y.set(HANDLE_HEIGHT);
+    else if (nextY > closedY) y.set(closedY);
+    else y.set(nextY);
   };
 
   const onDragEnd = (_: any, info: PanInfo) => {
     setIsDragging(false);
+
     const currentY = y.get();
+    const { x: offsetX, y: offsetY } = info.offset;
+    const { y: velocityY } = info.velocity;
 
-    const fastUp = info.velocity.y < -20;
-    const fastDown = info.velocity.y > 20;
+    const isVerticalSwipe = Math.abs(offsetY) > Math.abs(offsetX) * 1.2;
+    const draggedEnough = Math.abs(offsetY) > 28;
 
-    const shouldOpen = fastUp || (!fastDown && currentY <= closedY / 2);
-    const targetY = shouldOpen ? HANDLE_HEIGHT : closedY;
+    if (!isVerticalSwipe || !draggedEnough) return;
+
+    const fastUp = velocityY < -20;
+    const fastDown = velocityY > 20;
+    const openThreshold = closedY * 0.5;
+    const closeThreshold = closedY * 0.5;
+
+    let targetY = closedY;
+    let open = isOpen;
+
+    if (fastUp || currentY <= openThreshold) {
+      targetY = HANDLE_HEIGHT;
+      open = true;
+    } else if (fastDown || currentY >= closeThreshold) {
+      targetY = closedY;
+      open = false;
+    } else {
+      targetY = isOpen ? HANDLE_HEIGHT : closedY;
+      open = isOpen;
+    }
 
     controls.start({
       y: targetY,
@@ -83,12 +98,14 @@ const MobileBottomSheet = () => {
       },
     });
 
-    setIsOpen(shouldOpen);
+    setIsOpen(open);
   };
 
   return (
     <motion.aside
       drag="y"
+      dragControls={dragControls}
+      dragListener={false}
       dragConstraints={{ top: HANDLE_HEIGHT, bottom: closedY }}
       dragElastic={0.2}
       onDragStart={onDragStart}
@@ -96,9 +113,12 @@ const MobileBottomSheet = () => {
       onDragEnd={onDragEnd}
       style={{ y }}
       animate={controls}
-      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] touch-pan-y"
+      className="fixed z-20 bg-white/5 backdrop-blur-sm bottom-0 left-0 w-screen h-[50dvh] flex flex-col touch-pan-y"
     >
-      <div className="w-full h-7 flex justify-center items-center">
+      <div
+        className="w-full h-7 flex justify-center items-center cursor-pointer touch-none"
+        onPointerDown={e => dragControls.start(e)}
+      >
         <div
           className={clsx(
             "h-1 bg-white rounded-full transition-all duration-200",
@@ -107,7 +127,7 @@ const MobileBottomSheet = () => {
           )}
         />
       </div>
-      SideBar
+      <PartsCarousel />
     </motion.aside>
   );
 };
