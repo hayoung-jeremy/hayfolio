@@ -9,10 +9,12 @@ import "swiper/css/thumbs";
 
 import { partsTypes } from "@/types/garage";
 import { partThumbnails } from "@/constants/partsThumbnails";
+import { useGarageStore } from "@/store/useGarageStore";
 
 const PartsCarousel = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { selectBody, selectPart, selectedBody, selectedParts } = useGarageStore();
 
   useEffect(() => {
     if (thumbsSwiper && thumbsSwiper.slideTo) {
@@ -68,21 +70,48 @@ const PartsCarousel = () => {
                   const name = url.split("/").pop()!;
                   const isBody = type === "Body";
 
+                  let theme = "";
+                  let variant = "";
                   const displayName = isBody
                     ? name.replace(".png", "").toUpperCase()
                     : (() => {
                         const parts = name.replace("thumb_", "").replace(".png", "").split("_");
-                        const theme = parts[1] ?? "";
-                        const variant = /^[A-Z]$/.test(parts[2] ?? "") ? parts[2] : "";
+                        theme = parts[1] ?? "";
+                        variant = /^[A-Z]$/.test(parts[2] ?? "") ? parts[2] : "";
                         return `${theme.charAt(0).toUpperCase() + theme.slice(1)} ${variant}`.trim();
                       })();
+
+                  const isSelected = isBody
+                    ? selectedBody === name.replace(".png", "").toUpperCase()
+                    : selectedParts[type]?.imageUrl === url;
 
                   return (
                     <div
                       key={url}
-                      className="relative h-36 flex items-center justify-center my-5 border border-white/10 rounded-2xl mx-5 cursor-pointer hover:border-white/25 transition-all duration-200"
+                      onClick={() => {
+                        if (isBody) {
+                          selectBody(name.replace(".png", "").toUpperCase() as "XM3" | "SM6" | "QM6");
+                        } else {
+                          selectPart(type, { imageUrl: url, theme, variant });
+                        }
+                      }}
+                      className={clsx(
+                        "relative h-36 flex items-center justify-center mx-5 my-5 cursor-pointer",
+                        "border border-white/10 rounded-2xl",
+                        "transition-all duration-100",
+                        { "border-white/50": isSelected, "hover:border-white/25": !isSelected }
+                      )}
                     >
-                      <Image src={url} alt={displayName} width={180} height={80} className="object-contain" />
+                      <Image
+                        src={url}
+                        alt={displayName}
+                        width={180}
+                        height={80}
+                        className={clsx("object-contain transition-all duration-200", {
+                          "opacity-100": isSelected,
+                          "opacity-30": !isSelected,
+                        })}
+                      />
                       <p className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-center bg-[#222] px-3 py-1 rounded-full">
                         {displayName}
                       </p>
