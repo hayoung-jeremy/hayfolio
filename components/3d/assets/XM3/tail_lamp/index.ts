@@ -1,0 +1,7 @@
+export { default as XM3_TailLamp_Futuristic_A } from "./XM3_TailLamp_Futuristic_A";
+export { default as XM3_TailLamp_Futuristic_B } from "./XM3_TailLamp_Futuristic_B";
+export { default as XM3_TailLamp_Motorsport_A } from "./XM3_TailLamp_Motorsport_A";
+export { default as XM3_TailLamp_Motorsport_B } from "./XM3_TailLamp_Motorsport_B";
+export { default as XM3_TailLamp_Motorsport_C } from "./XM3_TailLamp_Motorsport_C";
+export { default as XM3_TailLamp_Offroad_A } from "./XM3_TailLamp_Offroad_A";
+export { default as XM3_TailLamp_Offroad_B } from "./XM3_TailLamp_Offroad_B";
