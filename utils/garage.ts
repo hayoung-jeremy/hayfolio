@@ -29,12 +29,12 @@ export function getWheelXOffset({
     sm6_offroad_b: 40,
 
     qm6_futuristic_a: 40,
-    qm6_futuristic_b: 105,
-    qm6_motorsport_a: 105,
-    qm6_motorsport_b: 100,
-    qm6_motorsport_c: 60,
-    qm6_offroad_a: 50,
-    qm6_offroad_b: 40,
+    qm6_futuristic_b: 70,
+    qm6_motorsport_a: 70,
+    qm6_motorsport_b: 105,
+    qm6_motorsport_c: 90,
+    qm6_offroad_a: 70,
+    qm6_offroad_b: 70,
   };
 
   const base = map[key] ?? 100;
