@@ -7,51 +7,40 @@ import React, { useRef } from "react";
 import { TextureLoader } from "three";
 import { useLoader } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
+import { useGarageStore } from "@/store/useGarageStore";
 
-export default function SM6_Decal({ ...props }: any) {
+const SM6_Decal = () => {
   const group = useRef<THREE.Group>(null);
+  const { selectedParts } = useGarageStore();
+  const patternMeta = selectedParts["Pattern"];
+
   const { nodes, materials } = useGLTF("/api/model-url?name=SM6/SM6_decal.glb") as any;
 
-  const pattern_motorsport = useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_stripe.png");
-  const pattern_offroad = useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_triangle.png");
-  const pattern_futuristic = useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_hexagon.png");
+  const textures = {
+    motorsport: useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_stripe.png"),
+    offroad: useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_triangle.png"),
+    futuristic: useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_hexagon.png"),
+  };
+
+  if (!patternMeta?.theme) return null;
+
+  const map = textures[patternMeta.theme.toLowerCase() as keyof typeof textures];
+  if (!map) return null;
 
   return (
-    <group ref={group} {...props} dispose={null}>
-      {props.selectedParts.pattern.id === "901" ? (
-        <mesh geometry={nodes.SM6_Decal.geometry} material={materials.Decal}>
-          <meshStandardMaterial
-            attach="material"
-            map={pattern_motorsport}
-            transparent
-            metalness={0.4}
-            roughness={0.15}
-            color={props.selectedParts.pattern.color}
-          />
-        </mesh>
-      ) : props.selectedParts.pattern.id === "902" ? (
-        <mesh geometry={nodes.SM6_Decal.geometry} material={materials.Decal}>
-          <meshStandardMaterial
-            attach="material"
-            map={pattern_offroad}
-            transparent
-            metalness={0.4}
-            roughness={0.15}
-            color={props.selectedParts.pattern.color}
-          />
-        </mesh>
-      ) : props.selectedParts.pattern.id === "903" ? (
-        <mesh geometry={nodes.SM6_Decal.geometry} material={materials.Decal}>
-          <meshStandardMaterial
-            attach="material"
-            map={pattern_futuristic}
-            transparent
-            metalness={0.4}
-            roughness={0.15}
-            color={props.selectedParts.pattern.color}
-          />
-        </mesh>
-      ) : null}
+    <group ref={group} dispose={null}>
+      <mesh geometry={nodes.SM6_Decal.geometry} material={materials.Decal}>
+        <meshStandardMaterial
+          attach="material"
+          map={map}
+          transparent
+          metalness={0.4}
+          roughness={0.15}
+          // color={patternMeta.color ?? undefined}
+        />
+      </mesh>
     </group>
   );
-}
+};
+
+export default SM6_Decal;

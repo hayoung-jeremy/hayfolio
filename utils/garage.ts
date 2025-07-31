@@ -21,10 +21,10 @@ export function getWheelXOffset({
     xm3_offroad_b: 40,
 
     sm6_futuristic_a: 30,
-    sm6_futuristic_b: 60,
-    sm6_motorsport_a: 100,
-    sm6_motorsport_b: 80,
-    sm6_motorsport_c: 60,
+    sm6_futuristic_b: 40,
+    sm6_motorsport_a: 35,
+    sm6_motorsport_b: 50,
+    sm6_motorsport_c: 80,
     sm6_offroad_a: 50,
     sm6_offroad_b: 40,
 
