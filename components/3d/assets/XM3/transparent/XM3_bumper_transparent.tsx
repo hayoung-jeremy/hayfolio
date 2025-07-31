@@ -6,7 +6,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export default function XM3_bumper_transparent({ ...props }: any) {
+export default function XM3_Bumper_Transparent({ ...props }: any) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials } = useGLTF("/api/model-url?name=XM3/XM3_bumper_transparent.glb") as any;
   return (

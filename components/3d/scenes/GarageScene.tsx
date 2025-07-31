@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 
 import EnvironmentSettings from "../EnvironmentSettings";
-import { XM3_container } from "../assets/XM3";
+import { XM3_Container } from "../assets/XM3";
 import { QM6_Container } from "../assets/QM6";
 import { SM6_Container } from "../assets/SM6";
 import { useGarageStore } from "@/store/useGarageStore";
@@ -13,7 +13,7 @@ const GarageScene = () => {
   const renderContainer = () => {
     switch (selectedBody) {
       case "XM3":
-        return <XM3_container />;
+        return <XM3_Container />;
       case "SM6":
         return <SM6_Container />;
       case "QM6":

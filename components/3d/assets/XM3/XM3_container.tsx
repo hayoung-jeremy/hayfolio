@@ -13,7 +13,7 @@ import XM3_Decal from "./XM3_Decal";
 import useDisplay from "@/hooks/useDisplay";
 import { useGarageStore } from "@/store/useGarageStore";
 
-const XM3_container = () => {
+const XM3_Container = () => {
   const { isDesktop } = useDisplay();
   const { selectedParts } = useGarageStore();
 
@@ -32,4 +32,4 @@ const XM3_container = () => {
   );
 };
 
-export default XM3_container;
+export default XM3_Container;

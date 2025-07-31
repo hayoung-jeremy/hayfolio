@@ -1,6 +1,6 @@
-export { default as XM3_body_transparent } from "./XM3_body_transparent";
-export { default as XM3_bonnet_transparent } from "./XM3_bonnet_transparent";
-export { default as XM3_bumper_transparent } from "./XM3_bumper_transparent";
-export { default as XM3_headlight_transparent } from "./XM3_headlight_transparent";
-export { default as XM3_taillamp_transparent } from "./XM3_taillamp_transparent";
-export { default as XM3_wheel_transparent } from "./XM3_wheel_transparent";
+export { default as XM3_Body_Transparent } from "./XM3_Body_Transparent";
+export { default as XM3_Bonnet_Transparent } from "./XM3_Bonnet_Transparent";
+export { default as XM3_Bumper_Transparent } from "./XM3_Bumper_Transparent";
+export { default as XM3_Headlight_Transparent } from "./XM3_Headlight_Transparent";
+export { default as XM3_Taillamp_Transparent } from "./XM3_Taillamp_Transparent";
+export { default as XM3_Wheel_Transparent } from "./XM3_Wheel_Transparent";
