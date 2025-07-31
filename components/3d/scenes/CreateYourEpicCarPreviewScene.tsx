@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { animated, useSpring, config } from "@react-spring/three";
 
-import { XM3_container } from "../assets/XM3";
+import { XM3_Transparent_Container } from "../assets/XM3";
 import EnvironmentSettings from "../EnvironmentSettings";
 import useDisplay from "@/hooks/useDisplay";
 import { SceneProps } from "@/types/scene";
@@ -49,7 +49,7 @@ const CreateYourEpicCarPreviewScene = ({ visible }: SceneProps) => {
         minPolarAngle={Math.PI / 3}
       />
       <animated.group ref={groupRef} scale={scale}>
-        <XM3_container />
+        <XM3_Transparent_Container />
       </animated.group>
 
       <EnvironmentSettings />
