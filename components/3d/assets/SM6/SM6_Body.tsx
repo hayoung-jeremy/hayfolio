@@ -23,7 +23,7 @@ export default function SM6_Body({ ...props }: any) {
       <mesh
         geometry={nodes.SM6_Body_Base0_3.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />

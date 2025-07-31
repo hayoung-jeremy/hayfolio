@@ -1,6 +1,5 @@
 import { degToRad } from "three/src/math/MathUtils.js";
 
-import useDisplay from "@/hooks/useDisplay";
 import {
   XM3_body_transparent,
   XM3_bonnet_transparent,
@@ -9,6 +8,7 @@ import {
   XM3_taillamp_transparent,
   XM3_wheel_transparent,
 } from "./transparent";
+import useDisplay from "@/hooks/useDisplay";
 
 const XM3_container = () => {
   const { isDesktop } = useDisplay();

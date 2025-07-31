@@ -1,14 +1,30 @@
 import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 
-import { XM3_container } from "../assets/XM3";
 import EnvironmentSettings from "../EnvironmentSettings";
-import useDisplay from "@/hooks/useDisplay";
+import { XM3_container } from "../assets/XM3";
+import { QM6_Container } from "../assets/QM6";
+import { SM6_Container } from "../assets/SM6";
+import { useGarageStore } from "@/store/useGarageStore";
 
 const GarageScene = () => {
-  const { isDesktop } = useDisplay();
+  const { selectedBody } = useGarageStore();
+
+  const renderContainer = () => {
+    switch (selectedBody) {
+      case "XM3":
+        return <XM3_container />;
+      case "SM6":
+        return <SM6_Container />;
+      case "QM6":
+        return <QM6_Container />;
+      default:
+        return null;
+    }
+  };
   return (
     <Canvas style={{ height: "100svh" }}>
+      {renderContainer()}
       <CameraControls
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 3}
@@ -17,8 +33,6 @@ const GarageScene = () => {
         smoothTime={0.5}
         draggingSmoothTime={0.5}
       />
-      <XM3_container />
-
       <EnvironmentSettings />
     </Canvas>
   );
