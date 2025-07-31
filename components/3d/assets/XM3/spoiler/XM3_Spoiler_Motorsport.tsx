@@ -15,7 +15,7 @@ export default function XM3_Spoiler_Motorsport(props: any) {
         receiveShadow
         geometry={nodes.XM3_Spoiler_Motorsport_2.geometry}
         material={materials.main}
-        material-color={props.selectedParts.spoiler.color ?? ""}
+        // material-color={props.selectedParts.spoiler.color ?? ""}
       />
       <mesh castShadow receiveShadow geometry={nodes.XM3_Spoiler_Motorsport_3.geometry} material={materials.metal} />
       <mesh
