@@ -37,6 +37,6 @@ export function getWheelXOffset({
     qm6_offroad_b: 70,
   };
 
-  const base = map[key] ?? 100;
+  const base = map[key] ?? 0;
   return [0, 0, side === "left" ? -base : base];
 }
