@@ -13,7 +13,7 @@ export default function QM6_Spoiler_Futuristic(props: any) {
         receiveShadow
         geometry={nodes.QM6_Spoiler_Futuristic.geometry}
         material={materials.main}
-        material-color={props.selectedParts.spoiler.color ?? ""}
+        // material-color={props.selectedParts.spoiler.color ?? ""}
       />
     </group>
   );

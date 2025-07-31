@@ -15,7 +15,7 @@ export default function SM6_Spoiler_Offroad(props: any) {
         receiveShadow
         geometry={nodes.SM6_Spoiler_Offroad_2.geometry}
         material={materials.main}
-        material-color={props.selectedParts.spoiler.color ?? ""}
+        // material-color={props.selectedParts.spoiler.color ?? ""}
       />
       <mesh castShadow receiveShadow geometry={nodes.SM6_Spoiler_Offroad_3.geometry} material={materials.metal} />
       <mesh castShadow receiveShadow geometry={nodes.SM6_Spoiler_Offroad_4.geometry} material={materials.out_black} />

@@ -14,7 +14,7 @@ export default function SM6_Spoiler_Futuristic(props: any) {
         receiveShadow
         geometry={nodes.SM6_Spoiler_Futuristic.geometry}
         material={materials.main}
-        material-color={props.selectedParts.spoiler.color ?? ""}
+        // material-color={props.selectedParts.spoiler.color ?? ""}
       />
     </group>
   );
