@@ -1,4 +1,4 @@
-import { XM3_wheel_transparent } from "./transparent";
+import { XM3_Wheel_Transparent } from "./transparent";
 import {
   XM3_Wheel_Futuristic_A,
   XM3_Wheel_Futuristic_B,
@@ -15,7 +15,7 @@ const XM3_Wheel = () => {
   const meta = selectedParts["Wheel"];
   const bumperMeta = selectedParts["Bumper"];
 
-  if (!meta?.theme || !meta.variant) return <XM3_wheel_transparent />;
+  if (!meta?.theme || !meta.variant) return <XM3_Wheel_Transparent />;
 
   const key = `${meta.theme.toLowerCase()}_${meta.variant.toLowerCase()}`;
   const commonProps = {
@@ -40,7 +40,7 @@ const XM3_Wheel = () => {
     case "offroad_b":
       return <XM3_Wheel_Offroad_B {...commonProps} />;
     default:
-      return <XM3_wheel_transparent />;
+      return <XM3_Wheel_Transparent />;
   }
 };
 

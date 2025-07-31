@@ -1,6 +1,6 @@
 import type { PartMeta } from "@/store/useGarageStore";
 
-import { XM3_bumper_transparent } from "./transparent";
+import { XM3_Bumper_Transparent } from "./transparent";
 import {
   XM3_Bumper_Futuristic_A,
   XM3_Bumper_Futuristic_B,
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const XM3_Bumper = ({ meta }: Props) => {
-  if (!meta?.theme || !meta.variant) return <XM3_bumper_transparent />;
+  if (!meta?.theme || !meta.variant) return <XM3_Bumper_Transparent />;
 
   const key = `${meta.theme.toLowerCase()}_${meta.variant.toLowerCase()}`;
 
@@ -36,7 +36,7 @@ const XM3_Bumper = ({ meta }: Props) => {
     case "offroad_b":
       return <XM3_Bumper_Offroad_B />;
     default:
-      return <XM3_bumper_transparent />;
+      return <XM3_Bumper_Transparent />;
   }
 };
 

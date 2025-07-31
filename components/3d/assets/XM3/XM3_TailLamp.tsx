@@ -1,6 +1,6 @@
 import type { PartMeta } from "@/store/useGarageStore";
 
-import { XM3_taillamp_transparent } from "./transparent";
+import { XM3_Taillamp_Transparent } from "./transparent";
 import {
   XM3_TailLamp_Futuristic_A,
   XM3_TailLamp_Futuristic_B,
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const XM3_TailLamp = ({ meta }: Props) => {
-  if (!meta?.theme || !meta.variant) return <XM3_taillamp_transparent />;
+  if (!meta?.theme || !meta.variant) return <XM3_Taillamp_Transparent />;
 
   const key = `${meta.theme.toLowerCase()}_${meta.variant.toLowerCase()}`;
 
@@ -36,7 +36,7 @@ const XM3_TailLamp = ({ meta }: Props) => {
     case "offroad_b":
       return <XM3_TailLamp_Offroad_B />;
     default:
-      return <XM3_taillamp_transparent />;
+      return <XM3_Taillamp_Transparent />;
   }
 };
 

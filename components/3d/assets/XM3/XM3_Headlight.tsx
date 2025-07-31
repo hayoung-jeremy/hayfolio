@@ -1,6 +1,6 @@
 import type { PartMeta } from "@/store/useGarageStore";
 
-import { XM3_headlight_transparent } from "./transparent";
+import { XM3_Headlight_Transparent } from "./transparent";
 import {
   XM3_Headlight_Futuristic_A,
   XM3_Headlight_Futuristic_B,
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const XM3_Headlight = ({ meta }: Props) => {
-  if (!meta?.theme || !meta.variant) return <XM3_headlight_transparent />;
+  if (!meta?.theme || !meta.variant) return <XM3_Headlight_Transparent />;
 
   const key = `${meta.theme.toLowerCase()}_${meta.variant.toLowerCase()}`;
 
@@ -36,7 +36,7 @@ const XM3_Headlight = ({ meta }: Props) => {
     case "offroad_b":
       return <XM3_Headlight_Offroad_B />;
     default:
-      return <XM3_headlight_transparent />;
+      return <XM3_Headlight_Transparent />;
   }
 };
 
