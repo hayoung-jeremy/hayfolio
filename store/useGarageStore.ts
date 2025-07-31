@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { PartsType } from "@/types/garage";
 
-type PartMeta = {
+export type PartMeta = {
   theme: string;
   variant: string | null;
   imageUrl: string;
@@ -16,7 +16,7 @@ type GarageState = {
 };
 
 export const useGarageStore = create<GarageState>(set => ({
-  selectedBody: null,
+  selectedBody: "XM3",
   selectedParts: {},
   selectBody: name =>
     set({
