@@ -9,6 +9,7 @@ import XM3_TailLamp from "./XM3_TailLamp";
 
 import useDisplay from "@/hooks/useDisplay";
 import { useGarageStore } from "@/store/useGarageStore";
+import XM3_Wheel from "./XM3_Wheel";
 
 const XM3_container = () => {
   const { isDesktop } = useDisplay();
@@ -21,6 +22,7 @@ const XM3_container = () => {
       <XM3_Bumper meta={selectedParts["Bumper"]} />
       <XM3_Headlight meta={selectedParts["Head light"]} />
       <XM3_TailLamp meta={selectedParts["Tail lamp"]} />
+      <XM3_Wheel />
     </group>
   );
 };
