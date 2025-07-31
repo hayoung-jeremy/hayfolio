@@ -23,7 +23,7 @@ export default function XM3_Bumper_Offroad_A(props: any) {
         receiveShadow
         geometry={nodes.XM3_Bumper_Offroad_A_5.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />

@@ -17,7 +17,7 @@ export default function XM3_Bumper_Motorsport_C({ ...props }: any) {
       <mesh
         geometry={nodes.XM3_Bumper_Motorsport_C_4.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />

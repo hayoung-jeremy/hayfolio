@@ -25,7 +25,7 @@ export default function QM6_Bumper_Offroad_A({ ...props }: any) {
         receiveShadow
         geometry={nodes.QM6_Bumper_Offroad_A_5.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />

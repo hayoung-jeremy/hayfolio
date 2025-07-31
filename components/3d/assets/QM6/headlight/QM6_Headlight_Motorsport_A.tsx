@@ -38,7 +38,7 @@ export default function QM6_Headlight_Motorsport_A(props: any) {
         receiveShadow
         geometry={nodes.QM6_Headlight_Motorsport_A__5.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
       />
     </group>
   );

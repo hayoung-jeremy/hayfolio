@@ -38,7 +38,7 @@ export default function XM3_Headlight_Motorsport_A(props: any) {
         receiveShadow
         geometry={nodes.XM3_Headlight_Motorsport_A__5.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
       />
     </group>
   );

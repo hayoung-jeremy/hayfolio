@@ -14,7 +14,7 @@ export default function Model(props: any) {
         receiveShadow
         geometry={nodes.QM6_Roofcarrier_Motorsport_1.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.4}
         material-roughness={0.15}
       />

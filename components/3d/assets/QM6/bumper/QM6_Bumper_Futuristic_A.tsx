@@ -36,7 +36,7 @@ export default function QM6_Bumper_Futuristic_A({ ...props }: any) {
         receiveShadow
         geometry={nodes.QM6_Bumper_Futuristic_A_4.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />
@@ -45,4 +45,3 @@ export default function QM6_Bumper_Futuristic_A({ ...props }: any) {
     </group>
   );
 }
-

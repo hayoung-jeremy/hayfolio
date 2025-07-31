@@ -29,7 +29,7 @@ export default function SM6_Bumper_Motorsport_C({ ...props }: any) {
         receiveShadow
         geometry={nodes.SM6_Bumper_Motorsport_C_4.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />

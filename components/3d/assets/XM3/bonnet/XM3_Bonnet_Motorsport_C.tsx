@@ -12,7 +12,7 @@ export default function XM3_Bonnet_Motorsport_C({ ...props }: any) {
       <mesh
         geometry={nodes.XM3_Bonnet_Motorsport_C__1.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />

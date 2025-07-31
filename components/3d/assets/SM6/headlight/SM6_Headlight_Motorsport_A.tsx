@@ -44,7 +44,7 @@ export default function SM6_Headlight_Motorsport_A(props: any) {
         receiveShadow
         geometry={nodes.SM6_Headlight_Motorsport_A_6.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
       />
     </group>
   );

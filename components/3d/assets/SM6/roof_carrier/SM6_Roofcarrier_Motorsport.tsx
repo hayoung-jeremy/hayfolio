@@ -14,7 +14,7 @@ export default function SM6_Roofcarrier_Motorsport(props: any) {
         receiveShadow
         geometry={nodes.SM6_Roofcarrier_Motorsport_1.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.4}
         material-roughness={0.15}
       />

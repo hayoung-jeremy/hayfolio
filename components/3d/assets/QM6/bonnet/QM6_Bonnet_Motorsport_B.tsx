@@ -12,7 +12,7 @@ export default function QM6_Bonnet_Motorsport_B({ ...props }: any) {
       <mesh
         geometry={nodes.QM6_Bonnet_Motorsport_B_1.geometry}
         material={materials.main}
-        material-color={props.selectedParts.body.color ?? ""}
+        // material-color={props.selectedParts.body.color ?? ""}
         material-metalness={0.05}
         material-roughness={0.15}
       />
