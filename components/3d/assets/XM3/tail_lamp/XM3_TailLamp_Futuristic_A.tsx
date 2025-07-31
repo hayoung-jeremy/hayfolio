@@ -6,7 +6,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function XM3_TailLamp_Futuristic_A({ ...props }: any) {
-  const { nodes, materials } = useGLTF("/api/model-url?name=XM3/XM3_tailLamp_Futuristic_A.glb") as any;
+  const { nodes, materials } = useGLTF("/api/model-url?name=XM3/XM3_tailLamp_futuristic_A.glb") as any;
   return (
     <group {...props} dispose={null}>
       <mesh

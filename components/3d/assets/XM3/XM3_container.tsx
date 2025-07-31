@@ -1,26 +1,26 @@
 import { degToRad } from "three/src/math/MathUtils.js";
 
-import {
-  XM3_body_transparent,
-  XM3_bonnet_transparent,
-  XM3_bumper_transparent,
-  XM3_headlight_transparent,
-  XM3_taillamp_transparent,
-  XM3_wheel_transparent,
-} from "./transparent";
+import { XM3_wheel_transparent } from "./transparent";
+import XM3_Body from "./XM3_Body";
+import XM3_Bonnet from "./XM3_Bonnet";
+import XM3_Bumper from "./XM3_Bumper";
+import XM3_Headlight from "./XM3_Headlight";
+import XM3_TailLamp from "./XM3_TailLamp";
+
 import useDisplay from "@/hooks/useDisplay";
+import { useGarageStore } from "@/store/useGarageStore";
 
 const XM3_container = () => {
   const { isDesktop } = useDisplay();
+  const { selectedParts } = useGarageStore();
 
   return (
     <group scale={isDesktop ? 0.0011 : 0.0007} position={[0, -1, 0]} rotation={[0, degToRad(10), 0]}>
-      <XM3_body_transparent />
-      <XM3_bonnet_transparent />
-      <XM3_bumper_transparent />
-      <XM3_headlight_transparent />
-      <XM3_taillamp_transparent />
-      <XM3_wheel_transparent />
+      <XM3_Body />
+      <XM3_Bonnet meta={selectedParts["Bonnet"]} />
+      <XM3_Bumper meta={selectedParts["Bumper"]} />
+      <XM3_Headlight meta={selectedParts["Head light"]} />
+      <XM3_TailLamp meta={selectedParts["Tail lamp"]} />
     </group>
   );
 };
