@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
-import { Vector3 } from "three";
 
 import { useGarageStore } from "@/store/useGarageStore";
 import { initialGarageCameraTarget } from "@/constants/partsCameraTarget";
@@ -35,16 +33,6 @@ const GarageSceneCameraController = () => {
       controls.removeEventListener("controlstart", handleStart);
     };
   }, [hasReset, setCameraTarget, setHasReset]);
-
-  useFrame(() => {
-    if (!cameraRef.current) return;
-    const pos = cameraRef.current.camera.position;
-    const tgt = new Vector3();
-    cameraRef.current.getTarget(tgt);
-
-    console.log("position:", [pos.x.toFixed(3), pos.y.toFixed(3), pos.z.toFixed(3)]);
-    console.log("target:", [tgt.x.toFixed(3), tgt.y.toFixed(3), tgt.z.toFixed(3)]);
-  });
 
   return (
     <CameraControls
