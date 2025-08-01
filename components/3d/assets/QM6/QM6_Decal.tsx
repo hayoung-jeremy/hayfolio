@@ -11,7 +11,7 @@ import { useGarageStore } from "@/store/useGarageStore";
 
 const QM6_Decal = () => {
   const group = useRef<THREE.Group>(null);
-  const { selectedParts } = useGarageStore();
+  const { selectedParts, selectedColors } = useGarageStore();
   const patternMeta = selectedParts["Pattern"];
 
   const { nodes, materials } = useGLTF("/api/model-url?name=QM6/QM6_decal.glb") as any;
@@ -36,7 +36,7 @@ const QM6_Decal = () => {
           transparent
           metalness={0.4}
           roughness={0.15}
-          // color={patternMeta.color ?? undefined}
+          color={selectedColors.Pattern}
         />
       </mesh>
     </group>

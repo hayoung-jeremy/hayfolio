@@ -7,10 +7,12 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { getWheelXOffset } from "@/utils/garage";
 import { WheelProps } from "@/types/garage";
+import { useGarageStore } from "@/store/useGarageStore";
 
 export default function SM6_Wheel_Futuristic_B({ carType, bumperMeta }: WheelProps) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials } = useGLTF("/api/model-url?name=SM6/SM6_wheel_futuristic_B.glb") as any;
+  const { selectedColors } = useGarageStore();
 
   const leftPos = getWheelXOffset({
     carType,
@@ -46,7 +48,7 @@ export default function SM6_Wheel_Futuristic_B({ carType, bumperMeta }: WheelPro
           receiveShadow
           geometry={nodes.SM6_Wheel_Futuristic_B_R_3.geometry}
           material={materials.tire_metal}
-          // material-color={props.selectedParts.wheel.color ?? ""}
+          material-color={selectedColors.Wheel}
         />
         <mesh
           castShadow
@@ -74,7 +76,7 @@ export default function SM6_Wheel_Futuristic_B({ carType, bumperMeta }: WheelPro
           receiveShadow
           geometry={nodes.SM6_Wheel_Futuristic_B_L_3.geometry}
           material={materials.tire_metal}
-          // material-color={props.selectedParts.wheel.color ?? ""}
+          material-color={selectedColors.Wheel}
         />
         <mesh
           castShadow

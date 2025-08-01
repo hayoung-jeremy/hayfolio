@@ -7,10 +7,12 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { getWheelXOffset } from "@/utils/garage";
 import { WheelProps } from "@/types/garage";
+import { useGarageStore } from "@/store/useGarageStore";
 
 export default function XM3_Wheel_Motorsport_A({ carType, bumperMeta }: WheelProps) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials } = useGLTF("/api/model-url?name=XM3/XM3_wheel_motorsport_A.glb") as any;
+  const { selectedColors } = useGarageStore();
 
   const leftPos = getWheelXOffset({
     carType,
@@ -58,7 +60,7 @@ export default function XM3_Wheel_Motorsport_A({ carType, bumperMeta }: WheelPro
           receiveShadow
           geometry={nodes.XM3_Wheel_Motorsport_A_R_5.geometry}
           material={materials.tire_metal}
-          // material-color={props.selectedParts.wheel.color ?? ""}
+          material-color={selectedColors.Wheel}
         />
         <mesh
           castShadow
@@ -98,7 +100,7 @@ export default function XM3_Wheel_Motorsport_A({ carType, bumperMeta }: WheelPro
           receiveShadow
           geometry={nodes.XM3_Wheel_Motorsport_A_L_5.geometry}
           material={materials.tire_metal}
-          // material-color={props.selectedParts.wheel.color ?? ""}
+          material-color={selectedColors.Wheel}
         />
         <mesh
           castShadow
