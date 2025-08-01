@@ -1,12 +1,26 @@
 import { HexColorPicker } from "react-colorful";
 import { useGarageStore } from "@/store/useGarageStore";
+import { partsTypes } from "@/types/garage";
 
 const ColorPicker = () => {
-  const { selectedColor, setSelectedColor, setColorPickerOpen, setPartPanelOpen } = useGarageStore();
+  const { activePartTabIndex, selectedColors, setSelectedColorByType, setColorPickerOpen, setPartPanelOpen } =
+    useGarageStore();
+
+  const currentType = partsTypes[activePartTabIndex];
+  const editableTypes = ["Body", "Bonnet", "Bumper", "Wheel", "Spoiler", "Pattern"] as const;
+  type EditableColorType = (typeof editableTypes)[number];
+  const isEditable = editableTypes.includes(currentType as EditableColorType);
+  const colorValue = isEditable ? selectedColors[currentType as EditableColorType] : "#ffffff";
 
   return (
     <>
-      <HexColorPicker color={selectedColor} onChange={setSelectedColor} />
+      <HexColorPicker
+        color={colorValue}
+        onChange={(newColor: string) => {
+          if (!isEditable) return;
+          setSelectedColorByType(currentType as EditableColorType, newColor);
+        }}
+      />
       <div className="flex items-center justify-center w-full gap-5 mt-5">
         <button
           onClick={() => {

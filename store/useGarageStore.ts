@@ -33,8 +33,15 @@ type GarageState = {
 
   isColorPickerOpen: boolean;
   setColorPickerOpen: (v: boolean) => void;
-  selectedColor: string;
-  setSelectedColor: (color: string) => void;
+  selectedColors: {
+    Body: string;
+    Bonnet: string;
+    Bumper: string;
+    Wheel: string;
+    Spoiler: string;
+    Pattern: string;
+  };
+  setSelectedColorByType: (type: "Body" | "Bonnet" | "Bumper" | "Wheel" | "Spoiler" | "Pattern", color: string) => void;
 };
 
 export const useGarageStore = create<GarageState>(set => ({
@@ -72,6 +79,19 @@ export const useGarageStore = create<GarageState>(set => ({
 
   isColorPickerOpen: false,
   setColorPickerOpen: v => set({ isColorPickerOpen: v }),
-  selectedColor: "#ffffff",
-  setSelectedColor: color => set({ selectedColor: color }),
+  selectedColors: {
+    Body: "#ffffff",
+    Bonnet: "#ffffff",
+    Bumper: "#ffffff",
+    Wheel: "#ffffff",
+    Spoiler: "#ffffff",
+    Pattern: "#ffffff",
+  },
+  setSelectedColorByType: (type: "Body" | "Bonnet" | "Bumper" | "Wheel" | "Spoiler" | "Pattern", color: string) =>
+    set(state => ({
+      selectedColors: {
+        ...state.selectedColors,
+        [type]: color,
+      },
+    })),
 }));
