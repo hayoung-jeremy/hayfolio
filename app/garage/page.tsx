@@ -1,16 +1,30 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useProgress } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
+
 import { GarageScene } from "@/components/3d/scenes";
-import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
+import { MobileBottomSheet, SceneLoader, SideBar } from "@/components/ui/garage";
 import useDisplay from "@/hooks/useDisplay";
 
 const Garage = () => {
   const { isMobile } = useDisplay();
+  const { progress } = useProgress();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (progress === 100) {
+      const timeout = setTimeout(() => setIsLoaded(true), 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [progress]);
+
   return (
     <>
+      {!isLoaded && <SceneLoader />}
       <motion.main
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: isLoaded ? 1 : 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
         className="min-h-svh z-0"
@@ -18,13 +32,7 @@ const Garage = () => {
         <GarageScene />
       </motion.main>
 
-      {isMobile ? (
-        <AnimatePresence>
-          <MobileBottomSheet />
-        </AnimatePresence>
-      ) : (
-        <SideBar />
-      )}
+      {isMobile ? <AnimatePresence>{isLoaded && <MobileBottomSheet />}</AnimatePresence> : isLoaded && <SideBar />}
     </>
   );
 };

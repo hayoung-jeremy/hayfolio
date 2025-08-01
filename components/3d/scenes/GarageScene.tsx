@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 
@@ -24,7 +25,7 @@ const GarageScene = () => {
   };
   return (
     <Canvas style={{ height: "100svh" }}>
-      {renderContainer()}
+      <Suspense fallback={null}>{renderContainer()}</Suspense>
       <CameraControls
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 3}
