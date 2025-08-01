@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { motion, useAnimation, useMotionValue, PanInfo, useDragControls } from "framer-motion";
 import clsx from "clsx";
 import PartsCarousel from "./PartsCarousel";
+import { useGarageStore } from "@/store/useGarageStore";
 
 const MobileBottomSheet = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [closedY, setClosedY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const { isPartPanelOpen, setPartPanelOpen } = useGarageStore();
 
   const HANDLE_HEIGHT = 32;
   const y = useMotionValue(0);
@@ -74,7 +75,7 @@ const MobileBottomSheet = () => {
     const closeThreshold = closedY * 0.5;
 
     let targetY = closedY;
-    let open = isOpen;
+    let open = isPartPanelOpen;
 
     if (fastUp || currentY <= openThreshold) {
       targetY = HANDLE_HEIGHT;
@@ -83,8 +84,8 @@ const MobileBottomSheet = () => {
       targetY = closedY;
       open = false;
     } else {
-      targetY = isOpen ? HANDLE_HEIGHT : closedY;
-      open = isOpen;
+      targetY = isPartPanelOpen ? HANDLE_HEIGHT : closedY;
+      open = isPartPanelOpen;
     }
 
     controls.start({
@@ -98,7 +99,7 @@ const MobileBottomSheet = () => {
       },
     });
 
-    setIsOpen(open);
+    setPartPanelOpen(open);
   };
 
   return (

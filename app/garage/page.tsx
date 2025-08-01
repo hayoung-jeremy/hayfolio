@@ -8,7 +8,7 @@ import { GarageScene } from "@/components/3d/scenes/garage";
 import useDisplay from "@/hooks/useDisplay";
 
 const Garage = () => {
-  const { isMobile } = useDisplay();
+  const { isMobile, isTablet } = useDisplay();
   const { progress } = useProgress();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -32,7 +32,11 @@ const Garage = () => {
         <GarageScene />
       </motion.main>
 
-      {isMobile ? <AnimatePresence>{isLoaded && <MobileBottomSheet />}</AnimatePresence> : isLoaded && <SideBar />}
+      {isMobile || isTablet ? (
+        <AnimatePresence>{isLoaded && <MobileBottomSheet />}</AnimatePresence>
+      ) : (
+        isLoaded && <SideBar />
+      )}
     </>
   );
 };

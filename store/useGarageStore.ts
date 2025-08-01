@@ -24,6 +24,8 @@ type GarageState = {
   resetCameraTarget: () => void;
   hasReset: boolean;
   setHasReset: (v: boolean) => void;
+  isPartPanelOpen: boolean;
+  setPartPanelOpen: (v: boolean) => void;
 };
 
 export const useGarageStore = create<GarageState>(set => ({
@@ -52,4 +54,6 @@ export const useGarageStore = create<GarageState>(set => ({
   resetCameraTarget: () => set({ cameraTarget: { position: [0, 0, 5], target: [0, 0, 0] } }),
   hasReset: false,
   setHasReset: v => set({ hasReset: v }),
+  isPartPanelOpen: false,
+  setPartPanelOpen: v => set({ isPartPanelOpen: v }),
 }));

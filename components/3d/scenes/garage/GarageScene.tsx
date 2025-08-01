@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 
 import { XM3_Container } from "../../assets/XM3";
@@ -7,9 +7,12 @@ import { QM6_Container } from "../../assets/QM6";
 import EnvironmentSettings from "../../EnvironmentSettings";
 import GarageSceneCameraController from "./GarageSceneCameraController";
 import { useGarageStore } from "@/store/useGarageStore";
+import useDisplay from "@/hooks/useDisplay";
 
 const GarageScene = () => {
-  const { selectedBody } = useGarageStore();
+  const [heightPx, setHeightPx] = useState(0);
+  const { selectedBody, isPartPanelOpen } = useGarageStore();
+  const { isDesktop } = useDisplay();
 
   const renderContainer = () => {
     switch (selectedBody) {
@@ -23,12 +26,29 @@ const GarageScene = () => {
         return null;
     }
   };
+
+  useEffect(() => {
+    const updateHeight = () => {
+      const vh = window.innerHeight;
+      const newHeight = isDesktop ? vh : isPartPanelOpen ? vh * 0.7 : vh;
+      setHeightPx(newHeight);
+    };
+
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [isDesktop, isPartPanelOpen]);
   return (
-    <Canvas style={{ height: "100svh" }}>
-      <Suspense fallback={null}>{renderContainer()}</Suspense>
-      <GarageSceneCameraController />
-      <EnvironmentSettings />
-    </Canvas>
+    <div
+      className="w-full transition-[height] duration-500 ease-in-out"
+      style={{ height: `${heightPx}px`, overflow: "hidden" }}
+    >
+      <Canvas style={{ height: "100%", width: "100%" }} resize={{ debounce: 0 }}>
+        <Suspense fallback={null}>{renderContainer()}</Suspense>
+        <GarageSceneCameraController />
+        <EnvironmentSettings />
+      </Canvas>
+    </div>
   );
 };
 
