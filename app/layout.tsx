@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${suit.variable} font-sans`}>
+      <body className={`antialiased ${suit.variable} font-suit`}>
         <Providers>{children}</Providers>
         <Analytics />
         <SpeedInsights />
