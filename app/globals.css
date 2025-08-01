@@ -24,3 +24,8 @@ body {
   font-kerning: none;
   text-rendering: optimizeSpeed;
 }
+
+.garage-colorpicker .react-colorful {
+  width: 100%;
+  height: 100%;
+}

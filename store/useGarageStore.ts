@@ -19,13 +19,20 @@ type GarageState = {
   selectBody: (name: "XM3" | "SM6" | "QM6") => void;
   selectPart: (part: PartsType, meta: PartMeta) => void;
   resetParts: () => void;
+
   cameraTarget: GarageSceneCameraTarget | null;
   setCameraTarget: (target: GarageSceneCameraTarget) => void;
   resetCameraTarget: () => void;
   hasReset: boolean;
   setHasReset: (v: boolean) => void;
+
   isPartPanelOpen: boolean;
   setPartPanelOpen: (v: boolean) => void;
+
+  isColorPickerOpen: boolean;
+  setColorPickerOpen: (v: boolean) => void;
+  selectedColor: string;
+  setSelectedColor: (color: string) => void;
 };
 
 export const useGarageStore = create<GarageState>(set => ({
@@ -49,11 +56,18 @@ export const useGarageStore = create<GarageState>(set => ({
       };
     }),
   resetParts: () => set({ selectedParts: {} }),
+
   cameraTarget: null,
   setCameraTarget: target => set({ cameraTarget: target }),
   resetCameraTarget: () => set({ cameraTarget: { position: [0, 0, 5], target: [0, 0, 0] } }),
   hasReset: false,
   setHasReset: v => set({ hasReset: v }),
+
   isPartPanelOpen: false,
   setPartPanelOpen: v => set({ isPartPanelOpen: v }),
+
+  isColorPickerOpen: false,
+  setColorPickerOpen: v => set({ isColorPickerOpen: v }),
+  selectedColor: "#ffffff",
+  setSelectedColor: color => set({ selectedColor: color }),
 }));

@@ -11,7 +11,7 @@ import useDisplay from "@/hooks/useDisplay";
 
 const GarageScene = () => {
   const [heightPx, setHeightPx] = useState(0);
-  const { selectedBody, isPartPanelOpen } = useGarageStore();
+  const { selectedBody, isPartPanelOpen, isColorPickerOpen } = useGarageStore();
   const { isDesktop } = useDisplay();
 
   const renderContainer = () => {
@@ -30,7 +30,7 @@ const GarageScene = () => {
   useEffect(() => {
     const updateHeight = () => {
       const vh = window.innerHeight;
-      const newHeight = isDesktop ? vh : isPartPanelOpen ? vh * 0.7 : vh;
+      const newHeight = isDesktop ? vh : isPartPanelOpen || isColorPickerOpen ? vh * 0.7 : vh;
       setHeightPx(newHeight);
     };
 

@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { motion, useAnimation, useMotionValue, PanInfo, useDragControls } from "framer-motion";
+import { motion, useAnimation, useMotionValue, PanInfo, useDragControls, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
+
 import PartsCarousel from "./PartsCarousel";
+import ColorPicker from "./ColorPicker";
+import { Palette } from "../icons";
 import { useGarageStore } from "@/store/useGarageStore";
 
 const MobileBottomSheet = () => {
   const [closedY, setClosedY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const { isPartPanelOpen, setPartPanelOpen } = useGarageStore();
+  const { isPartPanelOpen, setPartPanelOpen, isColorPickerOpen, setColorPickerOpen } = useGarageStore();
 
   const HANDLE_HEIGHT = 32;
   const y = useMotionValue(0);
@@ -128,7 +131,24 @@ const MobileBottomSheet = () => {
           )}
         />
       </div>
-      <PartsCarousel />
+      <AnimatePresence mode="wait">
+        {!isColorPickerOpen ? (
+          <>
+            <PartsCarousel />
+            <button
+              onClick={() => {
+                setPartPanelOpen(false);
+                setColorPickerOpen(true);
+              }}
+              className="fixed bottom-[calc(env(safe-area-inset-bottom)+48px)] right-5 z-[9999] border border-white/10 bg-black/70 w-12 h-12 rounded-full flex items-center justify-center"
+            >
+              <Palette />
+            </button>
+          </>
+        ) : (
+          <ColorPicker />
+        )}
+      </AnimatePresence>
     </motion.aside>
   );
 };
