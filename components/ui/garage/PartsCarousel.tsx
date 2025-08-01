@@ -14,20 +14,25 @@ import { useGarageStore } from "@/store/useGarageStore";
 
 const PartsCarousel = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { selectBody, selectPart, selectedBody, selectedParts } = useGarageStore();
+  const [mainSwiper, setMainSwiper] = useState<any>(null);
+  const { selectBody, selectPart, selectedBody, selectedParts, activePartTabIndex, setActivePartTabIndex } =
+    useGarageStore();
 
   useEffect(() => {
     if (thumbsSwiper && thumbsSwiper.slideTo) {
-      thumbsSwiper.slideTo(activeIndex);
+      thumbsSwiper.slideTo(activePartTabIndex);
     }
-  }, [activeIndex, thumbsSwiper]);
+    if (mainSwiper && mainSwiper.slideTo) {
+      mainSwiper.slideTo(activePartTabIndex, 0);
+    }
+  }, [activePartTabIndex, thumbsSwiper, mainSwiper]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 30 }}
+      transition={{ type: "tween", duration: 0.24, ease: "easeOut" }}
       className="flex flex-col flex-1 w-full select-none"
     >
       {/* Thumbs */}
@@ -46,7 +51,7 @@ const PartsCarousel = () => {
             className={clsx(
               "text-center text-white opacity-50 py-2 px-6 whitespace-nowrap inline-flex items-center justify-center !w-fit cursor-pointer",
               {
-                "opacity-100": index === activeIndex,
+                "opacity-100": index === activePartTabIndex,
               }
             )}
           >
@@ -63,7 +68,8 @@ const PartsCarousel = () => {
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Thumbs]}
           mousewheel={false}
-          onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
+          onSwiper={setMainSwiper}
+          onSlideChange={swiper => setActivePartTabIndex(swiper.activeIndex)}
           className="w-full h-full"
         >
           {partsTypes.map(type => (

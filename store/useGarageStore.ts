@@ -28,6 +28,8 @@ type GarageState = {
 
   isPartPanelOpen: boolean;
   setPartPanelOpen: (v: boolean) => void;
+  activePartTabIndex: number;
+  setActivePartTabIndex: (index: number) => void;
 
   isColorPickerOpen: boolean;
   setColorPickerOpen: (v: boolean) => void;
@@ -65,6 +67,8 @@ export const useGarageStore = create<GarageState>(set => ({
 
   isPartPanelOpen: false,
   setPartPanelOpen: v => set({ isPartPanelOpen: v }),
+  activePartTabIndex: 0,
+  setActivePartTabIndex: index => set({ activePartTabIndex: index }),
 
   isColorPickerOpen: false,
   setColorPickerOpen: v => set({ isColorPickerOpen: v }),
