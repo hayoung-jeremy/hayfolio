@@ -12,6 +12,8 @@ import XM3_Decal from "./XM3_Decal";
 
 import useDisplay from "@/hooks/useDisplay";
 import { useGarageStore } from "@/store/useGarageStore";
+import { Suspense } from "react";
+import SkeletonParts from "../SkeletonParts";
 
 const XM3_Container = () => {
   const { isDesktop } = useDisplay();
@@ -20,7 +22,9 @@ const XM3_Container = () => {
   return (
     <group scale={isDesktop ? 0.0011 : 0.0007} position={[0, -1, 0]} rotation={[0, degToRad(10), 0]}>
       <XM3_Body />
-      <XM3_Bonnet meta={selectedParts["Bonnet"]} />
+      <Suspense fallback={<SkeletonParts bodyType="XM3" partType="Bonnet" />}>
+        <XM3_Bonnet meta={selectedParts["Bonnet"]} />
+      </Suspense>
       <XM3_Bumper meta={selectedParts["Bumper"]} />
       <XM3_Headlight meta={selectedParts["Head light"]} />
       <XM3_TailLamp meta={selectedParts["Tail lamp"]} />
