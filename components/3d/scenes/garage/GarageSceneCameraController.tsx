@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { CameraControls } from "@react-three/drei";
+import { CameraControls as CameraControlsComponent } from "@react-three/drei";
+import CameraControls from "camera-controls";
 
 import { useGarageStore } from "@/store/useGarageStore";
 import { initialGarageCameraTarget } from "@/constants/partsCameraTarget";
 
 const GarageSceneCameraController = () => {
-  const cameraRef = useRef<CameraControls>(null);
+  const cameraRef = useRef<any>(null);
   const { cameraTarget, setCameraTarget, hasReset, setHasReset } = useGarageStore();
 
   useEffect(() => {
@@ -29,18 +30,22 @@ const GarageSceneCameraController = () => {
     };
 
     controls.addEventListener("controlstart", handleStart);
+    controls.mouseButtons.right = 0;
+    controls.touches.two = CameraControls.ACTION.TOUCH_DOLLY;
     return () => {
       controls.removeEventListener("controlstart", handleStart);
     };
   }, [hasReset, setCameraTarget, setHasReset]);
 
   return (
-    <CameraControls
+    <CameraControlsComponent
       ref={cameraRef}
       minPolarAngle={Math.PI / 3}
       maxPolarAngle={Math.PI / 2}
-      smoothTime={0.2}
-      draggingSmoothTime={0.2}
+      minDistance={3}
+      maxDistance={6}
+      smoothTime={0.25}
+      draggingSmoothTime={0.25}
     />
   );
 };

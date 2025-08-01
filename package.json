@@ -18,6 +18,7 @@
     "@react-three/postprocessing": "^3.0.4",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "camera-controls": "^3.1.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.7",
     "gsap": "^3.13.0",
