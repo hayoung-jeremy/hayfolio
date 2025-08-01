@@ -90,6 +90,8 @@ const SkeletonParts = ({ bodyType, partType }: SkeletonPartProps) => {
 
     groupRef.current.traverse(obj => {
       if (obj instanceof Mesh && obj.material instanceof MeshStandardMaterial) {
+        obj.material = obj.material.clone();
+
         obj.material.wireframe = true;
         obj.material.transparent = true;
         obj.material.opacity = 0.2;
