@@ -1,9 +1,11 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import PartsCarousel from "./PartsCarousel";
 import { useGarageStore } from "@/store/useGarageStore";
+import { Palette } from "../icons";
+import ColorPicker from "./ColorPicker";
 
 const SideBar = () => {
-  const { isPartPanelOpen, setPartPanelOpen } = useGarageStore();
+  const { isPartPanelOpen, setPartPanelOpen, isColorPickerOpen, setColorPickerOpen } = useGarageStore();
   const sidebarVariants = {
     open: { x: 0 },
     closed: { x: "100%" },
@@ -23,6 +25,30 @@ const SideBar = () => {
         {isPartPanelOpen ? "▶" : "◀"}
       </button>
       <PartsCarousel />
+      <AnimatePresence mode="wait">
+        {isPartPanelOpen && !isColorPickerOpen && (
+          <button
+            onClick={() => {
+              setColorPickerOpen(true);
+            }}
+            className="fixed top-5 right-[380px] z-[9999] border border-white/10 bg-black/70 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer"
+          >
+            <Palette />
+          </button>
+        )}
+        {isColorPickerOpen && (
+          <motion.div
+            key={"desktop colorpicker"}
+            className="w-[320px] p-5 garage-colorpicker h-[calc(29dvh)] absolute top-0 right-[360px] z-0"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 30 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ColorPicker />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.aside>
   );
 };

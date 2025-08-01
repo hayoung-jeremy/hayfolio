@@ -146,7 +146,15 @@ const MobileBottomSheet = () => {
             </button>
           </>
         ) : (
-          <ColorPicker />
+          <motion.div
+            key={"mobile colorpicker"}
+            className="w-full p-5 garage-colorpicker h-[calc(29dvh)] relative xl:absolute xl:top-0 xl:right-[360px] xl:w-[320px]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+          >
+            <ColorPicker />
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.aside>

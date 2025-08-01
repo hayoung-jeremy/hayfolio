@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Thumbs } from "swiper/modules";
 import "swiper/css";
@@ -23,7 +24,12 @@ const PartsCarousel = () => {
   }, [activeIndex, thumbsSwiper]);
 
   return (
-    <div className="flex flex-col flex-1 w-full select-none">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 30 }}
+      className="flex flex-col flex-1 w-full select-none"
+    >
       {/* Thumbs */}
       <Swiper
         spaceBetween={0}
@@ -123,7 +129,7 @@ const PartsCarousel = () => {
           ))}
         </Swiper>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
