@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Group, Mesh, MeshStandardMaterial } from "three";
+import { useFrame } from "@react-three/fiber";
 
 import {
   XM3_Bonnet_Transparent,
@@ -31,6 +32,7 @@ interface SkeletonPartProps {
 
 const SkeletonParts = ({ bodyType, partType }: SkeletonPartProps) => {
   const groupRef = useRef<Group>(null);
+  const t = useRef(0);
 
   const renderPart = () => {
     if (bodyType === "XM3") {
@@ -86,20 +88,33 @@ const SkeletonParts = ({ bodyType, partType }: SkeletonPartProps) => {
   };
 
   useEffect(() => {
-    if (!groupRef.current) return;
+    const rafId = requestAnimationFrame(() => {
+      if (!groupRef.current) return;
 
-    groupRef.current.traverse(obj => {
+      groupRef.current.traverse(obj => {
+        if (obj instanceof Mesh && obj.material instanceof MeshStandardMaterial) {
+          obj.material = obj.material.clone();
+          obj.material.wireframe = true;
+          obj.material.transparent = true;
+          obj.material.opacity = 0.2;
+          obj.material.depthWrite = false;
+          obj.material.color.set("white");
+        }
+      });
+    });
+
+    return () => cancelAnimationFrame(rafId);
+  }, [bodyType, partType]);
+
+  useFrame((_, delta) => {
+    t.current += delta;
+
+    groupRef.current?.traverse(obj => {
       if (obj instanceof Mesh && obj.material instanceof MeshStandardMaterial) {
-        obj.material = obj.material.clone();
-
-        obj.material.wireframe = true;
-        obj.material.transparent = true;
-        obj.material.opacity = 0.2;
-        obj.material.depthWrite = false;
-        obj.material.color.set("white");
+        obj.material.opacity = 0.15 + 0.05 * Math.sin(t.current * 3);
       }
     });
-  }, [bodyType, partType]);
+  });
 
   return <group ref={groupRef}>{renderPart()}</group>;
 };
