@@ -1,11 +1,8 @@
 import { HexColorPicker } from "react-colorful";
-import { motion } from "framer-motion";
 import { useGarageStore } from "@/store/useGarageStore";
-import useDisplay from "@/hooks/useDisplay";
 
 const ColorPicker = () => {
   const { selectedColor, setSelectedColor, setColorPickerOpen, setPartPanelOpen } = useGarageStore();
-  const { isDesktop } = useDisplay();
 
   return (
     <>
