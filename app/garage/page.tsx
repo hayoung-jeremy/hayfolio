@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { GarageScene } from "@/components/3d/scenes";
 import { MobileBottomSheet, SceneLoader, SideBar } from "@/components/ui/garage";
+import { GarageScene } from "@/components/3d/scenes/garage";
 import useDisplay from "@/hooks/useDisplay";
 
 const Garage = () => {

@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import CanvasWrapper from "../CanvasWrapper";
-import CreateYourEpicCarPreviewScene from "./CreateYourEpicCarPreviewScene";
+import { CreateYourEpicCarPreviewScene } from "./garage";
 import Xperiencemor3PreviewScene from "./Xperiencemor3PreviewScene";
 import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";

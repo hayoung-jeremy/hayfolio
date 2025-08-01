@@ -4,8 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { animated, useSpring, config } from "@react-spring/three";
 
-import { XM3_Transparent_Container } from "../assets/XM3";
-import EnvironmentSettings from "../EnvironmentSettings";
+import { XM3_Transparent_Container } from "../../assets/XM3";
+import EnvironmentSettings from "../../EnvironmentSettings";
 import useDisplay from "@/hooks/useDisplay";
 import { SceneProps } from "@/types/scene";
 

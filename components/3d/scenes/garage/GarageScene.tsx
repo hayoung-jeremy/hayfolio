@@ -2,10 +2,10 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 
-import EnvironmentSettings from "../EnvironmentSettings";
-import { XM3_Container } from "../assets/XM3";
-import { QM6_Container } from "../assets/QM6";
-import { SM6_Container } from "../assets/SM6";
+import { XM3_Container } from "../../assets/XM3";
+import { SM6_Container } from "../../assets/SM6";
+import { QM6_Container } from "../../assets/QM6";
+import EnvironmentSettings from "../../EnvironmentSettings";
 import { useGarageStore } from "@/store/useGarageStore";
 
 const GarageScene = () => {
