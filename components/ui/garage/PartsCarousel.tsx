@@ -64,7 +64,7 @@ const PartsCarousel = () => {
             <SwiperSlide key={`${type}-main`} className="">
               <div
                 onWheel={e => e.stopPropagation()}
-                className="max-h-[calc(50dvh-60px)] md:max-h-[calc(100dvh-60px)] overflow-y-auto pb-[env(safe-area-inset-bottom)]"
+                className="max-h-[34.7dvh] md:max-h-[calc(40dvh)] xl:max-h-[calc(100dvh-60px)] overflow-y-auto pb-[env(safe-area-inset-bottom)]"
               >
                 {partThumbnails[type]?.map(url => {
                   const name = url.split("/").pop()!;
