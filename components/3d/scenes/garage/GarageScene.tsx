@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { CameraControls } from "@react-three/drei";
 
 import { XM3_Container } from "../../assets/XM3";
 import { SM6_Container } from "../../assets/SM6";
 import { QM6_Container } from "../../assets/QM6";
 import EnvironmentSettings from "../../EnvironmentSettings";
+import GarageSceneCameraController from "./GarageSceneCameraController";
 import { useGarageStore } from "@/store/useGarageStore";
 
 const GarageScene = () => {
@@ -26,14 +26,7 @@ const GarageScene = () => {
   return (
     <Canvas style={{ height: "100svh" }}>
       <Suspense fallback={null}>{renderContainer()}</Suspense>
-      <CameraControls
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={Math.PI / 3}
-        minDistance={1.5}
-        maxDistance={4}
-        smoothTime={0.5}
-        draggingSmoothTime={0.5}
-      />
+      <GarageSceneCameraController />
       <EnvironmentSettings />
     </Canvas>
   );
