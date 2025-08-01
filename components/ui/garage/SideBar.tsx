@@ -15,7 +15,7 @@ const SideBar = () => {
       initial="closed"
       animate={isPartPanelOpen ? "open" : "closed"}
       variants={sidebarVariants}
-      transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+      transition={{ type: "tween", duration: 0.24, ease: "easeOut" }}
       className="fixed top-0 right-0 z-20 h-screen w-full max-w-[360px] bg-white/5 backdrop-blur-lg"
     >
       <button
@@ -43,7 +43,7 @@ const SideBar = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 30 }}
-            transition={{ duration: 0.2 }}
+            transition={{ type: "tween", duration: 0.24, ease: "easeOut" }}
           >
             <ColorPicker />
           </motion.div>
