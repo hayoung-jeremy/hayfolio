@@ -6,11 +6,16 @@ import PartsCarousel from "./PartsCarousel";
 import ColorPicker from "./ColorPicker";
 import { Palette } from "../icons";
 import { useGarageStore } from "@/store/useGarageStore";
+import { partsTypes } from "@/types/garage";
 
 const MobileBottomSheet = () => {
   const [closedY, setClosedY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const { isPartPanelOpen, setPartPanelOpen, isColorPickerOpen, setColorPickerOpen } = useGarageStore();
+  const { isPartPanelOpen, setPartPanelOpen, isColorPickerOpen, setColorPickerOpen, activePartTabIndex } =
+    useGarageStore();
+
+  const currentType = partsTypes[activePartTabIndex];
+  const isColorEditable = !["Head light", "Tail lamp", "Roof carrier"].includes(currentType);
 
   const HANDLE_HEIGHT = 32;
   const y = useMotionValue(0);
@@ -135,27 +140,31 @@ const MobileBottomSheet = () => {
         {!isColorPickerOpen ? (
           <>
             <PartsCarousel />
-            <button
-              onClick={() => {
-                setPartPanelOpen(false);
-                setColorPickerOpen(true);
-              }}
-              className="fixed bottom-[calc(env(safe-area-inset-bottom)+48px)] right-5 z-[9999] border border-white/10 bg-black/70 w-12 h-12 rounded-full flex items-center justify-center"
-            >
-              <Palette />
-            </button>
+            {isColorEditable && (
+              <button
+                onClick={() => {
+                  setPartPanelOpen(false);
+                  setColorPickerOpen(true);
+                }}
+                className="fixed bottom-[calc(env(safe-area-inset-bottom)+48px)] right-5 z-[9999] border border-white/10 bg-black/70 w-12 h-12 rounded-full flex items-center justify-center"
+              >
+                <Palette />
+              </button>
+            )}
           </>
         ) : (
-          <motion.div
-            key={"mobile colorpicker"}
-            className="w-full p-5 garage-colorpicker h-[calc(29dvh)] relative xl:absolute xl:top-0 xl:right-[360px] xl:w-[320px]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 30 }}
-            transition={{ type: "tween", duration: 0.24, ease: "easeOut" }}
-          >
-            <ColorPicker />
-          </motion.div>
+          isColorEditable && (
+            <motion.div
+              key={"mobile colorpicker"}
+              className="w-full p-5 garage-colorpicker h-[calc(29dvh)] relative xl:absolute xl:top-0 xl:right-[360px] xl:w-[320px]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 30 }}
+              transition={{ type: "tween", duration: 0.24, ease: "easeOut" }}
+            >
+              <ColorPicker />
+            </motion.div>
+          )
         )}
       </AnimatePresence>
     </motion.aside>

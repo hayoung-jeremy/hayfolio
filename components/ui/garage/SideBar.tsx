@@ -3,13 +3,19 @@ import PartsCarousel from "./PartsCarousel";
 import { useGarageStore } from "@/store/useGarageStore";
 import { Palette } from "../icons";
 import ColorPicker from "./ColorPicker";
+import { partsTypes } from "@/types/garage";
 
 const SideBar = () => {
-  const { isPartPanelOpen, setPartPanelOpen, isColorPickerOpen, setColorPickerOpen } = useGarageStore();
+  const { isPartPanelOpen, setPartPanelOpen, isColorPickerOpen, setColorPickerOpen, activePartTabIndex } =
+    useGarageStore();
   const sidebarVariants = {
     open: { x: 0 },
     closed: { x: "100%" },
   };
+
+  const currentType = partsTypes[activePartTabIndex];
+  const isColorEditable = !["Head light", "Tail lamp", "Roof carrier"].includes(currentType);
+
   return (
     <motion.aside
       initial="closed"
@@ -26,7 +32,7 @@ const SideBar = () => {
       </button>
       <PartsCarousel />
       <AnimatePresence mode="wait">
-        {isPartPanelOpen && !isColorPickerOpen && (
+        {isPartPanelOpen && !isColorPickerOpen && isColorEditable && (
           <button
             onClick={() => {
               setColorPickerOpen(true);
@@ -36,7 +42,7 @@ const SideBar = () => {
             <Palette />
           </button>
         )}
-        {isColorPickerOpen && (
+        {isColorPickerOpen && isColorEditable && (
           <motion.div
             key={"desktop colorpicker"}
             className="w-[320px] p-5 garage-colorpicker h-[calc(29dvh)] absolute top-0 right-[360px] z-0"
