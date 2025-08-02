@@ -32,12 +32,12 @@ export const partCameraMap: Record<PartsType, GarageSceneCameraTarget> = {
     target: [0, 0, 0],
   },
   "Roof carrier": {
-    position: [-0.432, 1.18, 2.308],
-    target: [0.365, 0.5, 0.012],
+    position: [-0.874, 1.656, 2.353],
+    target: [0.182, 0.382, -0.149],
   },
   Spoiler: {
-    position: [4.073, 0.836, 0.535],
-    target: [0.189, -0.154, -0.766],
+    position: [3.238, 1.775, 1.411],
+    target: [0.324, -0.332, -0.786],
   },
   Body: initialGarageCameraTarget,
 };
