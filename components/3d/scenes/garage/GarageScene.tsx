@@ -43,7 +43,16 @@ const GarageScene = () => {
       className="w-full transition-[height] duration-500 ease-in-out"
       style={{ height: `${heightPx}px`, overflow: "hidden" }}
     >
-      <Canvas style={{ height: "100%", width: "100%" }} resize={{ debounce: 0 }}>
+      <Canvas
+        style={{ height: "100%", width: "100%" }}
+        resize={{ debounce: 0 }}
+        camera={{
+          fov: 60,
+          position: [0, 0, 5],
+          near: 0.1,
+          far: 1000,
+        }}
+      >
         <Suspense fallback={null}>{renderContainer()}</Suspense>
         <GarageSceneCameraController />
         <EnvironmentSettings />

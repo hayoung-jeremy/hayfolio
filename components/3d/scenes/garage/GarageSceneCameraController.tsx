@@ -44,8 +44,8 @@ const GarageSceneCameraController = () => {
       maxPolarAngle={Math.PI / 2}
       minDistance={3}
       maxDistance={6}
-      smoothTime={0.25}
-      draggingSmoothTime={0.25}
+      smoothTime={0.28}
+      draggingSmoothTime={0.28}
     />
   );
 };
