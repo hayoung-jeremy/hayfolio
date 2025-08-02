@@ -1,4 +1,7 @@
+import { useEffect, useMemo, useState } from "react";
 import { HexColorPicker } from "react-colorful";
+import { debounce } from "lodash";
+
 import { useGarageStore } from "@/store/useGarageStore";
 import { partsTypes } from "@/types/garage";
 
@@ -11,14 +14,32 @@ const ColorPicker = () => {
   type EditableColorType = (typeof editableTypes)[number];
   const isEditable = editableTypes.includes(currentType as EditableColorType);
   const colorValue = isEditable ? selectedColors[currentType as EditableColorType] : "#ffffff";
+  const currentKey = currentType as EditableColorType;
+
+  const [tempColor, setTempColor] = useState<string>(isEditable ? selectedColors[currentKey] : "#ffffff");
+
+  const debouncedSetColor = useMemo(
+    () =>
+      debounce((color: string) => {
+        setSelectedColorByType(currentKey, color);
+      }, 50),
+    [currentKey, setSelectedColorByType]
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedSetColor.cancel();
+    };
+  }, [debouncedSetColor]);
 
   return (
     <>
       <HexColorPicker
-        color={colorValue}
+        color={tempColor}
         onChange={(newColor: string) => {
           if (!isEditable) return;
-          setSelectedColorByType(currentType as EditableColorType, newColor);
+          setTempColor(newColor);
+          debouncedSetColor(newColor);
         }}
       />
       <div className="flex items-center justify-center w-full gap-5 mt-5">
