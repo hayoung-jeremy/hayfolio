@@ -69,32 +69,30 @@ const MobileBottomSheet = () => {
     setIsDragging(false);
 
     const currentY = y.get();
-    const { x: offsetX, y: offsetY } = info.offset;
+    const { y: offsetY } = info.offset;
     const { y: velocityY } = info.velocity;
 
-    const isVerticalSwipe = Math.abs(offsetY) > Math.abs(offsetX) * 1.2;
-    const draggedEnough = Math.abs(offsetY) > 28;
-
-    if (!isVerticalSwipe || !draggedEnough) return;
-
     const fastUp = velocityY < -20;
-    const fastDown = velocityY > 20;
-    const openThreshold = closedY * 0.5;
-    const closeThreshold = closedY * 0.5;
+    const fastDown = velocityY > 200;
+    const shouldForceClose = offsetY > 10 || fastDown;
+    const shouldForceOpen = offsetY < -10 || fastUp;
 
     let targetY = closedY;
     let open = isPartPanelOpen;
 
-    if (fastUp || currentY <= openThreshold) {
+    if (shouldForceOpen) {
       targetY = HANDLE_HEIGHT;
       open = true;
-    } else if (fastDown || currentY >= closeThreshold) {
+    } else if (shouldForceClose) {
       targetY = closedY;
       open = false;
     } else {
-      targetY = isPartPanelOpen ? HANDLE_HEIGHT : closedY;
-      open = isPartPanelOpen;
+      const shouldOpen = currentY < closedY * 0.6;
+      targetY = shouldOpen ? HANDLE_HEIGHT : closedY;
+      open = shouldOpen;
     }
+
+    if (!open) setColorPickerOpen(false);
 
     controls.start({
       y: targetY,
@@ -126,7 +124,7 @@ const MobileBottomSheet = () => {
     >
       <div
         className="w-full h-7 flex justify-center items-center cursor-pointer touch-none"
-        onPointerDown={e => dragControls.start(e)}
+        onPointerDown={e => dragControls.start(e, { distanceThreshold: 10 })}
       >
         <div
           className={clsx(

@@ -37,7 +37,7 @@ const GarageScene = () => {
     updateHeight();
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
-  }, [isDesktop, isPartPanelOpen]);
+  }, [isDesktop, isPartPanelOpen, isColorPickerOpen]);
   return (
     <div
       className="w-full transition-[height] duration-500 ease-in-out"
