@@ -1,5 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
+import { Perf } from "r3f-perf";
 
 import { XM3_Container } from "../../assets/XM3";
 import { SM6_Container } from "../../assets/SM6";
@@ -56,6 +57,7 @@ const GarageScene = () => {
         <Suspense fallback={null}>{renderContainer()}</Suspense>
         <GarageSceneCameraController />
         <EnvironmentSettings />
+        <Perf position="top-left" />
       </Canvas>
     </div>
   );
