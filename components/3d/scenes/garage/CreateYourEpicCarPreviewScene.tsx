@@ -40,19 +40,24 @@ const CreateYourEpicCarPreviewScene = ({ visible }: SceneProps) => {
 
   return (
     <>
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        autoRotate
-        autoRotateSpeed={isDesktop ? 0.5 : 0.8}
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={Math.PI / 3}
-      />
       <animated.group ref={groupRef} scale={scale}>
         <XM3_Transparent_Container />
       </animated.group>
 
-      <EnvironmentSettings />
+      {visible && (
+        <>
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            autoRotate
+            autoRotateSpeed={isDesktop ? 0.5 : 0.8}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 3}
+          />
+
+          <EnvironmentSettings />
+        </>
+      )}
     </>
   );
 };

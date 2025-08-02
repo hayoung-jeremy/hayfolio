@@ -3,6 +3,7 @@ import ProjectDescription from "./ProjectDesc";
 import ViewProjectDetailButton from "./ViewProjectDetailButton ";
 import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
+import { AnimatePresence } from "framer-motion";
 
 const Navigation = () => {
   const progress = useScrollStore(s => s.progress);
@@ -24,7 +25,9 @@ const Navigation = () => {
         description="XM3 NFT 캠페인을 위한 인터랙티브 웹 이벤트 페이지를 개발했습니다. 사용자의 선택에 따라 고해상도 3D 차량 부품이 자연스럽게 전환되는 인터페이스를 구현했어요."
         visible={progress >= SCROLL_THRESHOLDS.xperiencemor3.min}
       />
-      <ViewProjectDetailButton />
+      <AnimatePresence>
+        {progress >= SCROLL_THRESHOLDS.createYourEpicCar.min && <ViewProjectDetailButton />}
+      </AnimatePresence>
     </nav>
   );
 };

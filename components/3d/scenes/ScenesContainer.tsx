@@ -31,7 +31,11 @@ const ScenesContainer = () => {
 
   return (
     <CanvasWrapper>
-      <CreateYourEpicCarPreviewScene visible={progress < SCROLL_THRESHOLDS.createYourEpicCar.max} />
+      <CreateYourEpicCarPreviewScene
+        visible={
+          progress >= SCROLL_THRESHOLDS.createYourEpicCar.min && progress < SCROLL_THRESHOLDS.createYourEpicCar.max
+        }
+      />
       <Xperiencemor3PreviewScene visible={progress >= SCROLL_THRESHOLDS.xperiencemor3.min} />
     </CanvasWrapper>
   );

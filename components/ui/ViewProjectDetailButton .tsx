@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
 
@@ -17,7 +18,10 @@ const ViewProjectDetailButton = () => {
   };
 
   return (
-    <button
+    <motion.button
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
       className={clsx(
         "fixed top-[80dvh] left-1/2 -translate-x-1/2",
         "w-full max-w-[88vw] md:max-w-[360px]",
@@ -29,7 +33,7 @@ const ViewProjectDetailButton = () => {
       onClick={navigateToSceneDetailPage}
     >
       자세히 살펴보기
-    </button>
+    </motion.button>
   );
 };
 

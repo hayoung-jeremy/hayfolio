@@ -4,6 +4,6 @@ export const SCROLL_THRESHOLDS = {
     max: 0.45,
   },
   xperiencemor3: {
-    min: 0.55,
+    min: 0.455,
   },
 };
