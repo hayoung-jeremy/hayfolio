@@ -42,6 +42,7 @@ type GarageState = {
     Pattern: string;
   };
   setSelectedColorByType: (type: "Body" | "Bonnet" | "Bumper" | "Wheel" | "Spoiler" | "Pattern", color: string) => void;
+  resetAll: () => void;
 };
 
 export const useGarageStore = create<GarageState>(set => ({
@@ -94,4 +95,22 @@ export const useGarageStore = create<GarageState>(set => ({
         [type]: color,
       },
     })),
+  resetAll: () =>
+    set({
+      selectedBody: "XM3",
+      selectedParts: {},
+      cameraTarget: { position: [0, 0, 5], target: [0, 0, 0] },
+      hasReset: false,
+      isPartPanelOpen: false,
+      activePartTabIndex: 0,
+      isColorPickerOpen: false,
+      selectedColors: {
+        Body: "#ffffff",
+        Bonnet: "#ffffff",
+        Bumper: "#ffffff",
+        Wheel: "#ffffff",
+        Spoiler: "#ffffff",
+        Pattern: "#ffffff",
+      },
+    }),
 }));
