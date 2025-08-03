@@ -20,7 +20,7 @@ const QM6_Container = () => {
   const { selectedParts } = useGarageStore();
 
   return (
-    <group scale={isDesktop ? 0.0011 : 0.0007} position={[0, -1, 0]} rotation={[0, degToRad(10), 0]}>
+    <group scale={isDesktop ? 0.0011 : 0.0007} position={[0, -0.98, 0]} rotation={[0, degToRad(10), 0]}>
       <QM6_Body />
       <Suspense fallback={<SkeletonParts bodyType="QM6" partType="Bonnet" />}>
         <QM6_Bonnet meta={selectedParts["Bonnet"]} />
