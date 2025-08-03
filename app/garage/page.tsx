@@ -36,7 +36,7 @@ const Garage = () => {
         animate={{ opacity: isLoaded ? 1 : 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
-        className="min-h-svh fixed inset-0 z-0 bg-[#1f1d24]"
+        className="min-h-svh fixed inset-0 z-0"
       >
         <GarageScene />
       </motion.main>

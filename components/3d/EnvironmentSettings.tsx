@@ -36,9 +36,8 @@ const EnvironmentSettings = () => {
       <EffectComposer multisampling={10}>
         <Bloom kernelSize={KernelSize.HUGE} luminanceThreshold={0} luminanceSmoothing={0.85} intensity={0.5} />
       </EffectComposer>
-      <fog attach="fog" args={["#1f1d24", 8, 30]} />
-      <color attach="background" args={["#1f1d24"]} />
-      <SoftShadows />
+      <fog attach="fog" args={["#000000", 8, 24]} />
+      <color attach="background" args={["#000000"]} />
 
       <group ref={lightRef}>
         <directionalLight
@@ -52,11 +51,11 @@ const EnvironmentSettings = () => {
 
       <ContactShadows
         opacity={1}
-        position={[0, -1.02, 0]}
+        position={[0, -1.01, 0]}
         scale={10}
         blur={1}
-        far={10}
-        resolution={256}
+        far={4}
+        resolution={1024}
         color="#000000"
       />
     </>

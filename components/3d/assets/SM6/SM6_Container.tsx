@@ -20,7 +20,7 @@ const SM6_Container = () => {
   const { selectedParts } = useGarageStore();
 
   return (
-    <group scale={isDesktop ? 0.0011 : 0.0007} position={[0, -1, 0]} rotation={[0, degToRad(10), 0]}>
+    <group scale={isDesktop ? 0.0011 : 0.0007} position={[0, -1.02, 0]} rotation={[0, degToRad(10), 0]}>
       <SM6_Body />
       <Suspense fallback={<SkeletonParts bodyType="SM6" partType="Bonnet" />}>
         <SM6_Bonnet meta={selectedParts["Bonnet"]} />
