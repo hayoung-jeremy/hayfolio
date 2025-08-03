@@ -5,6 +5,7 @@ import { Perf } from "r3f-perf";
 import { XM3_Container } from "../../assets/XM3";
 import { SM6_Container } from "../../assets/SM6";
 import { QM6_Container } from "../../assets/QM6";
+import { Background } from "../../assets";
 import EnvironmentSettings from "../../EnvironmentSettings";
 import GarageSceneCameraController from "./GarageSceneCameraController";
 import { useGarageStore } from "@/store/useGarageStore";
@@ -57,6 +58,7 @@ const GarageScene = () => {
         <Suspense fallback={null}>{renderContainer()}</Suspense>
         <GarageSceneCameraController />
         <EnvironmentSettings />
+        <Background />
         <Perf position="top-left" />
       </Canvas>
     </div>
