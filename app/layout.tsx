@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
-import { suit } from "./fonts/suit";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
@@ -17,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${suit.variable} font-suit`}>
+      <body className={`antialiased font-sans`}>
         <Providers>{children}</Providers>
         <Analytics />
         <SpeedInsights />
