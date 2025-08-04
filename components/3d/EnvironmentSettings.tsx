@@ -36,8 +36,8 @@ const EnvironmentSettings = () => {
       <EffectComposer multisampling={10}>
         <Bloom kernelSize={KernelSize.HUGE} luminanceThreshold={0} luminanceSmoothing={0.85} intensity={0.5} />
       </EffectComposer>
-      <fog attach="fog" args={["#000000", 8, 24]} />
-      <color attach="background" args={["#000000"]} />
+      <fog attach="fog" args={["#0a0a0a", 8, 24]} />
+      <color attach="background" args={["#0a0a0a"]} />
 
       <group ref={lightRef}>
         <directionalLight
