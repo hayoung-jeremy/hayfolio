@@ -49,7 +49,7 @@ const PartsCarousel = () => {
           <SwiperSlide
             key={type}
             className={clsx(
-              "text-center text-white opacity-50 py-2 px-6 whitespace-nowrap inline-flex items-center justify-center !w-fit cursor-pointer",
+              "text-center text-white opacity-50 py-2 px-6 md:py-4 md:text-[18px] whitespace-nowrap inline-flex items-center justify-center !w-fit cursor-pointer",
               {
                 "opacity-100": index === activePartTabIndex,
               }
@@ -109,9 +109,9 @@ const PartsCarousel = () => {
                       }}
                       className={clsx(
                         "relative h-36 flex items-center justify-center mx-5 my-5 cursor-pointer",
-                        "border border-white/10 rounded-2xl",
-                        "transition-all duration-100",
-                        { "border-white/50": isSelected, "hover:border-white/25": !isSelected }
+                        "border border-white/15 rounded-2xl",
+                        "transition-all duration-200",
+                        { "border-white/60": isSelected, "hover:border-white/30": !isSelected }
                       )}
                     >
                       <Image
@@ -124,7 +124,12 @@ const PartsCarousel = () => {
                           "opacity-30": !isSelected,
                         })}
                       />
-                      <p className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-center bg-[#222] px-3 py-1 rounded-full">
+                      <p
+                        className={clsx(
+                          "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs md:text-sm text-center bg-[#1d1d1d] px-3 py-1 rounded-full border border-transparent trasaltion-all duration-200 text-white/50",
+                          { "border-white/50 px-4 text-white/100": isSelected }
+                        )}
+                      >
                         {displayName}
                       </p>
                     </div>

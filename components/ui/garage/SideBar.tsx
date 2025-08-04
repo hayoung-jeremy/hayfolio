@@ -22,10 +22,10 @@ const SideBar = () => {
       animate={isPartPanelOpen ? "open" : "closed"}
       variants={sidebarVariants}
       transition={{ type: "tween", duration: 0.24, ease: "easeOut" }}
-      className="fixed top-0 right-0 z-20 h-screen w-full max-w-[360px] bg-white/5 backdrop-blur-lg"
+      className="fixed top-0 right-0 z-20 h-screen w-full max-w-[360px] bg-black/20 backdrop-blur-3xl"
     >
       <button
-        className="absolute left-[-42px] top-1/2 -translate-y-1/2 w-[42px] h-[120px] bg-white/15 backdrop-blur-lg text-white rounded-l-xl p-2 shadow-lg"
+        className="absolute left-[-42px] top-1/2 -translate-y-1/2 w-[42px] h-[120px] bg-black/70 backdrop-blur-lg text-white rounded-l-xl p-2 shadow-lg"
         onClick={() => setPartPanelOpen(!isPartPanelOpen)}
       >
         {isPartPanelOpen ? "▶" : "◀"}
