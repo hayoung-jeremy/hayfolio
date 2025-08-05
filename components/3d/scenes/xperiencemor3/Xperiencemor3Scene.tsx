@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Box, CameraControls } from "@react-three/drei";
+import { Perf } from "r3f-perf";
 
 const Xperiencemor3Scene = () => {
   return (
@@ -13,6 +14,7 @@ const Xperiencemor3Scene = () => {
         draggingSmoothTime={0.5}
       />
       <Box />
+      <Perf position="top-right" />
     </Canvas>
   );
 };

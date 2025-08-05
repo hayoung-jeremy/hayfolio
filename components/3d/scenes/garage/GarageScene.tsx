@@ -59,7 +59,7 @@ const GarageScene = () => {
         <GarageSceneCameraController />
         <EnvironmentSettings />
         <BackgroundContainer />
-        <Perf position="top-left" />
+        {/* <Perf position="top-left" /> */}
       </Canvas>
     </div>
   );
