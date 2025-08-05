@@ -1,82 +1,76 @@
-import React, { useEffect, useRef } from "react";
+import React, { useMemo, useRef, useLayoutEffect } from "react";
 import * as THREE from "three";
 
 const CylinderGrid = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const geometries: THREE.BufferGeometry[] = [];
-  const materials: THREE.Material[] = [];
+  const verticalLineRef = useRef<THREE.InstancedMesh>(null);
+  const horizontalLineRef = useRef<THREE.InstancedMesh>(null);
+  const tempObject = useMemo(() => new THREE.Object3D(), []);
 
-  useEffect(() => {
-    if (!groupRef.current) return;
+  const radius = 10;
+  const height = 100;
+  const radialSegments = 64;
+  const heightSegments = 64;
 
-    const group = groupRef.current;
-    const radius = 10;
-    const height = 80;
-    const radialSegments = 64;
-    const heightSegments = 64;
+  const verticalGeometry = useMemo(() => {
+    const geo = new THREE.CylinderGeometry(0.01, 0.01, height, 4);
+    geo.computeBoundingBox();
+    return geo;
+  }, [height]);
 
-    // Generate vertical lines
-    for (let i = 0; i <= radialSegments; i++) {
+  const horizontalGeometry = useMemo(() => {
+    const geo = new THREE.TorusGeometry(radius, 0.01, 4, radialSegments);
+    geo.computeBoundingBox();
+    return geo;
+  }, [radius, radialSegments]);
+
+  const material = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: "#a3a3a3",
+        transparent: true,
+        opacity: 0.15,
+        depthWrite: false,
+      }),
+    []
+  );
+
+  useLayoutEffect(() => {
+    if (!verticalLineRef.current) return;
+
+    for (let i = 0; i < radialSegments; i++) {
       const theta = (i / radialSegments) * Math.PI * 2;
-      const sinTheta = Math.sin(theta);
-      const cosTheta = Math.cos(theta);
+      const x = radius * Math.sin(theta);
+      const z = radius * Math.cos(theta);
 
-      const x1 = radius * sinTheta;
-      const z1 = radius * cosTheta;
-
-      const points = [new THREE.Vector3(x1, -height / 2, z1), new THREE.Vector3(x1, height / 2, z1)];
-
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-      const lineMaterial = new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 });
-
-      geometries.push(lineGeometry);
-      materials.push(lineMaterial);
-
-      const line = new THREE.Line(lineGeometry, lineMaterial);
-      group.add(line);
+      tempObject.position.set(x, 0, z);
+      tempObject.rotation.set(0, theta, 0);
+      tempObject.updateMatrix();
+      verticalLineRef.current.setMatrixAt(i, tempObject.matrix);
     }
 
-    // Generate horizontal lines
+    verticalLineRef.current.instanceMatrix.needsUpdate = true;
+  }, [radialSegments]);
+
+  useLayoutEffect(() => {
+    if (!horizontalLineRef.current) return;
+
     for (let i = 0; i <= heightSegments; i++) {
       const y = -height / 2 + (height / heightSegments) * i;
-      const circlePoints = [];
 
-      for (let j = 0; j <= radialSegments; j++) {
-        const theta = (j / radialSegments) * Math.PI * 2;
-        const x = radius * Math.sin(theta);
-        const z = radius * Math.cos(theta);
-        circlePoints.push(new THREE.Vector3(x, y, z));
-      }
-
-      const circleGeometry = new THREE.BufferGeometry().setFromPoints(circlePoints);
-      const circleMaterial = new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 });
-
-      geometries.push(circleGeometry);
-      materials.push(circleMaterial);
-
-      const line = new THREE.LineLoop(circleGeometry, circleMaterial);
-      group.add(line);
+      tempObject.position.set(0, y, 0);
+      tempObject.rotation.set(Math.PI / 2, 0, 0);
+      tempObject.updateMatrix();
+      horizontalLineRef.current.setMatrixAt(i, tempObject.matrix);
     }
 
-    return () => {
-      group.clear();
-
-      geometries.forEach((geo, i) => {
-        geo.dispose();
-      });
-
-      materials.forEach((mat, i) => {
-        mat.dispose();
-      });
-    };
-  }, []);
+    horizontalLineRef.current.instanceMatrix.needsUpdate = true;
+  }, [heightSegments]);
 
   return (
     <group ref={groupRef}>
-      <mesh>
-        <cylinderGeometry args={[10, 10, 100, 64, 64]} />
-        <meshStandardMaterial transparent opacity={0.05} color={"#a3a3a3"} />
-      </mesh>
+      <instancedMesh ref={verticalLineRef} args={[verticalGeometry, material, radialSegments]} />
+      <instancedMesh ref={horizontalLineRef} args={[horizontalGeometry, material, heightSegments + 1]} />
     </group>
   );
 };
