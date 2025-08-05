@@ -6,7 +6,7 @@ import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { Group } from "three";
 
-const EnvironmentSettings = () => {
+const GarageEnvironments = () => {
   const lightRef = useRef<Group>(null);
   useFrame((state, delta) => {
     if (!lightRef.current) return;
@@ -62,4 +62,4 @@ const EnvironmentSettings = () => {
   );
 };
 
-export default EnvironmentSettings;
+export default GarageEnvironments;

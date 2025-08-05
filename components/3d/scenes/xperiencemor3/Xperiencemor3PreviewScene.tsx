@@ -1,11 +1,11 @@
 import { Box } from "@react-three/drei";
-import SceneEnvironment from "./SceneEnvironment";
+import { Xperiencemor3Environments } from "../../envs";
 
 const Xperiencemor3PreviewScene = () => {
   return (
     <>
       <Box />
-      <SceneEnvironment />
+      <Xperiencemor3Environments />
     </>
   );
 };

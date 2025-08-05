@@ -1,6 +1,5 @@
 import { Environment, Lightformer } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { CylinderGrid } from "../../assets/xperiencemor3";
 
 const SceneEnvironment = () => {
   return (
@@ -45,7 +44,6 @@ const SceneEnvironment = () => {
           radius={0.2}
         />
       </EffectComposer>
-      <CylinderGrid />
     </>
   );
 };

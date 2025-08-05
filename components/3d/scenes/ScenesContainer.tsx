@@ -9,6 +9,7 @@ import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
 import { Perf } from "r3f-perf";
 import { Suspense } from "react";
+import { PreviewSceneEnvironments } from "../envs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,6 +44,7 @@ const ScenesContainer = () => {
         {showXperiencemor3 && <Xperiencemor3PreviewScene />}
       </Suspense>
       <Perf position="top-right" />
+      <PreviewSceneEnvironments />
     </CanvasWrapper>
   );
 };

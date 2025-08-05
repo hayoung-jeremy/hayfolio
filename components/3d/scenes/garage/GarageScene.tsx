@@ -6,10 +6,10 @@ import { XM3_Container } from "../../assets/XM3";
 import { SM6_Container } from "../../assets/SM6";
 import { QM6_Container } from "../../assets/QM6";
 import { BackgroundContainer } from "../../assets";
+import { GarageEnvironments } from "../../envs";
 import GarageSceneCameraController from "./GarageSceneCameraController";
 import { useGarageStore } from "@/store/useGarageStore";
 import useDisplay from "@/hooks/useDisplay";
-import EnvironmentSettings from "./EnvironmentSettings";
 
 const GarageScene = () => {
   const [heightPx, setHeightPx] = useState(0);
@@ -57,7 +57,7 @@ const GarageScene = () => {
       >
         <Suspense fallback={null}>{renderContainer()}</Suspense>
         <GarageSceneCameraController />
-        <EnvironmentSettings />
+        <GarageEnvironments />
         <BackgroundContainer />
         {/* <Perf position="top-left" /> */}
       </Canvas>
