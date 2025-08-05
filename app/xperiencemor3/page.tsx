@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Xperiencemor3Scene } from "@/components/3d/scenes";
+import { Xperiencemor3Scene } from "@/components/3d/scenes/xperiencemor3";
 
 const Xperiencemor3 = () => {
   return (

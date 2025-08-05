@@ -1,8 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Box, CameraControls } from "@react-three/drei";
 
-import EnvironmentSettings from "../EnvironmentSettings";
-
 const Xperiencemor3Scene = () => {
   return (
     <Canvas>
@@ -15,7 +13,6 @@ const Xperiencemor3Scene = () => {
         draggingSmoothTime={0.5}
       />
       <Box />
-      <EnvironmentSettings />
     </Canvas>
   );
 };
