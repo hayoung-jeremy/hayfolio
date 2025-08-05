@@ -2,7 +2,9 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const CylinderGrid = () => {
-  const groupRef = useRef<any>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  const geometries: THREE.BufferGeometry[] = [];
+  const materials: THREE.Material[] = [];
 
   useEffect(() => {
     if (!groupRef.current) return;
@@ -25,10 +27,12 @@ const CylinderGrid = () => {
       const points = [new THREE.Vector3(x1, -height / 2, z1), new THREE.Vector3(x1, height / 2, z1)];
 
       const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-      const line = new THREE.Line(
-        lineGeometry,
-        new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 })
-      );
+      const lineMaterial = new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 });
+
+      geometries.push(lineGeometry);
+      materials.push(lineMaterial);
+
+      const line = new THREE.Line(lineGeometry, lineMaterial);
       group.add(line);
     }
 
@@ -45,12 +49,26 @@ const CylinderGrid = () => {
       }
 
       const circleGeometry = new THREE.BufferGeometry().setFromPoints(circlePoints);
-      const line = new THREE.LineLoop(
-        circleGeometry,
-        new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 })
-      );
+      const circleMaterial = new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 });
+
+      geometries.push(circleGeometry);
+      materials.push(circleMaterial);
+
+      const line = new THREE.LineLoop(circleGeometry, circleMaterial);
       group.add(line);
     }
+
+    return () => {
+      group.clear();
+
+      geometries.forEach((geo, i) => {
+        geo.dispose();
+      });
+
+      materials.forEach((mat, i) => {
+        mat.dispose();
+      });
+    };
   }, []);
 
   return (
