@@ -35,14 +35,7 @@ const SceneEnvironment = () => {
       </Environment>
 
       <EffectComposer>
-        <Bloom
-          mipmapBlur
-          luminanceThreshold={1}
-          luminanceSmoothing={0.55}
-          intensity={0.8}
-          // @ts-ignore
-          radius={0.2}
-        />
+        <Bloom mipmapBlur luminanceThreshold={1} luminanceSmoothing={0.55} intensity={0.8} radius={0.2} />
       </EffectComposer>
     </>
   );

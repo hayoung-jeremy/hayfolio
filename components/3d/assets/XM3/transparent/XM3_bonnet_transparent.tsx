@@ -33,7 +33,7 @@ export default function XM3_Bonnet_Transparent({ ...props }: any) {
         }
       });
     };
-  }, []);
+  }, [nodes]);
 
   return (
     <group {...props} dispose={null}>

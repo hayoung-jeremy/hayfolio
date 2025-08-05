@@ -34,7 +34,7 @@ export default function XM3_Wheel_Transparent({ ...props }: any) {
         }
       });
     };
-  }, []);
+  }, [nodes]);
 
   return (
     <group ref={group} {...props} dispose={null}>
