@@ -1,0 +1,66 @@
+import React, { useEffect, useRef } from "react";
+import * as THREE from "three";
+
+const CylinderGrid = () => {
+  const groupRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!groupRef.current) return;
+
+    const group = groupRef.current;
+    const radius = 10;
+    const height = 80;
+    const radialSegments = 64;
+    const heightSegments = 64;
+
+    // Generate vertical lines
+    for (let i = 0; i <= radialSegments; i++) {
+      const theta = (i / radialSegments) * Math.PI * 2;
+      const sinTheta = Math.sin(theta);
+      const cosTheta = Math.cos(theta);
+
+      const x1 = radius * sinTheta;
+      const z1 = radius * cosTheta;
+
+      const points = [new THREE.Vector3(x1, -height / 2, z1), new THREE.Vector3(x1, height / 2, z1)];
+
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+      const line = new THREE.Line(
+        lineGeometry,
+        new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 })
+      );
+      group.add(line);
+    }
+
+    // Generate horizontal lines
+    for (let i = 0; i <= heightSegments; i++) {
+      const y = -height / 2 + (height / heightSegments) * i;
+      const circlePoints = [];
+
+      for (let j = 0; j <= radialSegments; j++) {
+        const theta = (j / radialSegments) * Math.PI * 2;
+        const x = radius * Math.sin(theta);
+        const z = radius * Math.cos(theta);
+        circlePoints.push(new THREE.Vector3(x, y, z));
+      }
+
+      const circleGeometry = new THREE.BufferGeometry().setFromPoints(circlePoints);
+      const line = new THREE.LineLoop(
+        circleGeometry,
+        new THREE.LineBasicMaterial({ color: "#a3a3a3", transparent: true, opacity: 0.15 })
+      );
+      group.add(line);
+    }
+  }, []);
+
+  return (
+    <group ref={groupRef}>
+      <mesh>
+        <cylinderGeometry args={[10, 10, 100, 64, 64]} />
+        <meshStandardMaterial transparent opacity={0.05} color={"#a3a3a3"} />
+      </mesh>
+    </group>
+  );
+};
+
+export default CylinderGrid;
