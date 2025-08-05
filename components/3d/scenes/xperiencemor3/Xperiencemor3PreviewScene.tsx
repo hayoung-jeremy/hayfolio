@@ -4,6 +4,7 @@ import { Box } from "@react-three/drei";
 import { Group, Mesh } from "three";
 import { useSpring, animated, config } from "@react-spring/three";
 
+import SceneEnvironment from "./SceneEnvironment";
 import { SceneProps } from "@/types/scene";
 
 const Xperiencemor3PreviewScene = ({ visible }: SceneProps) => {
@@ -36,6 +37,7 @@ const Xperiencemor3PreviewScene = ({ visible }: SceneProps) => {
   return (
     <animated.group ref={groupRef} scale={scale}>
       <Box />
+      <SceneEnvironment />
     </animated.group>
   );
 };
