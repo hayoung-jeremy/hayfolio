@@ -7,6 +7,8 @@ import { CreateYourEpicCarPreviewScene } from "./garage";
 import { Xperiencemor3PreviewScene } from "./xperiencemor3";
 import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
+import { Perf } from "r3f-perf";
+import { Suspense } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,14 +31,18 @@ const ScenesContainer = () => {
     return () => ctx.revert();
   }, []);
 
+  const showEpicCar =
+    progress >= SCROLL_THRESHOLDS.createYourEpicCar.min && progress < SCROLL_THRESHOLDS.createYourEpicCar.max;
+
+  const showXperiencemor3 = progress >= SCROLL_THRESHOLDS.xperiencemor3.min;
+
   return (
     <CanvasWrapper>
-      <CreateYourEpicCarPreviewScene
-        visible={
-          progress >= SCROLL_THRESHOLDS.createYourEpicCar.min && progress < SCROLL_THRESHOLDS.createYourEpicCar.max
-        }
-      />
-      <Xperiencemor3PreviewScene visible={progress >= SCROLL_THRESHOLDS.xperiencemor3.min} />
+      <Suspense>
+        {showEpicCar && <CreateYourEpicCarPreviewScene />}
+        {showXperiencemor3 && <Xperiencemor3PreviewScene />}
+      </Suspense>
+      <Perf position="top-right" />
     </CanvasWrapper>
   );
 };
