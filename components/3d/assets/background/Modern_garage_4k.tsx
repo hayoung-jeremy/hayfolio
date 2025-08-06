@@ -9,17 +9,19 @@ Title: Modern Garage
 */
 
 import React, { JSX } from "react";
-import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
+import { Mesh, MeshPhysicalMaterial, MeshStandardMaterial } from "three";
 import { GLTF } from "three-stdlib";
+import { useGLTF } from "@react-three/drei";
+import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Modern_Garage_0: THREE.Mesh;
-    Modern_Garage_Light_0: THREE.Mesh;
+    Modern_Garage_0: Mesh;
+    Modern_Garage_Light_0: Mesh;
   };
   materials: {
-    Basic_White: THREE.MeshPhysicalMaterial;
-    Basic_White_Light: THREE.MeshStandardMaterial;
+    Basic_White: MeshPhysicalMaterial;
+    Basic_White_Light: MeshStandardMaterial;
   };
 };
 
