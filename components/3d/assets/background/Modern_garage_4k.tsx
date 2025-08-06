@@ -8,9 +8,8 @@ Source: https://sketchfab.com/3d-models/modern-garage-8a34c73da7914676b342a3a878
 Title: Modern Garage
 */
 
-import * as THREE from "three";
 import React, { JSX } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -25,7 +24,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Modern_garage_4k(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/assets/models/modern_garage_4k.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTFWithDispose("/assets/models/modern_garage_4k.glb") as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh

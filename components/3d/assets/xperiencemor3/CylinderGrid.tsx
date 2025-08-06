@@ -1,11 +1,11 @@
 import React, { useMemo, useRef, useLayoutEffect } from "react";
-import * as THREE from "three";
+import { CylinderGeometry, Group, InstancedMesh, MeshBasicMaterial, Object3D, TorusGeometry } from "three";
 
 const CylinderGrid = () => {
-  const groupRef = useRef<THREE.Group>(null);
-  const verticalLineRef = useRef<THREE.InstancedMesh>(null);
-  const horizontalLineRef = useRef<THREE.InstancedMesh>(null);
-  const tempObject = useMemo(() => new THREE.Object3D(), []);
+  const groupRef = useRef<Group>(null);
+  const verticalLineRef = useRef<InstancedMesh>(null);
+  const horizontalLineRef = useRef<InstancedMesh>(null);
+  const tempObject = useMemo(() => new Object3D(), []);
 
   const radius = 10;
   const height = 100;
@@ -13,20 +13,20 @@ const CylinderGrid = () => {
   const heightSegments = 64;
 
   const verticalGeometry = useMemo(() => {
-    const geo = new THREE.CylinderGeometry(0.01, 0.01, height, 4);
+    const geo = new CylinderGeometry(0.01, 0.01, height, 4);
     geo.computeBoundingBox();
     return geo;
   }, [height]);
 
   const horizontalGeometry = useMemo(() => {
-    const geo = new THREE.TorusGeometry(radius, 0.01, 4, radialSegments);
+    const geo = new TorusGeometry(radius, 0.01, 4, radialSegments);
     geo.computeBoundingBox();
     return geo;
   }, [radius, radialSegments]);
 
   const material = useMemo(
     () =>
-      new THREE.MeshBasicMaterial({
+      new MeshBasicMaterial({
         color: "#a3a3a3",
         transparent: true,
         opacity: 0.15,

@@ -40,3 +40,33 @@ export function getWheelXOffset({
   const base = map[key] ?? 0;
   return [0, 0, side === "left" ? -base : base];
 }
+
+export function disposeGLTF(gltf: any) {
+  if (!gltf || !gltf.scene) {
+    return;
+  }
+
+  let geometryCount = 0;
+  let materialCount = 0;
+
+  gltf.scene.traverse((obj: any) => {
+    if (obj.geometry && typeof obj.geometry.dispose === "function") {
+      obj.geometry.dispose();
+      geometryCount++;
+    }
+
+    if (obj.material) {
+      if (Array.isArray(obj.material)) {
+        obj.material.forEach((m: { dispose: () => void; name: any }, i: any) => {
+          if (m && typeof m.dispose === "function") {
+            m.dispose();
+            materialCount++;
+          }
+        });
+      } else if (typeof obj.material.dispose === "function") {
+        obj.material.dispose();
+        materialCount++;
+      }
+    }
+  });
+}
