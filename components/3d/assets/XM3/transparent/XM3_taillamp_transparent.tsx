@@ -7,7 +7,7 @@ import { Mesh } from "three";
 import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
-export default function XM3_Taillamp_Transparent(props: any) {
+export default function XM3_TailLamp_Transparent(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_taillamp_transparent.glb") as any;
 
   useEffect(() => {
