@@ -7,11 +7,12 @@ import { IntroOverlay } from "@/components/ui/xperiencemor3";
 
 import { useGameStatus } from "@/hooks/useXperiencemor3Game";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
+import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 
 const Xperiencemor3 = () => {
   const isModelLoaded = useModelLoadProgress();
-
   const gameStatus = useGameStatus();
+  useCleanupOnUnmount();
 
   return (
     <>

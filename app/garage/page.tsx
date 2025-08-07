@@ -8,12 +8,14 @@ import { GarageScene } from "@/components/3d/scenes/garage";
 import { useGarageStore } from "@/store/useGarageStore";
 import useDisplay from "@/hooks/useDisplay";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
+import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 
 const Garage = () => {
   const router = useRouter();
   const { isMobile, isTablet } = useDisplay();
   const isModelLoaded = useModelLoadProgress();
   const { resetAll } = useGarageStore();
+  useCleanupOnUnmount();
 
   const handleBack = () => {
     router.push("/");
