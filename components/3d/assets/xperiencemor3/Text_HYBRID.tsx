@@ -4,7 +4,9 @@ import { GLTFResult } from "@/types/3d-model";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTFWithDispose("/assets/models/text_hybrid.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTFWithDispose(
+    "/api/model-url?name=xperiencemor3/text_hybrid.glb"
+  ) as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -21,4 +23,4 @@ export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/assets/models/text_hybrid.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/text_hybrid.glb");

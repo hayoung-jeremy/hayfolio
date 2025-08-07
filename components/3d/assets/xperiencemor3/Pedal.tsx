@@ -4,7 +4,9 @@ import { GLTFResult } from "@/types/3d-model";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Pedal({ ...rest }: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTFWithDispose("/assets/models/pedal.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTFWithDispose(
+    "/api/model-url?name=xperiencemor3/pedal.glb"
+  ) as unknown as GLTFResult;
   return (
     <group {...rest} dispose={null}>
       <mesh
@@ -20,4 +22,4 @@ export default function Pedal({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/assets/models/pedal.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/pedal.glb");

@@ -4,7 +4,9 @@ import { GLTFResult } from "@/types/3d-model";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function CarKey({ ...rest }: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTFWithDispose("/assets/models/carkey.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTFWithDispose(
+    "/api/model-url?name=xperiencemor3/carkey.glb"
+  ) as unknown as GLTFResult;
   return (
     <group {...rest} dispose={null}>
       <mesh
@@ -29,4 +31,4 @@ export default function CarKey({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/assets/models/carkey.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/carkey.glb");
