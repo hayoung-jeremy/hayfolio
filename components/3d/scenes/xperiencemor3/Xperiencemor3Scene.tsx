@@ -1,8 +1,10 @@
 import { Canvas } from "@react-three/fiber";
 import { Box, CameraControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
+
 import { Xperiencemor3Environments } from "../../envs";
 import { CylinderGrid } from "../../assets/xperiencemor3";
+import DecoModelsContainer from "./DecoModelsContainer";
 
 const Xperiencemor3Scene = () => {
   return (
@@ -11,6 +13,7 @@ const Xperiencemor3Scene = () => {
       <Box />
       <Perf position="top-right" />
       <CylinderGrid />
+      <DecoModelsContainer />
       <Xperiencemor3Environments />
     </Canvas>
   );
