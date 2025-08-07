@@ -18,7 +18,7 @@ export type Keywords =
   | "Compact"
   | "Pop-culture"
   | "Traditions";
-export type GameStatus = "beforeStart" | "loading" | "inGame" | "end";
+export type GameStatus = "intro" | "entering" | "questioning" | "result";
 
 export type QuestionInfo = {
   first: Keywords;
@@ -46,19 +46,19 @@ type GameStore = {
 
 export const useXperiencemor3GameStore = create<GameStore>(set => ({
   choosedList: [],
-  status: "beforeStart",
+  status: "intro",
   result: null,
   currentQuestionInfo: null,
   actions: {
     setChoosedList: k => set(s => ({ choosedList: [...s.choosedList, k] })),
     setGameStatus: s => set(() => ({ status: s })),
     setCurrentQuestionInfo: i => set(() => ({ currentQuestionInfo: QUESTION_INFO_COLLECTION[i] })),
-    setResult: r => set(() => ({ result: r, status: "end" })),
+    setResult: r => set(() => ({ result: r, status: "result" })),
     undo: () => set(s => ({ choosedList: s.choosedList.slice(0, -1) })),
     resetGame: () =>
       set(() => ({
         choosedList: [],
-        status: "beforeStart",
+        status: "intro",
         result: null,
         currentQuestionInfo: null,
       })),

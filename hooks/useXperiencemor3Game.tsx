@@ -14,7 +14,7 @@ export const useGameProgressObserver = () => {
   const { setCurrentQuestionInfo, setResult, resetGame } = useGameActions();
 
   useEffect(() => {
-    if (status !== "inGame") return;
+    if (status !== "questioning") return;
 
     if (choosedList.length === 4) {
       const result = getResultForCombinationFromSelections(choosedList);
