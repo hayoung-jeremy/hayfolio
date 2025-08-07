@@ -20,6 +20,7 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <Analytics />
         <SpeedInsights />
+        <div id="root-modal" />
       </body>
     </html>
   );
