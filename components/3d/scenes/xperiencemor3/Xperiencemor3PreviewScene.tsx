@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Group, Mesh } from "three";
+import { Float } from "@react-three/drei";
 import gsap from "gsap";
 
-import { CylinderGrid, LogoSymbol } from "../../assets/xperiencemor3";
+import { LogoSymbol } from "../../assets/xperiencemor3";
 
 const Xperiencemor3PreviewScene = () => {
   const ref = useRef<Group>(null);
@@ -27,8 +28,9 @@ const Xperiencemor3PreviewScene = () => {
   }, []);
   return (
     <group ref={ref}>
-      <LogoSymbol />
-      <CylinderGrid />
+      <Float speed={2.4} rotationIntensity={1} floatIntensity={1} floatingRange={[-0.2, 0.2]}>
+        <LogoSymbol scale={2} />
+      </Float>
     </group>
   );
 };

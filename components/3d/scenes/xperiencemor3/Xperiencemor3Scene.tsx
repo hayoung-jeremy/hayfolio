@@ -8,7 +8,7 @@ import DecoModelsContainer from "./DecoModelsContainer";
 
 const Xperiencemor3Scene = () => {
   return (
-    <Canvas>
+    <Canvas camera={{ fov: 60 }}>
       <CameraControls minDistance={1.5} maxDistance={4} smoothTime={0.5} draggingSmoothTime={0.5} />
       <Perf position="top-right" />
       <CylinderGrid />
