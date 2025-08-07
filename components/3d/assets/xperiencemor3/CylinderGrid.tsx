@@ -1,85 +1,56 @@
-import React, { useMemo, useRef, useLayoutEffect, useEffect } from "react";
-import { CylinderGeometry, Group, InstancedMesh, MeshBasicMaterial, Object3D, TorusGeometry } from "three";
+import { useEffect, useMemo } from "react";
+import { BufferGeometry, Float32BufferAttribute } from "three";
+
+const radius = 10;
+const height = 100;
+const radialSegments = 64;
+const heightSegments = 64;
 
 const CylinderGrid = () => {
-  const groupRef = useRef<Group>(null);
-  const verticalLineRef = useRef<InstancedMesh>(null);
-  const horizontalLineRef = useRef<InstancedMesh>(null);
-  const tempObject = useMemo(() => new Object3D(), []);
+  const geometry = useMemo(() => {
+    const positions: number[] = [];
 
-  const radius = 10;
-  const height = 100;
-  const radialSegments = 64;
-  const heightSegments = 64;
-
-  const verticalGeometry = useMemo(() => {
-    const geo = new CylinderGeometry(0.01, 0.01, height, 4);
-    geo.computeBoundingBox();
-    return geo;
-  }, [height]);
-
-  const horizontalGeometry = useMemo(() => {
-    const geo = new TorusGeometry(radius, 0.01, 4, radialSegments);
-    geo.computeBoundingBox();
-    return geo;
-  }, [radius, radialSegments]);
-
-  const material = useMemo(
-    () =>
-      new MeshBasicMaterial({
-        color: "#a3a3a3",
-        transparent: true,
-        opacity: 0.15,
-        depthWrite: false,
-      }),
-    []
-  );
-
-  useLayoutEffect(() => {
-    if (!verticalLineRef.current) return;
-
+    // 수직 라인
     for (let i = 0; i < radialSegments; i++) {
       const theta = (i / radialSegments) * Math.PI * 2;
       const x = radius * Math.sin(theta);
       const z = radius * Math.cos(theta);
-
-      tempObject.position.set(x, 0, z);
-      tempObject.rotation.set(0, theta, 0);
-      tempObject.updateMatrix();
-      verticalLineRef.current.setMatrixAt(i, tempObject.matrix);
+      positions.push(x, -height / 2, z, x, height / 2, z);
     }
 
-    verticalLineRef.current.instanceMatrix.needsUpdate = true;
-  }, [radialSegments]);
-
-  useLayoutEffect(() => {
-    if (!horizontalLineRef.current) return;
-
+    // 수평 라인
     for (let i = 0; i <= heightSegments; i++) {
       const y = -height / 2 + (height / heightSegments) * i;
 
-      tempObject.position.set(0, y, 0);
-      tempObject.rotation.set(Math.PI / 2, 0, 0);
-      tempObject.updateMatrix();
-      horizontalLineRef.current.setMatrixAt(i, tempObject.matrix);
+      for (let j = 0; j < radialSegments; j++) {
+        const theta1 = (j / radialSegments) * Math.PI * 2;
+        const theta2 = ((j + 1) / radialSegments) * Math.PI * 2;
+
+        const x1 = radius * Math.sin(theta1);
+        const z1 = radius * Math.cos(theta1);
+        const x2 = radius * Math.sin(theta2);
+        const z2 = radius * Math.cos(theta2);
+
+        positions.push(x1, y, z1, x2, y, z2);
+      }
     }
 
-    horizontalLineRef.current.instanceMatrix.needsUpdate = true;
-  }, [heightSegments]);
-
-  useEffect(() => {
-    return () => {
-      verticalGeometry.dispose();
-      horizontalGeometry.dispose();
-      material.dispose();
-    };
+    const geo = new BufferGeometry();
+    geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+    return geo;
   }, []);
 
+  // ✅ 메모리 누수 방지용 dispose
+  useEffect(() => {
+    return () => {
+      geometry.dispose();
+    };
+  }, [geometry]);
+
   return (
-    <group ref={groupRef}>
-      <instancedMesh ref={verticalLineRef} args={[verticalGeometry, material, radialSegments]} />
-      <instancedMesh ref={horizontalLineRef} args={[horizontalGeometry, material, heightSegments + 1]} />
-    </group>
+    <lineSegments geometry={geometry}>
+      <lineBasicMaterial color="#a3a3a3" transparent opacity={0.15} depthWrite={false} />
+    </lineSegments>
   );
 };
 
