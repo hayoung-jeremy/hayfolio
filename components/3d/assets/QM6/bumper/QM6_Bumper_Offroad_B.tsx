@@ -9,7 +9,7 @@ export default function QM6_Bumper_Offroad_B({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_bumper_offroad_B.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

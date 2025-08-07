@@ -25,7 +25,7 @@ const XM3_Decal = () => {
   if (!map) return null;
 
   return (
-    <group dispose={null}>
+    <group>
       <mesh geometry={nodes.XM3_Decal.geometry} material={materials.Decal}>
         <meshStandardMaterial
           attach="material"

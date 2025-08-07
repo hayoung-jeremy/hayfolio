@@ -9,7 +9,7 @@ export default function SM6_Bumper_Offroad_B({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bumper_offroad_B.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh geometry={nodes.SM6_Bumper_Offroad_B_1.geometry} material={materials.Color_Y} material-color="#ffb700" />
       <mesh geometry={nodes.SM6_Bumper_Offroad_B_2.geometry} material={materials.Silver} />
       <mesh geometry={nodes.SM6_Bumper_Offroad_B_3.geometry} material={materials.chrome_black} />

@@ -26,7 +26,7 @@ export default function XM3_Wheel_Futuristic_B({ carType, bumperMeta }: WheelPro
   });
 
   return (
-    <group dispose={null}>
+    <group>
       <group position={rightPos}>
         <mesh
           castShadow

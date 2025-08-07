@@ -26,7 +26,7 @@ export default function XM3_Wheel_Offroad_A({ carType, bumperMeta }: WheelProps)
   });
 
   return (
-    <group dispose={null}>
+    <group>
       <group position={rightPos}>
         <mesh
           castShadow

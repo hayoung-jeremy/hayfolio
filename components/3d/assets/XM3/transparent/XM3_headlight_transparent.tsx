@@ -37,7 +37,7 @@ export default function XM3_Headlight_Transparent(props: any) {
   }, [nodes]);
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

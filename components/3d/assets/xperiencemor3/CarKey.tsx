@@ -8,7 +8,7 @@ export default function CarKey({ ...rest }: JSX.IntrinsicElements["group"]) {
     "/api/model-url?name=xperiencemor3/carkey.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.LJL_Key_PH1_Domestic.geometry}
         material={materials["1"]}

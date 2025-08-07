@@ -8,7 +8,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 export default function SM6_TailLamp_Motorsport_C(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_tailLamp.glb") as any;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

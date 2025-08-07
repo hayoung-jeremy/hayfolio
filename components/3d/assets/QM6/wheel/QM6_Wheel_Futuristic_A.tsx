@@ -26,7 +26,7 @@ export default function QM6_Wheel_Futuristic_A({ carType, bumperMeta }: WheelPro
   });
 
   return (
-    <group dispose={null}>
+    <group>
       <group position={leftPos}>
         <mesh
           castShadow

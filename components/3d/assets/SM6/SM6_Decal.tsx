@@ -25,7 +25,7 @@ const SM6_Decal = () => {
   if (!map) return null;
 
   return (
-    <group dispose={null}>
+    <group>
       <mesh geometry={nodes.SM6_Decal.geometry} material={materials.Decal}>
         <meshStandardMaterial
           attach="material"

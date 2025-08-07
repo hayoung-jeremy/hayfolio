@@ -9,7 +9,7 @@ export default function SM6_Bumper_Futuristic_A({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bumper_futuristic_A.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

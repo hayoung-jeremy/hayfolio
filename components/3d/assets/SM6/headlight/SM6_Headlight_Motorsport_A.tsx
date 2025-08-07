@@ -10,7 +10,7 @@ export default function SM6_Headlight_Motorsport_A(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_headlight.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

@@ -8,7 +8,7 @@ export default function DecoPedal(props: JSX.IntrinsicElements["group"]) {
     "/api/model-url?name=xperiencemor3/deco_pedal.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         geometry={nodes.PEDAL.geometry}
         material={materials["1"]}

@@ -10,7 +10,7 @@ export default function SM6_Body({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_body.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={nodes.SM6_Body_Base1_1.geometry} material={materials.metal} />
         <mesh geometry={nodes.SM6_Body_Base1_2.geometry} material={materials.out_black} />

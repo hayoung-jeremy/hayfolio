@@ -8,7 +8,7 @@ export default function LogoSymbol({ ...rest }: JSX.IntrinsicElements["group"]) 
     "/api/model-url?name=xperiencemor3/logo_symbol.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.LOGO.geometry}
         material={materials["1"]}

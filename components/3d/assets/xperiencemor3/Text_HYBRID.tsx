@@ -8,7 +8,7 @@ export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
     "/api/model-url?name=xperiencemor3/text_hybrid.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         geometry={nodes.XM3_hybrid.geometry}
         material={materials["1"]}

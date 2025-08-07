@@ -9,7 +9,7 @@ export default function XM3_Bumper_Offroad_B(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_bumper_offroad_B.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

@@ -8,7 +8,7 @@ export default function Suspension({ ...rest }: JSX.IntrinsicElements["group"]) 
     "/api/model-url?name=xperiencemor3/suspension.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.SUSPENSION.geometry}
         material={materials["1"]}

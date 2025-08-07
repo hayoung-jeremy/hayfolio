@@ -37,7 +37,7 @@ export default function XM3_Bonnet_Transparent({ ...props }: any) {
   }, [nodes]);
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         geometry={nodes.XM3_Bonnet_BaseParts.geometry}
         material={materials.main}

@@ -9,7 +9,7 @@ export default function QM6_Bumper_Futuristic_B({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_bumper_futuristic_B.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh
           geometry={nodes.QM6_Bumper_Futuristic_B_1.geometry}

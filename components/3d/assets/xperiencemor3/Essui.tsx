@@ -8,7 +8,7 @@ export default function Essui({ ...rest }: JSX.IntrinsicElements["group"]) {
     "/api/model-url?name=xperiencemor3/essui.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.ESSUI.geometry}
         material={materials["1"]}

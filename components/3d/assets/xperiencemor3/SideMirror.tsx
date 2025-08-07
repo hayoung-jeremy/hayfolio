@@ -8,7 +8,7 @@ export default function SideMirror({ ...rest }: JSX.IntrinsicElements["group"]) 
     "/api/model-url?name=xperiencemor3/side_mirror.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.MIRROR.geometry}
         material={materials["1"]}

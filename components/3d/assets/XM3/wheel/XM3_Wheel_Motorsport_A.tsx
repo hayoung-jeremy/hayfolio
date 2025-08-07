@@ -26,7 +26,7 @@ export default function XM3_Wheel_Motorsport_A({ carType, bumperMeta }: WheelPro
   });
 
   return (
-    <group dispose={null}>
+    <group>
       <group position={rightPos}>
         <mesh
           castShadow

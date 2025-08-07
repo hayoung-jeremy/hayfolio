@@ -8,7 +8,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 export default function SM6_Bumper_Transparent({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bumper_transparent.glb") as any;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

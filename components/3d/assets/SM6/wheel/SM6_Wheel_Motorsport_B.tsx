@@ -26,7 +26,7 @@ export default function SM6_Wheel_Motorsport_B({ carType, bumperMeta }: WheelPro
   });
 
   return (
-    <group dispose={null}>
+    <group>
       <group position={rightPos}>
         <mesh
           castShadow

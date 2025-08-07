@@ -8,7 +8,7 @@ export default function Tire({ ...rest }: JSX.IntrinsicElements["group"]) {
     "/api/model-url?name=xperiencemor3/tire.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.TIRE0.geometry}
         material={materials["1"]}

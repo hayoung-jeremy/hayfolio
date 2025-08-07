@@ -8,7 +8,7 @@ export default function Text_ETECH({ ...rest }: JSX.IntrinsicElements["group"]) 
     "/api/model-url?name=xperiencemor3/text_etech.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.XM3_etech.geometry}
         material={materials["1"]}

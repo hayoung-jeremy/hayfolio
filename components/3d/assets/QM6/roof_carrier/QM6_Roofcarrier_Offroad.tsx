@@ -8,7 +8,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 export default function Model({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_roofcarrier_offroad.glb") as any;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh geometry={nodes.QM6_Roofcarrier_Offroad_1.geometry} material={materials.light_led} />
       <mesh geometry={nodes.QM6_Roofcarrier_Offroad_2.geometry} material={materials.Silver} />
       <mesh geometry={nodes.QM6_Roofcarrier_Offroad_3.geometry} material={materials.metal_matt} />

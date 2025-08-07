@@ -9,7 +9,7 @@ export default function QM6_Bumper_Motorsport_B({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_bumper_motorsport_B.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh geometry={nodes.QM6_Bumper_Motorsport_B_1.geometry} material={materials.chrome_black} />
       <mesh geometry={nodes.QM6_Bumper_Motorsport_B_2.geometry} material={materials.light_led} />
       <mesh

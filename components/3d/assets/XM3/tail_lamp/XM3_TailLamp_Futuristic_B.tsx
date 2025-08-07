@@ -8,7 +8,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 export default function XM3_TailLamp_Futuristic_B(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_tailLamp.glb") as any;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

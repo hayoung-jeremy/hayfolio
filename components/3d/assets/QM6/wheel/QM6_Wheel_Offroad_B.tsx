@@ -26,7 +26,7 @@ export default function Model({ carType, bumperMeta }: WheelProps) {
   });
 
   return (
-    <group dispose={null}>
+    <group>
       <group position={leftPos}>
         <mesh
           castShadow

@@ -8,7 +8,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 export default function QM6_TailLamp_Base(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_tailLamp_transparent.glb") as any;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

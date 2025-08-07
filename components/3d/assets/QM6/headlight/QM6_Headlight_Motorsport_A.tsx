@@ -10,7 +10,7 @@ export default function QM6_Headlight_Motorsport_A(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_headlight.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

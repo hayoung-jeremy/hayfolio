@@ -10,7 +10,7 @@ export default function Model(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_roofcarrier.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

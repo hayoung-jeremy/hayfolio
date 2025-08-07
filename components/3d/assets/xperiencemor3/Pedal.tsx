@@ -8,7 +8,7 @@ export default function Pedal({ ...rest }: JSX.IntrinsicElements["group"]) {
     "/api/model-url?name=xperiencemor3/pedal.glb"
   ) as unknown as GLTFResult;
   return (
-    <group {...rest} dispose={null}>
+    <group {...rest}>
       <mesh
         geometry={nodes.PEDAL.geometry}
         material={materials["1"]}

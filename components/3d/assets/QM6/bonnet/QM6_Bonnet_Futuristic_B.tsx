@@ -9,7 +9,7 @@ export default function QM6_Bonnet_Futuristic_B({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_bonnet_futuristic_B.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         geometry={nodes.QM6_Bonnet_Futuristic_B_1.geometry}
         material={materials.Color_Y}

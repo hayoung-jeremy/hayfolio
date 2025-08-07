@@ -10,7 +10,7 @@ export default function SM6_Roofcarrier_Motorsport(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_roofcarrier.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         castShadow
         receiveShadow

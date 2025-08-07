@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useLayoutEffect } from "react";
+import React, { useMemo, useRef, useLayoutEffect, useEffect } from "react";
 import { CylinderGeometry, Group, InstancedMesh, MeshBasicMaterial, Object3D, TorusGeometry } from "three";
 
 const CylinderGrid = () => {
@@ -66,6 +66,14 @@ const CylinderGrid = () => {
 
     horizontalLineRef.current.instanceMatrix.needsUpdate = true;
   }, [heightSegments]);
+
+  useEffect(() => {
+    return () => {
+      verticalGeometry.dispose();
+      horizontalGeometry.dispose();
+      material.dispose();
+    };
+  }, []);
 
   return (
     <group ref={groupRef}>

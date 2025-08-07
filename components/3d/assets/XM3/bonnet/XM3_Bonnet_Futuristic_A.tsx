@@ -9,7 +9,7 @@ export default function XM3_Bonnet_Futuristic_A({ ...props }: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_bonnet_futuristic_A.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         geometry={nodes.XM3_Bonnet_Futuristic_A_1.geometry}
         material={materials.main}

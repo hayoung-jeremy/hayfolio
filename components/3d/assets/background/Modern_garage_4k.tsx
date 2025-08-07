@@ -28,7 +28,7 @@ type GLTFResult = GLTF & {
 export default function Modern_garage_4k(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose("/assets/models/modern_garage_4k.glb") as unknown as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh
         name="Modern_Garage_0"
         geometry={nodes.Modern_Garage_0.geometry}

@@ -10,7 +10,7 @@ export default function QM6_Spoiler_Motorsport(props: any) {
   const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_spoiler.glb") as any;
   const { selectedColors } = useGarageStore();
   return (
-    <group {...props} dispose={null}>
+    <group {...props}>
       <mesh castShadow receiveShadow geometry={nodes.QM6_Spoiler_Motorsport_1.geometry} material={materials.Color_Y} />
       <mesh
         castShadow
