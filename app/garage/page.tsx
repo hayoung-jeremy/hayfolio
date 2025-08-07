@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { MobileBottomSheet, SceneLoader, SideBar } from "@/components/ui/garage";
+import { SceneLoader } from "@/components/ui";
+import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
 import { GarageScene } from "@/components/3d/scenes/garage";
 import useDisplay from "@/hooks/useDisplay";
 import { useGarageStore } from "@/store/useGarageStore";

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
@@ -9,11 +10,13 @@ import DecoModelsContainer from "./DecoModelsContainer";
 const Xperiencemor3Scene = () => {
   return (
     <Canvas camera={{ fov: 60 }}>
-      <CameraControls minDistance={1.5} maxDistance={4} smoothTime={0.5} draggingSmoothTime={0.5} />
-      <Perf position="top-right" />
-      <CylinderGrid />
-      <DecoModelsContainer />
-      <Xperiencemor3Environments />
+      <Suspense>
+        <CameraControls minDistance={1.5} maxDistance={4} smoothTime={0.5} draggingSmoothTime={0.5} />
+        <Perf position="top-right" />
+        <CylinderGrid />
+        <DecoModelsContainer />
+        <Xperiencemor3Environments />
+      </Suspense>
     </Canvas>
   );
 };
