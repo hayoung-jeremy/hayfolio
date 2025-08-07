@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Perf } from "r3f-perf";
 
 import CanvasWrapper from "../CanvasWrapper";
 import { CreateYourEpicCarPreviewScene } from "./garage";
@@ -43,7 +42,6 @@ const ScenesContainer = () => {
         {showEpicCar && <CreateYourEpicCarPreviewScene />}
         {showXperiencemor3 && <Xperiencemor3PreviewScene />}
       </Suspense>
-      <Perf position="top-right" />
       <PreviewSceneEnvironments />
     </CanvasWrapper>
   );
