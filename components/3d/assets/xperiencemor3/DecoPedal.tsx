@@ -16,7 +16,6 @@ export default function DecoPedal(props: JSX.IntrinsicElements["group"]) {
         material-opacity={0.05}
         material-metalness={0.8}
         material-roughness={0.3}
-        material-wireframe={true}
       />
     </group>
   );
