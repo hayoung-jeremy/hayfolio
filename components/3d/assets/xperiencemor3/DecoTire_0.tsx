@@ -1,9 +1,10 @@
 import { JSX } from "react";
 import { useGLTF } from "@react-three/drei";
+import { GLTFResult } from "@/types/3d-model";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function DecoTire_0(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTFWithDispose("/assets/models/deco_tire_0.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/assets/models/deco_tire_0.glb") as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh

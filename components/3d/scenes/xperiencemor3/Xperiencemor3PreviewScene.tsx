@@ -2,8 +2,7 @@ import { useEffect, useRef } from "react";
 import { Group, Mesh } from "three";
 import gsap from "gsap";
 
-import { Box } from "@react-three/drei";
-import { CylinderGrid } from "../../assets/xperiencemor3";
+import { CylinderGrid, LogoSymbol } from "../../assets/xperiencemor3";
 
 const Xperiencemor3PreviewScene = () => {
   const ref = useRef<Group>(null);
@@ -28,9 +27,7 @@ const Xperiencemor3PreviewScene = () => {
   }, []);
   return (
     <group ref={ref}>
-      <Box>
-        <meshStandardMaterial transparent opacity={1} color="hotpink" />
-      </Box>
+      <LogoSymbol />
       <CylinderGrid />
     </group>
   );

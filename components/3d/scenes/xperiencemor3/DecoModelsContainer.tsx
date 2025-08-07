@@ -1,8 +1,7 @@
 import React from "react";
 import { Float } from "@react-three/drei";
 import { degToRad } from "three/src/math/MathUtils.js";
-import { DecoPedal, DecoTire_0 } from "../../assets/xperiencemor3";
-import DecoTire_1 from "../../assets/xperiencemor3/DecoPedal";
+import { DecoPedal, DecoTire_0, DecoTire_1, LogoSymbol, Text_HYBRID } from "../../assets/xperiencemor3";
 
 const array = [
   () => {
@@ -22,6 +21,12 @@ const array = [
   },
   () => {
     return <DecoTire_1 position={[-2, -2, 0]} rotation={[0, degToRad(60), 0]} />;
+  },
+  () => {
+    return <Text_HYBRID position={[-1.8, 1, -2.1]} rotation={[0, degToRad(40), 0]} />;
+  },
+  () => {
+    return <LogoSymbol position={[0, 0.5, 0]} rotation={[-degToRad(10), -degToRad(12), 0]} />;
   },
 ];
 

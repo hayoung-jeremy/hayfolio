@@ -1,15 +1,15 @@
+import { Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Perf } from "r3f-perf";
 
 import CanvasWrapper from "../CanvasWrapper";
 import { CreateYourEpicCarPreviewScene } from "./garage";
 import { Xperiencemor3PreviewScene } from "./xperiencemor3";
+import { PreviewSceneEnvironments } from "../envs";
 import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
-import { Perf } from "r3f-perf";
-import { Suspense } from "react";
-import { PreviewSceneEnvironments } from "../envs";
 
 gsap.registerPlugin(ScrollTrigger);
 
