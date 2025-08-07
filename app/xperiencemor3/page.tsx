@@ -1,14 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
-import { SceneLoader } from "@/components/ui";
+import { ModalWrapper, SceneLoader } from "@/components/ui";
 import { Xperiencemor3Scene } from "@/components/3d/scenes/xperiencemor3";
+import { IntroOverlay } from "@/components/ui/xperiencemor3";
+import { useGameStatus } from "@/hooks/useXperiencemor3Game";
 
 const Xperiencemor3 = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { progress } = useProgress();
+  const gameStatus = useGameStatus();
 
   useEffect(() => {
     if (progress === 100) {
@@ -28,6 +31,14 @@ const Xperiencemor3 = () => {
         className="min-h-svh fixed inset-0 z-0"
       >
         <Xperiencemor3Scene />
+
+        <AnimatePresence>
+          {gameStatus === "intro" && isLoaded && (
+            <ModalWrapper>
+              <IntroOverlay />
+            </ModalWrapper>
+          )}
+        </AnimatePresence>
       </motion.main>
     </>
   );
