@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import ProjectDescription from "./ProjectDesc";
-import ViewProjectDetailButton from "./ViewProjectDetailButton ";
+import ViewProjectDetailButton from "./ViewProjectDetailButton";
 import { useScrollStore } from "@/store/useScrollStore";
 import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
 import { AnimatePresence } from "framer-motion";
