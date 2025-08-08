@@ -13,9 +13,10 @@ const PreviewSceneEnvironments = () => {
       <fog attach="fog" args={["#0a0a0a", 1, 20]} />
       {domElement && (
         <OrbitControls
-          domElement={domElement}
+          domElement={isDesktop ? domElement : undefined}
           enableZoom={false}
-          enablePan={false}
+          enablePan={isDesktop}
+          enableRotate={isDesktop}
           autoRotate
           autoRotateSpeed={isDesktop ? 0.5 : 0.8}
           maxPolarAngle={Math.PI / 2}
