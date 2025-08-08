@@ -12,7 +12,7 @@ const RootCanvas = () => {
         shadows
         gl={{ antialias: true }}
         dpr={[1, 1.5]}
-        camera={{ position: [0, 0, 5], fov: 60 }}
+        camera={{ position: [0, 0, 5], fov: 65 }}
         style={{
           position: "fixed",
           top: 0,
