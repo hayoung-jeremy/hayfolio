@@ -6,6 +6,7 @@ type SceneState = {
   currentScene: SceneType;
   previousScene: SceneType | null;
   setScene: (scene: SceneType) => void;
+  enterMainScene: () => void;
 };
 
 export const useSceneStore = create<SceneState>(set => ({

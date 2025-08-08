@@ -1,20 +1,21 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
-import { SceneLoader } from "@/components/ui";
 import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
-import { GarageScene } from "@/components/3d/scenes/garage";
-import { useGarageStore } from "@/store/useGarageStore";
 import useDisplay from "@/hooks/useDisplay";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
+import { useGarageStore } from "@/store/useGarageStore";
+import { useSceneStore } from "@/store/useSceneStore";
+import { useEffect } from "react";
 
 const Garage = () => {
   const router = useRouter();
   const { isMobile, isTablet } = useDisplay();
   const isModelLoaded = useModelLoadProgress();
   const { resetAll } = useGarageStore();
+  const { currentScene } = useSceneStore();
   useCleanupOnUnmount();
 
   const handleBack = () => {
@@ -22,19 +23,12 @@ const Garage = () => {
     resetAll();
   };
 
+  useEffect(() => {
+    console.log("Current scene changed:", currentScene);
+  }, [currentScene]);
+
   return (
     <>
-      {!isModelLoaded && <SceneLoader />}
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isModelLoaded ? 1 : 0 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1 }}
-        className="min-h-svh fixed inset-0 z-0"
-      >
-        <GarageScene />
-      </motion.main>
-
       {isMobile || isTablet ? (
         <AnimatePresence>{isModelLoaded && <MobileBottomSheet />}</AnimatePresence>
       ) : (
