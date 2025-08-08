@@ -22,7 +22,7 @@ const RootCanvas = () => {
           zIndex: 0,
         }}
       >
-        <Suspense fallback={<SceneLoader />}>
+        <Suspense fallback={null}>
           <DynamicSceneRenderer />
           <DynamicEnvironmentRenderer />
         </Suspense>

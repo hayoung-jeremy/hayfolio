@@ -1,5 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 
 import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
@@ -8,15 +9,15 @@ import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 import { useGarageStore } from "@/store/useGarageStore";
 import { useSceneStore } from "@/store/useSceneStore";
-import { useEffect } from "react";
 
 const Garage = () => {
   const router = useRouter();
   const { isMobile, isTablet } = useDisplay();
   const isModelLoaded = useModelLoadProgress();
   const { resetAll } = useGarageStore();
-  const { currentScene } = useSceneStore();
+  const { currentScene, enterMainScene } = useSceneStore();
   useCleanupOnUnmount();
+  const searchParams = useSearchParams();
 
   const handleBack = () => {
     router.push("/");
@@ -26,6 +27,14 @@ const Garage = () => {
   useEffect(() => {
     console.log("Current scene changed:", currentScene);
   }, [currentScene]);
+
+  useEffect(() => {
+    const sceneParam = searchParams.get("scene");
+
+    if (sceneParam === "garage") {
+      enterMainScene();
+    }
+  }, [searchParams, enterMainScene]);
 
   return (
     <>
