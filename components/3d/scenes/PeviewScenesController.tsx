@@ -35,7 +35,11 @@ const PeviewScenesController = () => {
   const renderXperiencemor3Scene = progress >= SCROLL_THRESHOLDS.xperiencemor3.min;
 
   useEffect(() => {
-    if (renderGarageScene && currentScene !== "garage preview") {
+    if (progress < SCROLL_THRESHOLDS.createYourEpicCar.min || progress === 1) {
+      if (currentScene !== "none") {
+        setScene("none");
+      }
+    } else if (renderGarageScene && currentScene !== "garage preview") {
       setScene("garage preview");
     } else if (renderXperiencemor3Scene && currentScene !== "xperiencemor3 preview") {
       setScene("xperiencemor3 preview");

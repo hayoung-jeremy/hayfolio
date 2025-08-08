@@ -16,60 +16,37 @@ const SceneFadeWrapper = ({ children }: SceneFadeWrapperProps) => {
     const group = ref.current;
     if (!group) return;
 
-    const originalOpacities: WeakMap<THREE.Material, number> = new WeakMap();
+    const originalOpacities = new WeakMap<THREE.Material, number>();
+    const materials: THREE.Material[] = [];
 
-    // 모든 material의 original opacity 저장
     group.traverse(obj => {
-      if (obj instanceof THREE.Mesh && obj.material) {
-        const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
-        materials.forEach(mat => {
-          if (!originalOpacities.has(mat)) {
-            originalOpacities.set(mat, mat.opacity ?? 1);
-          }
+      if (!(obj instanceof THREE.Mesh)) return;
+      const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+      mats.forEach(mat => {
+        if (!originalOpacities.has(mat)) {
+          originalOpacities.set(mat, mat.opacity ?? 1);
           mat.transparent = true;
           mat.opacity = 0;
-        });
-      }
-    });
-
-    // Fade In: 0 → original opacity
-    const tl = gsap.timeline();
-    group.traverse(obj => {
-      if (obj instanceof THREE.Mesh && obj.material) {
-        const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
-        materials.forEach(mat => {
-          const targetOpacity = originalOpacities.get(mat) ?? 1;
-          tl.to(
-            mat,
-            {
-              opacity: targetOpacity,
-              duration: 1.2,
-              ease: "power2.out",
-            },
-            0
-          );
-        });
-      }
-    });
-
-    return () => {
-      // Fade Out: current → 0
-      const tlOut = gsap.timeline();
-      group.traverse(obj => {
-        if (obj instanceof THREE.Mesh && obj.material) {
-          const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
-          materials.forEach(mat => {
-            tlOut.to(
-              mat,
-              {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.in",
-              },
-              0
-            );
-          });
+          materials.push(mat);
         }
+      });
+    });
+
+    // 2. Fade In
+    gsap.to(materials, {
+      opacity: i => originalOpacities.get(materials[i]) ?? 1,
+      duration: 1.2,
+      ease: "power2.out",
+      stagger: 0,
+    });
+
+    // 3. Fade Out on unmount
+    return () => {
+      gsap.to(materials, {
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.in",
+        stagger: 0,
       });
     };
   }, []);
