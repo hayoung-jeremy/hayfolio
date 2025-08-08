@@ -45,6 +45,7 @@ const GarageScene = () => {
       style={{ height: `${heightPx}px`, overflow: "hidden" }}
     >
       <Canvas
+        key="garage-canvas"
         style={{ height: "100%", width: "100%" }}
         resize={{ debounce: 0 }}
         camera={{
@@ -53,6 +54,8 @@ const GarageScene = () => {
           near: 0.1,
           far: 1000,
         }}
+        dpr={[1, 2]}
+        gl={{ antialias: true }}
       >
         <Suspense fallback={null}>{renderContainer()}</Suspense>
         <GarageSceneCameraController />

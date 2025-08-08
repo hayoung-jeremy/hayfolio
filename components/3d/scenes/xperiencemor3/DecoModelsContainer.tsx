@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Float } from "@react-three/drei";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { DecoPedal, DecoTire_0, DecoTire_1, LogoSymbol, Text_HYBRID } from "../../assets/xperiencemor3";
@@ -42,7 +42,7 @@ const DecoModelsContainer = () => {
             floatIntensity={1}
             floatingRange={[-0.1, 0.1]}
           >
-            {item()}
+            <Suspense fallback={null}>{item()}</Suspense>
           </Float>
         );
       })}

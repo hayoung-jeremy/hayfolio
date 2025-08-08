@@ -10,8 +10,8 @@ import MainModelsContainer from "./MainModelsContainer";
 
 const Xperiencemor3Scene = () => {
   return (
-    <Canvas camera={{ fov: 60 }}>
-      <Suspense>
+    <Canvas key="xperiencemor3-canvas" camera={{ fov: 60 }} dpr={[1, 2]} gl={{ antialias: true }}>
+      <Suspense fallback={null}>
         <DecoModelsContainer />
         <MainModelsContainer />
 
