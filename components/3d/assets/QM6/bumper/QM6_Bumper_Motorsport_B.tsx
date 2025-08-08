@@ -6,7 +6,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function QM6_Bumper_Motorsport_B({ ...props }: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_bumper_motorsport_B.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_bumper_motorsport_B.glb?1") as any;
   const { selectedColors } = useGarageStore();
   return (
     <group {...props}>

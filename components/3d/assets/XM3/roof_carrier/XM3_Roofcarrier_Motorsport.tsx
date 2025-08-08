@@ -7,7 +7,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function XM3_Roofcarrier_Motorsport(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_roofcarrier.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_roofcarrier.glb?1") as any;
   const { selectedColors } = useGarageStore();
   return (
     <group {...props}>
@@ -36,4 +36,4 @@ export default function XM3_Roofcarrier_Motorsport(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=XM3/XM3_roofcarrier.glb");
+useGLTF.preload("/api/model-url?name=XM3/XM3_roofcarrier.glb?1");

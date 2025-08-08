@@ -8,7 +8,7 @@ import { WheelProps } from "@/types/garage";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function XM3_Wheel_Offroad_B({ carType, bumperMeta }: WheelProps) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_wheel_offroad_B.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_wheel_offroad_B.glb?1") as any;
   const { selectedColors } = useGarageStore();
   const leftPos = getWheelXOffset({
     carType,

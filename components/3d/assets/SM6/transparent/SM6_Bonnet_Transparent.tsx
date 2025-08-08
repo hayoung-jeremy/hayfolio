@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function SM6_Bonnet_Transparent({ ...props }: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bonnet_transparent.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bonnet_transparent.glb?1") as any;
   return (
     <group {...props}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -32,4 +32,4 @@ export default function SM6_Bonnet_Transparent({ ...props }: any) {
     </group>
   );
 }
-useGLTF.preload("/api/model-url?name=SM6/SM6_bonnet_transparent.glb");
+useGLTF.preload("/api/model-url?name=SM6/SM6_bonnet_transparent.glb?1");

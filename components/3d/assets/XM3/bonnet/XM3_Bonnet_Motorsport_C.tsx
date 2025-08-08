@@ -6,7 +6,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function XM3_Bonnet_Motorsport_C({ ...props }: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_bonnet_motorsport_C.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_bonnet_motorsport_C.glb?1") as any;
   const { selectedColors } = useGarageStore();
   return (
     <group {...props}>

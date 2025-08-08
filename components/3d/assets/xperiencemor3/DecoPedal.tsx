@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function DecoPedal(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/deco_pedal.glb"
+    "/api/model-url?name=xperiencemor3/deco_pedal.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...props}>
@@ -21,4 +21,4 @@ export default function DecoPedal(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/deco_pedal.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/deco_pedal.glb?1");

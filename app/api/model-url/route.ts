@@ -2,8 +2,10 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const name = searchParams.get("name");
-  if (!name) return new Response("Missing name", { status: 400 });
+  const rawName = searchParams.get("name");
+  if (!rawName) return new Response("Missing name", { status: 400 });
+
+  const cleanName = rawName.split("?")[0];
 
   const s3 = new S3Client({
     region: process.env.R2_REGION!,
@@ -17,7 +19,7 @@ export async function GET(req: Request) {
 
   const command = new GetObjectCommand({
     Bucket: process.env.R2_BUCKET!,
-    Key: name,
+    Key: cleanName,
   });
 
   const s3Res = await s3.send(command);

@@ -7,7 +7,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function XM3_Headlight_Motorsport_A(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_headlight.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_headlight.glb?1") as any;
   const { selectedColors } = useGarageStore();
   return (
     <group {...props}>
@@ -46,4 +46,4 @@ export default function XM3_Headlight_Motorsport_A(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=XM3/XM3_headlight.glb");
+useGLTF.preload("/api/model-url?name=XM3/XM3_headlight.glb?1");

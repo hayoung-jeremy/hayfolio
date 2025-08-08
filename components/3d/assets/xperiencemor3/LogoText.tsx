@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function LogoText({ ...rest }: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/logo_text.glb"
+    "/api/model-url?name=xperiencemor3/logo_text.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...rest}>
@@ -23,4 +23,4 @@ export default function LogoText({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/logo_text.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/logo_text.glb?1");

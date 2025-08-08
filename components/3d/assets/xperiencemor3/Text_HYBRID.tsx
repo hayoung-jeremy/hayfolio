@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/text_hybrid.glb"
+    "/api/model-url?name=xperiencemor3/text_hybrid.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...props}>
@@ -23,4 +23,4 @@ export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/text_hybrid.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/text_hybrid.glb?1");

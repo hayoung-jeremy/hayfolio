@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function SM6_Bumper_Transparent({ ...props }: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bumper_transparent.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_bumper_transparent.glb?1") as any;
   return (
     <group {...props}>
       <mesh
@@ -112,4 +112,4 @@ export default function SM6_Bumper_Transparent({ ...props }: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=SM6/SM6_bumper_transparent.glb");
+useGLTF.preload("/api/model-url?name=SM6/SM6_bumper_transparent.glb?1");

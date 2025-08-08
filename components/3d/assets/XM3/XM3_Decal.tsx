@@ -11,7 +11,7 @@ const XM3_Decal = () => {
   const { selectedParts, selectedColors } = useGarageStore();
   const patternMeta = selectedParts["Pattern"];
 
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_decal.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_decal.glb?1") as any;
 
   const textures = {
     motorsport: useLoader(TextureLoader, "/api/model-url?name=XM3/XM3_decal_stripe.png"),

@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function CarKey({ ...rest }: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/carkey.glb"
+    "/api/model-url?name=xperiencemor3/carkey.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...rest}>
@@ -31,4 +31,4 @@ export default function CarKey({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/carkey.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/carkey.glb?1");

@@ -8,7 +8,7 @@ import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function XM3_Headlight_Transparent(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_headlight_transparent.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_headlight_transparent.glb?1") as any;
 
   useEffect(() => {
     return () => {
@@ -78,4 +78,4 @@ export default function XM3_Headlight_Transparent(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=XM3/XM3_headlight_transparent.glb");
+useGLTF.preload("/api/model-url?name=XM3/XM3_headlight_transparent.glb?1");

@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Suspension({ ...rest }: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/suspension.glb"
+    "/api/model-url?name=xperiencemor3/suspension.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...rest}>
@@ -23,4 +23,4 @@ export default function Suspension({ ...rest }: JSX.IntrinsicElements["group"]) 
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/suspension.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/suspension.glb?1");

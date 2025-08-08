@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Essui({ ...rest }: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/essui.glb"
+    "/api/model-url?name=xperiencemor3/essui.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...rest}>
@@ -22,4 +22,4 @@ export default function Essui({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/essui.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/essui.glb?1");

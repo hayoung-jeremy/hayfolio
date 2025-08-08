@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function XM3_Roofcarrier_Offroad(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_roofcarrier.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=XM3/XM3_roofcarrier.glb?1") as any;
   return (
     <group {...props}>
       <mesh
@@ -32,4 +32,4 @@ export default function XM3_Roofcarrier_Offroad(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=XM3/XM3_roofcarrier.glb");
+useGLTF.preload("/api/model-url?name=XM3/XM3_roofcarrier.glb?1");

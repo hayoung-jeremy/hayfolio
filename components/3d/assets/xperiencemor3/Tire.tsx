@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Tire({ ...rest }: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/tire.glb"
+    "/api/model-url?name=xperiencemor3/tire.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...rest}>
@@ -31,4 +31,4 @@ export default function Tire({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/tire.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/tire.glb?1");

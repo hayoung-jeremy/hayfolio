@@ -7,7 +7,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function SM6_Spoiler_Offroad(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_spoiler.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_spoiler.glb?1") as any;
   const { selectedColors } = useGarageStore();
   return (
     <group {...props}>
@@ -25,4 +25,4 @@ export default function SM6_Spoiler_Offroad(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=SM6/SM6_spoiler.glb");
+useGLTF.preload("/api/model-url?name=SM6/SM6_spoiler.glb?1");

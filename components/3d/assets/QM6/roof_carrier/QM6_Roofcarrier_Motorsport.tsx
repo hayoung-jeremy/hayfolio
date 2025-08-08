@@ -7,7 +7,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function Model(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_roofcarrier.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_roofcarrier.glb?1") as any;
   const { selectedColors } = useGarageStore();
   return (
     <group {...props}>
@@ -36,4 +36,4 @@ export default function Model(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=QM6/QM6_roofcarrier.glb");
+useGLTF.preload("/api/model-url?name=QM6/QM6_roofcarrier.glb?1");

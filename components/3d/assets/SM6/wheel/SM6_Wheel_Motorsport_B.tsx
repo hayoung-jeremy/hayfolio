@@ -8,7 +8,7 @@ import { WheelProps } from "@/types/garage";
 import { useGarageStore } from "@/store/useGarageStore";
 
 export default function SM6_Wheel_Motorsport_B({ carType, bumperMeta }: WheelProps) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_wheel_motorsport_B.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_wheel_motorsport_B.glb?1") as any;
   const { selectedColors } = useGarageStore();
 
   const leftPos = getWheelXOffset({

@@ -5,7 +5,7 @@ import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Text_ETECH({ ...rest }: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTFWithDispose(
-    "/api/model-url?name=xperiencemor3/text_etech.glb"
+    "/api/model-url?name=xperiencemor3/text_etech.glb?1"
   ) as unknown as GLTFResult;
   return (
     <group {...rest}>
@@ -24,4 +24,4 @@ export default function Text_ETECH({ ...rest }: JSX.IntrinsicElements["group"]) 
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/text_etech.glb");
+useGLTF.preload("/api/model-url?name=xperiencemor3/text_etech.glb?1");

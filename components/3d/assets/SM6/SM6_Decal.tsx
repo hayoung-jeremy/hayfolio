@@ -11,7 +11,7 @@ const SM6_Decal = () => {
   const { selectedParts, selectedColors } = useGarageStore();
   const patternMeta = selectedParts["Pattern"];
 
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_decal.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_decal.glb?1") as any;
 
   const textures = {
     motorsport: useLoader(TextureLoader, "/api/model-url?name=SM6/SM6_decal_stripe.png"),

@@ -26,7 +26,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Modern_garage_4k(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTFWithDispose("/assets/models/modern_garage_4k.glb") as unknown as GLTFResult;
+  const { nodes, materials } = useGLTFWithDispose("/assets/models/modern_garage_4k.glb?1") as unknown as GLTFResult;
   return (
     <group {...props}>
       <mesh
@@ -45,4 +45,4 @@ export default function Modern_garage_4k(props: JSX.IntrinsicElements["group"]) 
   );
 }
 
-useGLTF.preload("/assets/models/modern_garage_4k.glb");
+useGLTF.preload("/assets/models/modern_garage_4k.glb?1");

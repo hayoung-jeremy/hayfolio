@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function SM6_Roofcarrier_Futuristic(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_roofcarrier.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=SM6/SM6_roofcarrier.glb?1") as any;
   return (
     <group {...props}>
       <mesh
@@ -31,4 +31,4 @@ export default function SM6_Roofcarrier_Futuristic(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=SM6/SM6_roofcarrier.glb");
+useGLTF.preload("/api/model-url?name=SM6/SM6_roofcarrier.glb?1");

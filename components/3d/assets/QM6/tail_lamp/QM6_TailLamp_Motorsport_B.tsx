@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import { useGLTFWithDispose } from "@/hooks/useGLTFWithDispose";
 
 export default function Model(props: any) {
-  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_tailLamp.glb") as any;
+  const { nodes, materials } = useGLTFWithDispose("/api/model-url?name=QM6/QM6_tailLamp.glb?1") as any;
   return (
     <group {...props}>
       <mesh
@@ -42,4 +42,4 @@ export default function Model(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=QM6/QM6_tailLamp.glb");
+useGLTF.preload("/api/model-url?name=QM6/QM6_tailLamp.glb?1");
