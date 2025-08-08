@@ -1,4 +1,5 @@
 "use client";
+import { useLayoutEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,9 +8,19 @@ import { motion } from "framer-motion";
 gsap.registerPlugin(ScrollTrigger);
 
 import { IntroText, Navigation } from "@/components/ui";
-import { ScenesContainer } from "@/components/3d/scenes";
+import { PeviewScenesController } from "@/components/3d/scenes";
+import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 
 export default function Home() {
+  const ref = useRef<HTMLDivElement>(null);
+  const setDomElement = useInteractionLayerStore(s => s.setDomElement);
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      setDomElement(ref.current);
+    }
+  }, []);
+
   useGSAP(() => {
     gsap.to(".IntroText", {
       opacity: 0,
@@ -21,10 +32,10 @@ export default function Home() {
       },
     });
 
-    gsap.to(".ScenesContainer", {
+    gsap.to(".PeviewScenesController", {
       opacity: 1,
       scrollTrigger: {
-        trigger: ".ScenesContainer",
+        trigger: ".PeviewScenesController",
         start: "top 40%",
         end: "top top",
         scrub: true,
@@ -39,9 +50,9 @@ export default function Home() {
       transition={{ duration: 1 }}
     >
       <IntroText />
-      <div className="ScenesContainer opacity-0 h-[300vh] relative z-10">
+      <div ref={ref} className="PeviewScenesController opacity-0 h-[300vh] relative z-10">
         <div className="sticky top-0 h-screen">
-          <ScenesContainer />
+          <PeviewScenesController />
           <Navigation />
         </div>
       </div>

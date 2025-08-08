@@ -1,1 +1,2 @@
-export { default as ScenesContainer } from "./ScenesContainer";
+export { default as PeviewScenesController } from "./PeviewScenesController";
+export { default as DynamicSceneRenderer } from "./DynamicSceneRenderer";
