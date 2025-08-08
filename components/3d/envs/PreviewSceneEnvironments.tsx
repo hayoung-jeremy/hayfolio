@@ -1,20 +1,27 @@
 import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
+
 import useDisplay from "@/hooks/useDisplay";
+import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 
 const PreviewSceneEnvironments = () => {
   const { isDesktop } = useDisplay();
+  const domElement = useInteractionLayerStore(s => s.domElement);
+
   return (
     <>
       <fog attach="fog" args={["#0a0a0a", 1, 20]} />
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        autoRotate
-        autoRotateSpeed={isDesktop ? 0.5 : 0.8}
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={Math.PI / 3}
-      />
+      {domElement && (
+        <OrbitControls
+          domElement={domElement}
+          enableZoom={false}
+          enablePan={false}
+          autoRotate
+          autoRotateSpeed={isDesktop ? 0.5 : 0.8}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 3}
+        />
+      )}
 
       <Environment>
         <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, -9]} scale={[10, 1, 1]} />

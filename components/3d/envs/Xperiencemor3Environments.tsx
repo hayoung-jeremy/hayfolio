@@ -1,7 +1,7 @@
 import { Environment, Lightformer } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
-const SceneEnvironment = () => {
+const Xperiencemor3Environments = () => {
   return (
     <>
       <fog attach="fog" args={["#0a0a0a", 1, 20]} />
@@ -41,4 +41,4 @@ const SceneEnvironment = () => {
   );
 };
 
-export default SceneEnvironment;
+export default Xperiencemor3Environments;
