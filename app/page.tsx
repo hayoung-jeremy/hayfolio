@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,16 +10,12 @@ gsap.registerPlugin(ScrollTrigger);
 import { IntroText, Navigation } from "@/components/ui";
 import { PeviewScenesController } from "@/components/3d/scenes";
 import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
+import { useSceneStore } from "@/store/useSceneStore";
+import { useScrollStore } from "@/store/useScrollStore";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
   const setDomElement = useInteractionLayerStore(s => s.setDomElement);
-
-  useLayoutEffect(() => {
-    if (ref.current) {
-      setDomElement(ref.current);
-    }
-  }, []);
 
   useGSAP(() => {
     gsap.to(".IntroText", {
@@ -42,6 +38,18 @@ export default function Home() {
       },
     });
   }, []);
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      setDomElement(ref.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    useSceneStore.getState().setScene("none");
+    useScrollStore.getState().setProgress(0);
+  }, []);
+
   return (
     <motion.main
       initial={{ opacity: 0, y: 30 }}

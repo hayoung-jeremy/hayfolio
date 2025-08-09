@@ -26,10 +26,12 @@ const GarageScene = () => {
 
   return (
     <>
-      <Suspense fallback={null}>{renderContainer()}</Suspense>
-      <GarageSceneCameraController />
-      <GarageEnvironments />
-      <BackgroundContainer />
+      <Suspense fallback={null}>
+        {renderContainer()}
+        <GarageSceneCameraController />
+        <GarageEnvironments />
+        <BackgroundContainer />
+      </Suspense>
     </>
   );
 };

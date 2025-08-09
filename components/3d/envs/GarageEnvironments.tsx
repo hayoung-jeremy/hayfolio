@@ -1,17 +1,16 @@
-import { ContactShadows, Environment, Lightformer, SoftShadows } from "@react-three/drei";
-import { KernelSize } from "postprocessing";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import { easing } from "maath";
 import { Group } from "three";
+import { useFrame } from "@react-three/fiber";
+import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { KernelSize } from "postprocessing";
+import { easing } from "maath";
 
 const GarageEnvironments = () => {
   const lightRef = useRef<Group>(null);
   useFrame((state, delta) => {
     if (!lightRef.current) return;
 
-    // console.log("Updating light position based on pointer movement");
     easing.dampE(
       lightRef.current.rotation,
       [(state.pointer.y * Math.PI) / 50, (state.pointer.x * Math.PI) / 20, 0],
