@@ -1,6 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useLayoutEffect } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 
 import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
@@ -15,26 +15,17 @@ const Garage = () => {
   const { isMobile, isTablet } = useDisplay();
   const isModelLoaded = useModelLoadProgress();
   const { resetAll } = useGarageStore();
-  const { currentScene, enterMainScene } = useSceneStore();
+  const { setScene } = useSceneStore();
   useCleanupOnUnmount();
-  const searchParams = useSearchParams();
 
   const handleBack = () => {
     router.push("/");
     resetAll();
   };
 
-  useEffect(() => {
-    console.log("Current scene changed:", currentScene);
-  }, [currentScene]);
-
-  useEffect(() => {
-    const sceneParam = searchParams.get("scene");
-
-    if (sceneParam === "garage") {
-      enterMainScene();
-    }
-  }, [searchParams, enterMainScene]);
+  useLayoutEffect(() => {
+    setScene("xperiencemor3");
+  }, [setScene]);
 
   return (
     <>

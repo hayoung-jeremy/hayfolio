@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 
-import { SceneLoader } from "../ui";
 import { DynamicSceneRenderer } from "./scenes";
 import { DynamicEnvironmentRenderer } from "./envs";
 

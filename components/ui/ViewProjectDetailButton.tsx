@@ -11,9 +11,9 @@ const ViewProjectDetailButton = () => {
 
   const navigateToSceneDetailPage = () => {
     if (progress < SCROLL_THRESHOLDS.createYourEpicCar.max) {
-      router.push("/garage?scene=garage");
+      router.push("/garage");
     } else if (progress >= SCROLL_THRESHOLDS.xperiencemor3.min) {
-      router.push("/xperiencemor3?scene=xperiencemor3");
+      router.push("/xperiencemor3");
     }
   };
 
