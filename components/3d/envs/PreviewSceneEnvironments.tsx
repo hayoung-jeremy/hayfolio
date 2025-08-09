@@ -15,7 +15,7 @@ const PreviewSceneEnvironments = () => {
         <OrbitControls
           domElement={isDesktop ? domElement : undefined}
           enableZoom={false}
-          enablePan={isDesktop}
+          enablePan={false}
           enableRotate={isDesktop}
           autoRotate
           autoRotateSpeed={isDesktop ? 0.5 : 0.8}
