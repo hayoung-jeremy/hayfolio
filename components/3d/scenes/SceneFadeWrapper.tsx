@@ -1,55 +1,120 @@
 "use client";
 
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import * as THREE from "three";
-import { Group } from "three";
+import { Group, Mesh, LineSegments, Points, Material } from "three";
 import { gsap } from "gsap";
 
 interface SceneFadeWrapperProps {
   children: ReactNode;
+  inDuration?: number;
+  outDuration?: number;
 }
 
-const SceneFadeWrapper = ({ children }: SceneFadeWrapperProps) => {
+type Fadeable = Mesh | LineSegments | Points;
+
+const SceneFadeWrapper = ({ children, inDuration = 1.0, outDuration = 0.8 }: SceneFadeWrapperProps) => {
   const ref = useRef<Group>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useLayoutEffect(() => {
     const group = ref.current;
     if (!group) return;
 
-    const originalOpacities = new WeakMap<THREE.Material, number>();
-    const materials: THREE.Material[] = [];
+    // 현재 씬에 포함된 머티리얼 수집
+    const materials: Material[] = [];
+    const collect = (m: Material | Material[] | undefined) => {
+      if (!m) return;
+      if (Array.isArray(m)) m.forEach(mm => mm && materials.push(mm));
+      else materials.push(m);
+    };
 
     group.traverse(obj => {
-      if (!(obj instanceof THREE.Mesh)) return;
-      const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
-      mats.forEach(mat => {
-        if (!originalOpacities.has(mat)) {
-          originalOpacities.set(mat, mat.opacity ?? 1);
-          mat.transparent = true;
-          mat.opacity = 0;
-          materials.push(mat);
-        }
-      });
+      const o = obj as Fadeable;
+      // Mesh/Line/Points 전부 처리
+      if (o.material) collect(o.material);
     });
 
-    // 2. Fade In
-    gsap.to(materials, {
-      opacity: i => originalOpacities.get(materials[i]) ?? 1,
-      duration: 1.2,
+    // 원본 값 저장: userData._baseOpacity / _wasTransparent / _baseDepthWrite
+    materials.forEach(m => {
+      const ud = (m.userData ||= {});
+      if (ud._baseOpacity == null) ud._baseOpacity = (m as any).opacity ?? 1;
+      if (ud._wasTransparent == null) ud._wasTransparent = (m as any).transparent === true;
+      if (ud._baseDepthWrite == null) ud._baseDepthWrite = (m as any).depthWrite ?? true;
+    });
+
+    // 래퍼 알파 상태
+    const state = { a: 0 };
+
+    // 기존 트윈/타겟 깨끗이
+    if (tweenRef.current) tweenRef.current.kill();
+    gsap.killTweensOf(state);
+
+    // 페이드인: baseOpacity * a
+    tweenRef.current = gsap.to(state, {
+      a: 1,
+      duration: inDuration,
       ease: "power2.out",
-      stagger: 0,
+      onUpdate: () => {
+        materials.forEach(m => {
+          const ud = m.userData as any;
+          const base = ud._baseOpacity ?? 1;
+          // 투명 페이드 중에는 투명 활성 & depthWrite 끔(겹침 깜빡임 방지)
+          (m as any).transparent = true;
+          (m as any).depthWrite = false;
+          (m as any).opacity = base * state.a;
+          (m as any).needsUpdate = true;
+        });
+      },
+      onComplete: () => {
+        materials.forEach(m => {
+          const ud = m.userData as any;
+          // 완전 표시 상태 도달 시 원래 depthWrite 복구
+          (m as any).depthWrite = ud._baseDepthWrite ?? true;
+          // 원래 투명 상태가 아니었고 baseOpacity===1이면 transparent 끔
+          const base = ud._baseOpacity ?? 1;
+          if (!ud._wasTransparent && base >= 1) {
+            (m as any).transparent = false;
+            (m as any).opacity = 1;
+          }
+        });
+      },
     });
 
-    // 3. Fade Out on unmount
+    // 언마운트: 페이드아웃 + kill, 마지막에 원복
     return () => {
-      gsap.to(materials, {
-        opacity: 0,
-        duration: 0.8,
+      if (tweenRef.current) tweenRef.current.kill();
+      gsap.killTweensOf(state);
+
+      const tw = gsap.to(state, {
+        a: 0,
+        duration: outDuration,
         ease: "power2.in",
-        stagger: 0,
+        onUpdate: () => {
+          materials.forEach(m => {
+            const ud = m.userData as any;
+            const base = ud._baseOpacity ?? 1;
+            (m as any).transparent = true;
+            (m as any).depthWrite = false;
+            (m as any).opacity = base * state.a;
+            (m as any).needsUpdate = true;
+          });
+        },
+        onComplete: () => {
+          materials.forEach(m => {
+            const ud = m.userData as any;
+            // 페이드 종료 후 '원본'으로 되돌려두면 다음 진입 때도 안전
+            (m as any).opacity = ud._baseOpacity ?? 1;
+            (m as any).transparent = ud._wasTransparent ?? false;
+            (m as any).depthWrite = ud._baseDepthWrite ?? true;
+            (m as any).needsUpdate = true;
+          });
+        },
       });
+
+      // 언마운트 직전에 또 빠르게 씬이 교체될 수 있어 한 번 더 보증
+      tw.play();
     };
-  }, []);
+  }, [inDuration, outDuration]);
 
   return <group ref={ref}>{children}</group>;
 };
