@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 
 import { DynamicSceneRenderer } from "./scenes";
 import { DynamicEnvironmentRenderer } from "./envs";
+import GlobalCameraController from "./GlobalCameraController";
 
 const RootCanvas = () => {
   return (
@@ -25,6 +26,7 @@ const RootCanvas = () => {
           <DynamicSceneRenderer />
           <DynamicEnvironmentRenderer />
         </Suspense>
+        <GlobalCameraController />
       </Canvas>
     </>
   );

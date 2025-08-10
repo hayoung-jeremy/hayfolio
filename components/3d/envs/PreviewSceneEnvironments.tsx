@@ -1,28 +1,22 @@
-import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
+import { useLayoutEffect } from "react";
+import { Environment, Lightformer } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
-import useDisplay from "@/hooks/useDisplay";
-import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
+import { useCameraBus } from "@/store/useCameraBus";
 
 const PreviewSceneEnvironments = () => {
-  const { isDesktop } = useDisplay();
-  const domElement = useInteractionLayerStore(s => s.domElement);
+  const { moveTo, setConstraints, setAutoRotate } = useCameraBus();
+
+  useLayoutEffect(() => {
+    setConstraints({ minDistance: 1.5, maxDistance: 4.5, polar: [Math.PI / 3, Math.PI / 2], fov: 65 });
+    setAutoRotate(true, 0.3);
+    moveTo([0, 0, 5.0], [0, 0, 0], true);
+    return () => setAutoRotate(false);
+  }, [moveTo, setConstraints, setAutoRotate]);
 
   return (
     <>
       <fog attach="fog" args={["#0a0a0a", 1, 20]} />
-      {domElement && (
-        <OrbitControls
-          domElement={isDesktop ? domElement : undefined}
-          enableZoom={false}
-          enablePan={false}
-          enableRotate={isDesktop}
-          autoRotate
-          autoRotateSpeed={isDesktop ? 0.5 : 0.8}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 3}
-        />
-      )}
 
       <Environment>
         <Lightformer intensity={1.2} rotation-x={Math.PI / 2} position={[0, 4, -9]} scale={[10, 1, 1]} />

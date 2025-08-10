@@ -24,7 +24,7 @@ const Garage = () => {
   };
 
   useLayoutEffect(() => {
-    setScene("xperiencemor3");
+    setScene("garage");
   }, [setScene]);
 
   return (
