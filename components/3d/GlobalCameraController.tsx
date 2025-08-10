@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { CameraControls as DreiCameraControls } from "@react-three/drei";
 import CameraControls from "camera-controls";
 
@@ -11,11 +11,14 @@ import { useSceneStore } from "@/store/useSceneStore";
 
 const GlobalCameraController = () => {
   const ref = useRef<CameraControls>(null);
+  const isInteractingRef = useRef(false);
+
   const setRef = useCameraBus(s => s.setRef);
   const { autoRotate, autoRotateSpeed } = useCameraBus();
   const { isDesktop } = useDisplay();
   const domElement = useInteractionLayerStore(s => s.domElement);
   const currentScene = useSceneStore(s => s.currentScene);
+  const glDom = useThree(state => state.gl.domElement);
 
   const isPreview = currentScene === "garage preview" || currentScene === "xperiencemor3 preview";
 
@@ -30,23 +33,69 @@ const GlobalCameraController = () => {
     const c = ref.current;
     if (!c) return;
 
-    c.minAzimuthAngle = -Infinity;
-    c.maxAzimuthAngle = Infinity;
-
     c.minPolarAngle = Math.PI / 3;
     c.maxPolarAngle = Math.PI / 2;
-
     c.azimuthRotateSpeed = 1;
     c.polarRotateSpeed = 1;
     c.truckSpeed = 2;
   }, [currentScene]);
 
+  useEffect(() => {
+    const c = ref.current;
+    if (!c) return;
+
+    const onStart = () => (isInteractingRef.current = true);
+    const onEnd = () => (isInteractingRef.current = false);
+
+    c.addEventListener("controlstart", onStart);
+    c.addEventListener("controlend", onEnd);
+
+    return () => {
+      c.removeEventListener("controlstart", onStart);
+      c.removeEventListener("controlend", onEnd);
+    };
+  }, []);
+
+  useEffect(() => {
+    const c = ref.current;
+    if (!c) return;
+
+    const wantsCustom = isPreview && isDesktop && !!domElement;
+
+    c.disconnect();
+    c.connect(wantsCustom ? (domElement as HTMLElement) : glDom);
+
+    let prevTouchAction: string | undefined;
+    let prevUserSelect: string | undefined;
+    let prevCursor: string | undefined;
+
+    if (wantsCustom && domElement) {
+      prevTouchAction = domElement.style.touchAction;
+      prevUserSelect = domElement.style.userSelect;
+      prevCursor = domElement.style.cursor;
+
+      domElement.style.touchAction = "none";
+      domElement.style.userSelect = "none";
+      domElement.style.cursor = "grab";
+    }
+
+    return () => {
+      c.disconnect();
+      c.connect(glDom);
+      if (wantsCustom && domElement) {
+        domElement.style.touchAction = prevTouchAction ?? "";
+        domElement.style.userSelect = prevUserSelect ?? "";
+        domElement.style.cursor = prevCursor ?? "";
+      }
+    };
+  }, [isPreview, isDesktop, domElement, glDom]);
+
   // auto-rotate
   useFrame((_, dt) => {
     const c = ref.current;
     if (!c) return;
-    if (autoRotate) {
-      c.azimuthAngle += dt * autoRotateSpeed;
+    if (autoRotate && !isInteractingRef.current) {
+      c.rotate(dt * autoRotateSpeed, 0, true);
       c.update(dt);
     }
   });
@@ -68,12 +117,10 @@ const GlobalCameraController = () => {
         two: CameraControls.ACTION.TOUCH_DOLLY,
         three: CameraControls.ACTION.TOUCH_TRUCK,
       }}
-      minAzimuthAngle={-Infinity}
-      maxAzimuthAngle={Infinity}
       minPolarAngle={Math.PI / 3}
       maxPolarAngle={Math.PI / 2}
-      minDistance={isPreview ? 1.5 : 3}
-      maxDistance={isPreview ? 4 : 6}
+      minDistance={3}
+      maxDistance={6}
     />
   );
 };
