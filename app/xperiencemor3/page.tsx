@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { ModalWrapper } from "@/components/ui";
@@ -9,16 +9,32 @@ import { useGameStatus } from "@/hooks/useXperiencemor3Game";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 import { useSceneStore } from "@/store/useSceneStore";
+import { useCameraBus } from "@/store/useCameraBus";
 
 const Xperiencemor3 = () => {
   const isModelLoaded = useModelLoadProgress();
   const gameStatus = useGameStatus();
   const { setScene } = useSceneStore();
+  const { moveTo, setAutoRotate } = useCameraBus();
   useCleanupOnUnmount();
 
   useLayoutEffect(() => {
     setScene("xperiencemor3");
   }, [setScene]);
+
+  useEffect(() => {
+    if (gameStatus !== "questioning") {
+      setAutoRotate(false);
+      moveTo([0, 0, 5] as any, [0, 0, 0] as any, true);
+    }
+  }, [gameStatus, moveTo, setAutoRotate]);
+
+  useEffect(() => {
+    return () => {
+      setAutoRotate(false);
+      moveTo([0, 0, 5] as any, [0, 0, 0] as any, false);
+    };
+  }, [moveTo, setAutoRotate]);
 
   return (
     <>

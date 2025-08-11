@@ -12,6 +12,7 @@ import {
   useGameProgressObserver,
 } from "@/hooks/useXperiencemor3Game";
 import { useXperiencemor3GameController } from "@/hooks/useXperiencemor3GameController";
+import useXperiencemor3GameCameraSync from "@/hooks/useXperiencemor3GameCameraSync";
 import { QUESTION_INFO_COLLECTION } from "@/constants/xperiencemor3";
 
 export default function KeywordDuel() {
@@ -20,6 +21,7 @@ export default function KeywordDuel() {
   const selectedOptions = useSelectedOptions();
   const { selectKeyword, undo } = useXperiencemor3GameController();
   useGameProgressObserver();
+  useXperiencemor3GameCameraSync();
 
   const [selectedIdx, setSelectedIdx] = useState<number>(-1);
   const [locked, setLocked] = useState(false);
