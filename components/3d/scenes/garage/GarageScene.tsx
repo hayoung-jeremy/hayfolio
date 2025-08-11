@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from "react";
 
-import { XM3_Container } from "../../assets/XM3";
+import { XM3_Container, XM3_Transparent_Container } from "../../assets/XM3";
 import { SM6_Container } from "../../assets/SM6";
 import { QM6_Container } from "../../assets/QM6";
 import { BackgroundContainer } from "../../assets";
@@ -38,11 +38,9 @@ const GarageScene = () => {
 
   return (
     <>
-      <Suspense fallback={null}>
-        {renderContainer()}
-        <GarageEnvironments />
-        <BackgroundContainer />
-      </Suspense>
+      <Suspense fallback={<XM3_Transparent_Container />}>{renderContainer()}</Suspense>
+      <GarageEnvironments />
+      <BackgroundContainer />
     </>
   );
 };
