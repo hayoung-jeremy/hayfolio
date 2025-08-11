@@ -80,9 +80,9 @@ export default function KeywordDuel() {
             variants={stackVariants}
             className="flex flex-col items-center justify-center mb-2"
           >
-            <motion.span variants={stackVariants} className="text-[16px] leading-4 opacity-80">
+            {/* <motion.span variants={stackVariants} className="text-[16px] leading-4 opacity-80">
               {info?.first}
-            </motion.span>
+            </motion.span> */}
             <motion.span variants={stackVariants} className="game-text-shadow font-bold text-[40px] leading-[40px]">
               {info?.first}
             </motion.span>
@@ -134,9 +134,9 @@ export default function KeywordDuel() {
             <motion.span className="game-text-shadow font-bold text-[40px] leading-[40px]" variants={stackVariants}>
               {info?.second}
             </motion.span>
-            <motion.span className="text-[16px] leading-4 opacity-80" variants={stackVariants}>
+            {/* <motion.span className="text-[16px] leading-4 opacity-80" variants={stackVariants}>
               {info?.second}
-            </motion.span>
+            </motion.span> */}
           </motion.button>
         </div>
       </aside>

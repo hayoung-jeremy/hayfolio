@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ModalWrapper } from "@/components/ui";
 import { BeginningQuestionOverlay, IntroOverlay, KeywordDuelOverlay } from "@/components/ui/xperiencemor3";
 
-import { useGameStatus } from "@/hooks/useXperiencemor3Game";
+import { useGameActions, useGameStatus } from "@/hooks/useXperiencemor3Game";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 import { useSceneStore } from "@/store/useSceneStore";
@@ -14,6 +14,7 @@ import { useCameraBus } from "@/store/useCameraBus";
 const Xperiencemor3 = () => {
   const isModelLoaded = useModelLoadProgress();
   const gameStatus = useGameStatus();
+  const { setGameStatus } = useGameActions();
   const { setScene } = useSceneStore();
   const { moveTo, setAutoRotate } = useCameraBus();
   useCleanupOnUnmount();
@@ -32,6 +33,7 @@ const Xperiencemor3 = () => {
   useEffect(() => {
     return () => {
       setAutoRotate(false);
+      setGameStatus("intro");
       moveTo([0, 0, 5] as any, [0, 0, 0] as any, false);
     };
   }, [moveTo, setAutoRotate]);
