@@ -8,6 +8,8 @@ import useDisplay from "@/hooks/useDisplay";
 import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 import { useCameraBus } from "@/store/useCameraBus";
 import { useSceneStore } from "@/store/useSceneStore";
+import { useGarageStore } from "@/store/useGarageStore";
+import { initialGarageCameraTarget } from "@/constants/partsCameraTarget";
 
 const GlobalCameraController = () => {
   const ref = useRef<CameraControls>(null);
@@ -44,7 +46,20 @@ const GlobalCameraController = () => {
     const c = ref.current;
     if (!c) return;
 
-    const onStart = () => (isInteractingRef.current = true);
+    const onStart = () => {
+      isInteractingRef.current = true;
+
+      if (currentScene === "garage") {
+        const { shouldResetOnFirstInteract, setShouldResetOnFirstInteract } = useGarageStore.getState();
+
+        if (shouldResetOnFirstInteract) {
+          const { position, target } = initialGarageCameraTarget;
+          c.setLookAt(position[0], position[1], position[2], target[0], target[1], target[2], true);
+          c.saveState();
+          setShouldResetOnFirstInteract(false);
+        }
+      }
+    };
     const onEnd = () => (isInteractingRef.current = false);
 
     c.addEventListener("controlstart", onStart);

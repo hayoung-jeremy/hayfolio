@@ -23,8 +23,8 @@ type GarageState = {
   cameraTarget: GarageSceneCameraTarget | null;
   setCameraTarget: (target: GarageSceneCameraTarget) => void;
   resetCameraTarget: () => void;
-  hasReset: boolean;
-  setHasReset: (v: boolean) => void;
+  shouldResetOnFirstInteract: boolean; // 추가
+  setShouldResetOnFirstInteract: (v: boolean) => void;
 
   isPartPanelOpen: boolean;
   setPartPanelOpen: (v: boolean) => void;
@@ -62,7 +62,7 @@ export const useGarageStore = create<GarageState>(set => ({
           [part]: meta,
         },
         ...(cameraTarget ? { cameraTarget } : {}),
-        hasReset: false,
+        shouldResetOnFirstInteract: !!cameraTarget,
       };
     }),
   resetParts: () => set({ selectedParts: {} }),
@@ -70,8 +70,8 @@ export const useGarageStore = create<GarageState>(set => ({
   cameraTarget: null,
   setCameraTarget: target => set({ cameraTarget: target }),
   resetCameraTarget: () => set({ cameraTarget: { position: [0, 0, 5], target: [0, 0, 0] } }),
-  hasReset: false,
-  setHasReset: v => set({ hasReset: v }),
+  shouldResetOnFirstInteract: false,
+  setShouldResetOnFirstInteract: v => set({ shouldResetOnFirstInteract: v }),
 
   isPartPanelOpen: false,
   setPartPanelOpen: v => set({ isPartPanelOpen: v }),
@@ -100,7 +100,7 @@ export const useGarageStore = create<GarageState>(set => ({
       selectedBody: "XM3",
       selectedParts: {},
       cameraTarget: { position: [0, 0, 5], target: [0, 0, 0] },
-      hasReset: false,
+      shouldResetOnFirstInteract: false,
       isPartPanelOpen: false,
       activePartTabIndex: 0,
       isColorPickerOpen: false,
