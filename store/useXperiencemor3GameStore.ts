@@ -30,12 +30,12 @@ export type QuestionInfo = {
 export type GameResult = { text: string; imageUrl: string };
 
 type GameStore = {
-  choosedList: Keywords[];
+  selectedOptions: Keywords[];
   status: GameStatus;
   result: GameResult | null;
   currentQuestionInfo: QuestionInfo | null;
   actions: {
-    setChoosedList: (k: Keywords) => void;
+    setSelectedOptions: (k: Keywords) => void;
     setGameStatus: (s: GameStatus) => void;
     setCurrentQuestionInfo: (i: number) => void;
     setResult: (r: GameResult) => void;
@@ -45,19 +45,19 @@ type GameStore = {
 };
 
 export const useXperiencemor3GameStore = create<GameStore>(set => ({
-  choosedList: [],
+  selectedOptions: [],
   status: "intro",
   result: null,
   currentQuestionInfo: null,
   actions: {
-    setChoosedList: k => set(s => ({ choosedList: [...s.choosedList, k] })),
+    setSelectedOptions: k => set(s => ({ selectedOptions: [...s.selectedOptions, k] })),
     setGameStatus: s => set(() => ({ status: s })),
     setCurrentQuestionInfo: i => set(() => ({ currentQuestionInfo: QUESTION_INFO_COLLECTION[i] })),
     setResult: r => set(() => ({ result: r, status: "result" })),
-    undo: () => set(s => ({ choosedList: s.choosedList.slice(0, -1) })),
+    undo: () => set(s => ({ selectedOptions: s.selectedOptions.slice(0, -1) })),
     resetGame: () =>
       set(() => ({
-        choosedList: [],
+        selectedOptions: [],
         status: "intro",
         result: null,
         currentQuestionInfo: null,

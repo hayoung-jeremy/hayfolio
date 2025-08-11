@@ -2,7 +2,7 @@ import { Float } from "@react-three/drei";
 import { degToRad } from "three/src/math/MathUtils.js";
 
 import { CarKey, Essui, LogoText, Pedal, SideMirror, Suspension, Text_ETECH, Tire } from "../../assets/xperiencemor3";
-import { useChoosedList } from "@/hooks/useXperiencemor3Game";
+import { useSelectedOptions } from "@/hooks/useXperiencemor3Game";
 import { Suspense } from "react";
 
 const mainModels = [
@@ -97,14 +97,14 @@ const mainModels = [
 ];
 
 const MainModelsContainer = () => {
-  const choosedList = useChoosedList();
+  const selectedOptions = useSelectedOptions();
 
   return (
     <>
       {mainModels.map((item, idx) => {
         return (
           <Float key={idx} speed={1.2} rotationIntensity={0.3} floatIntensity={1} floatingRange={[-0.05, 0.05]}>
-            <Suspense fallback={null}>{item(choosedList.length >= idx)}</Suspense>
+            <Suspense fallback={null}>{item(selectedOptions.length >= idx)}</Suspense>
           </Float>
         );
       })}
