@@ -2,51 +2,71 @@ import { create } from "zustand";
 import type CameraControls from "camera-controls";
 
 type Vec3 = [number, number, number];
+type Constraints = Partial<{
+  minDistance: number;
+  maxDistance: number;
+  polar: [number, number];
+  fov: number;
+}>;
 
 type CameraBus = {
   ref: CameraControls | null;
   setRef: (r: CameraControls | null) => void;
 
   moveTo: (pos: Vec3, tgt: Vec3, smooth?: boolean) => Promise<void>;
-  setConstraints: (
-    opts: Partial<{ minDistance: number; maxDistance: number; polar: [number, number]; fov: number }>
-  ) => void;
+  constraints: Constraints | null;
+  setConstraints: (opts: Constraints | null) => void;
   setAutoRotate: (on: boolean, speed?: number) => void;
 
   autoRotate: boolean;
   autoRotateSpeed: number;
 };
 
-export const useCameraBus = create<CameraBus>((set, get) => ({
-  ref: null,
-  setRef: r => set({ ref: r }),
+export const useCameraBus = create<CameraBus>((set, get) => {
+  const applyConstraints = (c: CameraControls, opts: Constraints | null) => {
+    if (opts?.minDistance != null) c.minDistance = opts.minDistance;
+    else c.minDistance = 0;
 
-  moveTo: async (pos, tgt, smooth = true) => {
-    const c = get().ref;
-    if (!c) return;
-    await c.setLookAt(pos[0], pos[1], pos[2], tgt[0], tgt[1], tgt[2], smooth);
-    c.saveState();
-  },
+    if (opts?.maxDistance != null) c.maxDistance = opts.maxDistance;
+    else c.maxDistance = Number.POSITIVE_INFINITY;
 
-  setConstraints: ({ minDistance, maxDistance, polar, fov }) => {
-    const c = get().ref;
-    if (!c) return;
-    if (minDistance != null) c.minDistance = minDistance;
-    if (maxDistance != null) c.maxDistance = maxDistance;
-    if (polar) {
-      c.minPolarAngle = polar[0];
-      c.maxPolarAngle = polar[1];
+    if (opts?.polar) {
+      c.minPolarAngle = opts.polar[0];
+      c.maxPolarAngle = opts.polar[1];
+    } else {
+      c.minPolarAngle = 0;
+      c.maxPolarAngle = Math.PI;
     }
-    if (fov != null) {
+
+    if (opts?.fov != null) {
       const cam: any = (c as any).camera;
       if (cam) {
-        cam.fov = fov;
+        cam.fov = opts.fov;
         cam.updateProjectionMatrix();
       }
     }
-  },
+  };
 
-  setAutoRotate: (on, speed = 0.3) => set({ autoRotate: on, autoRotateSpeed: speed }),
-  autoRotate: false,
-  autoRotateSpeed: 0.3,
-}));
+  return {
+    ref: null,
+    setRef: r => set({ ref: r }),
+
+    moveTo: async (pos, tgt, smooth = true) => {
+      const c = get().ref;
+      if (!c) return;
+      await c.setLookAt(pos[0], pos[1], pos[2], tgt[0], tgt[1], tgt[2], smooth);
+      c.saveState();
+    },
+
+    constraints: null,
+    setConstraints: opts => {
+      set({ constraints: opts });
+      const c = get().ref;
+      if (c) applyConstraints(c, opts);
+    },
+
+    setAutoRotate: (on, speed = 0.3) => set({ autoRotate: on, autoRotateSpeed: speed }),
+    autoRotate: false,
+    autoRotateSpeed: 0.3,
+  };
+});

@@ -35,8 +35,6 @@ const GlobalCameraController = () => {
     const c = ref.current;
     if (!c) return;
 
-    c.minPolarAngle = Math.PI / 3;
-    c.maxPolarAngle = Math.PI / 2;
     c.azimuthRotateSpeed = 1;
     c.polarRotateSpeed = 1;
     c.truckSpeed = 2;
@@ -132,10 +130,6 @@ const GlobalCameraController = () => {
         two: CameraControls.ACTION.TOUCH_DOLLY,
         three: CameraControls.ACTION.TOUCH_TRUCK,
       }}
-      minPolarAngle={Math.PI / 3}
-      maxPolarAngle={Math.PI / 2}
-      minDistance={3}
-      maxDistance={6}
     />
   );
 };
