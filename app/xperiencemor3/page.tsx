@@ -3,7 +3,7 @@ import { useLayoutEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { ModalWrapper } from "@/components/ui";
-import { BeginningQuestionOverlay, IntroOverlay } from "@/components/ui/xperiencemor3";
+import { BeginningQuestionOverlay, IntroOverlay, KeywordDuelOverlay } from "@/components/ui/xperiencemor3";
 
 import { useGameStatus } from "@/hooks/useXperiencemor3Game";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
@@ -39,6 +39,7 @@ const Xperiencemor3 = () => {
               <BeginningQuestionOverlay />
             </ModalWrapper>
           )}
+          {gameStatus === "questioning" && <KeywordDuelOverlay />}
         </AnimatePresence>
       </motion.main>
     </>

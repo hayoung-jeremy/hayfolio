@@ -53,7 +53,7 @@ export const useXperiencemor3GameStore = create<GameStore>(set => ({
     setSelectedOptions: k => set(s => ({ selectedOptions: [...s.selectedOptions, k] })),
     setGameStatus: s => set(() => ({ status: s })),
     setCurrentQuestionInfo: i => set(() => ({ currentQuestionInfo: QUESTION_INFO_COLLECTION[i] })),
-    setResult: r => set(() => ({ result: r, status: "result" })),
+    setResult: r => set(() => ({ result: r })),
     undo: () => set(s => ({ selectedOptions: s.selectedOptions.slice(0, -1) })),
     resetGame: () =>
       set(() => ({
