@@ -27,7 +27,7 @@ const ModalWrapper = ({ closeModal, children }: ModalProps) => {
         transition={{ duration: 0.3 }}
         exit={{ opacity: 0 }}
         onClick={closeModal}
-        className="fixed top-0 right-0 bg-black/70 w-screen h-[100dvh] flex justify-center items-center z-[9999] overflow-y-auto p-5 xl:p-0"
+        className="fixed top-0 right-0 bg-black/70 w-screen h-[100dvh] flex flex-col justify-center items-center z-[9999] overflow-y-auto p-5 xl:p-0"
       >
         {children}
       </motion.div>,

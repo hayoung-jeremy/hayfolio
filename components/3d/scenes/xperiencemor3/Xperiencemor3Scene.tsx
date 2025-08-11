@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 
 import { CylinderGrid } from "../../assets/xperiencemor3";
 import DecoModelsContainer from "./DecoModelsContainer";
@@ -14,12 +14,12 @@ const Xperiencemor3Scene = () => {
     moveTo([0, 0, 5], [0, 0, 0], true);
   }, [moveTo, setConstraints, setAutoRotate]);
   return (
-    <Suspense fallback={null}>
+    <>
       <DecoModelsContainer />
       <MainModelsContainer />
 
       <CylinderGrid />
-    </Suspense>
+    </>
   );
 };
 

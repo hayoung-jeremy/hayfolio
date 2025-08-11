@@ -3,7 +3,7 @@ import { useLayoutEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { ModalWrapper } from "@/components/ui";
-import { IntroOverlay } from "@/components/ui/xperiencemor3";
+import { BeginningQuestionOverlay, IntroOverlay } from "@/components/ui/xperiencemor3";
 
 import { useGameStatus } from "@/hooks/useXperiencemor3Game";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
@@ -28,10 +28,15 @@ const Xperiencemor3 = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
       >
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {gameStatus === "intro" && isModelLoaded && (
             <ModalWrapper>
               <IntroOverlay />
+            </ModalWrapper>
+          )}
+          {gameStatus === "entering" && (
+            <ModalWrapper>
+              <BeginningQuestionOverlay />
             </ModalWrapper>
           )}
         </AnimatePresence>
