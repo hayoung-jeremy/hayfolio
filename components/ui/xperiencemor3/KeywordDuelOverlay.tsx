@@ -63,7 +63,7 @@ export default function KeywordDuel() {
       <aside
         className={clsx(
           "fixed left-1/2 -translate-x-1/2 z-[9999]",
-          "top-[16vh] md:top-[15.625vh] xl:top-[180px]",
+          "top-[16vh] md:top-[15.625vh] xl:top-[19vh]",
           "flex flex-col items-center justify-center",
           "w-fit min-h-[194px] select-none"
         )}
@@ -81,7 +81,7 @@ export default function KeywordDuel() {
             initial="initial"
             animate="animate"
             variants={stackVariants}
-            className="flex flex-col items-center justify-center mb-2"
+            className="flex flex-col items-center justify-center mb-2 xl:mb-5"
           >
             {/* <motion.span variants={stackVariants} className="text-[16px] leading-4 opacity-80">
               {info?.first}
@@ -105,7 +105,7 @@ export default function KeywordDuel() {
       <aside
         className={clsx(
           "fixed left-1/2 -translate-x-1/2 z-[9999]",
-          "bottom-[10vh] md:bottom-[15.625vh] xl:bottom-[180px]",
+          "bottom-[10vh] md:bottom-[15.625vh] xl:bottom-[19vh]",
           "flex flex-col items-center justify-center",
           "w-fit min-h-[194px] select-none"
         )}
@@ -132,7 +132,7 @@ export default function KeywordDuel() {
             initial="initial"
             animate="animate"
             variants={stackVariants}
-            className="flex flex-col items-center justify-center gap-2"
+            className="flex flex-col items-center justify-center gap-2 xl:mt-5"
           >
             <motion.span className="game-text-shadow font-bold text-[40px] leading-[40px]" variants={stackVariants}>
               {info?.second}
