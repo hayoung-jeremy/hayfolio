@@ -38,11 +38,7 @@ const DynamicSceneRenderer = () => {
       break;
 
     case "xperiencemor3":
-      scene = (
-        <SceneFadeWrapper>
-          <Xperiencemor3Scene />
-        </SceneFadeWrapper>
-      );
+      scene = <Xperiencemor3Scene />;
       break;
 
     case "none":

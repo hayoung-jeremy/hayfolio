@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { Html } from "@react-three/drei";
 
+import { SceneLoader } from "@/components/ui";
 import { CylinderGrid } from "../../assets/xperiencemor3";
-import DecoModelsContainer from "./DecoModelsContainer";
-import MainModelsContainer from "./MainModelsContainer";
 import { useCameraBus } from "@/store/useCameraBus";
+
+const DecoModelsContainer = lazy(() => import("./DecoModelsContainer"));
+const MainModelsContainer = lazy(() => import("./MainModelsContainer"));
 
 const Xperiencemor3Scene = () => {
   const { moveTo, setConstraints, setAutoRotate } = useCameraBus();
@@ -17,7 +20,6 @@ const Xperiencemor3Scene = () => {
     <>
       <DecoModelsContainer />
       <MainModelsContainer />
-
       <CylinderGrid />
     </>
   );

@@ -22,4 +22,4 @@ export default function Essui({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/essui.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/essui.glb?1");

@@ -23,4 +23,4 @@ export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/text_hybrid.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/text_hybrid.glb?1");

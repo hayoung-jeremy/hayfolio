@@ -104,7 +104,7 @@ const MainModelsContainer = () => {
       {mainModels.map((item, idx) => {
         return (
           <Float key={idx} speed={1.2} rotationIntensity={0.3} floatIntensity={1} floatingRange={[-0.05, 0.05]}>
-            <Suspense fallback={null}>{item(selectedOptions.length >= idx)}</Suspense>
+            {item(selectedOptions.length >= idx)}
           </Float>
         );
       })}

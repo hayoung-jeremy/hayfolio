@@ -42,7 +42,7 @@ const DecoModelsContainer = () => {
             floatIntensity={1}
             floatingRange={[-0.1, 0.1]}
           >
-            <Suspense fallback={null}>{item()}</Suspense>
+            {item()}
           </Float>
         );
       })}

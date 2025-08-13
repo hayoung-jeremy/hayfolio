@@ -31,4 +31,4 @@ export default function CarKey({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/carkey.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/carkey.glb?1");

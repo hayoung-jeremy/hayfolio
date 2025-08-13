@@ -22,4 +22,4 @@ export default function LogoSymbol({ ...rest }: JSX.IntrinsicElements["group"]) 
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/logo_symbol.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/logo_symbol.glb?1");

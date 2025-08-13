@@ -24,4 +24,4 @@ export default function Text_ETECH({ ...rest }: JSX.IntrinsicElements["group"]) 
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/text_etech.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/text_etech.glb?1");

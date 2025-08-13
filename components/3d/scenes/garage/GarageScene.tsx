@@ -1,5 +1,7 @@
 import { Suspense, useEffect } from "react";
+import { Html } from "@react-three/drei";
 
+import { SceneLoader } from "@/components/ui";
 import { XM3_Container, XM3_Transparent_Container } from "../../assets/XM3";
 import { SM6_Container } from "../../assets/SM6";
 import { QM6_Container } from "../../assets/QM6";

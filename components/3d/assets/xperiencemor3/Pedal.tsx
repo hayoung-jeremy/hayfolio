@@ -22,4 +22,4 @@ export default function Pedal({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/pedal.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/pedal.glb?1");

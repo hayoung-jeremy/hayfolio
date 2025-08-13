@@ -1,8 +1,10 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 
 import { DynamicSceneRenderer } from "./scenes";
 import { DynamicEnvironmentRenderer } from "./envs";
+import { SceneLoader } from "../ui";
 import GlobalCameraController from "./GlobalCameraController";
 
 const RootCanvas = () => {
@@ -22,11 +24,35 @@ const RootCanvas = () => {
           zIndex: 0,
         }}
       >
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <Html
+              fullscreen
+              wrapperClass="z-[9999]"
+              transform={false}
+              center={true}
+              style={{
+                position: "fixed",
+                inset: 0,
+                width: "100vw",
+                height: "100dvh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#0a0a0a",
+                zIndex: 9999,
+                WebkitOverflowScrolling: "touch",
+              }}
+              zIndexRange={[100, 0]}
+            >
+              <SceneLoader />
+            </Html>
+          }
+        >
           <DynamicSceneRenderer />
           <DynamicEnvironmentRenderer />
+          <GlobalCameraController />
         </Suspense>
-        <GlobalCameraController />
       </Canvas>
     </>
   );

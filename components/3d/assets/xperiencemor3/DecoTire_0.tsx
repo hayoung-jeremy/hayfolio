@@ -21,4 +21,4 @@ export default function DecoTire_0(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/deco_tire_0.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/deco_tire_0.glb?1");

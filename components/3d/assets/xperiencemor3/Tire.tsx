@@ -31,4 +31,4 @@ export default function Tire({ ...rest }: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=xperiencemor3/tire.glb?1");
+// useGLTF.preload("/api/model-url?name=xperiencemor3/tire.glb?1");
