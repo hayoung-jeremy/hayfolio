@@ -41,7 +41,10 @@ export default function KeywordDuel() {
   if (status !== "questioning") return null;
 
   const total = QUESTION_INFO_COLLECTION.length;
-  const progressRatio = selectedOptions.length / total;
+  const filled = selectedOptions.length;
+  const progressRatio = filled / total;
+  const progressPct = progressRatio * 100;
+  const hasProgress = filled > 0;
 
   const handlePick = (k: string | undefined, idx: 0 | 1) => {
     if (locked) return;
@@ -60,7 +63,7 @@ export default function KeywordDuel() {
       <aside
         className={clsx(
           "fixed left-1/2 -translate-x-1/2 z-[9999]",
-          "top-[12vh] md:top-[15.625vh] xl:top-[180px]",
+          "top-[16vh] md:top-[15.625vh] xl:top-[180px]",
           "flex flex-col items-center justify-center",
           "w-fit min-h-[194px] select-none"
         )}
@@ -102,7 +105,7 @@ export default function KeywordDuel() {
       <aside
         className={clsx(
           "fixed left-1/2 -translate-x-1/2 z-[9999]",
-          "bottom-[15vh] md:bottom-[15.625vh] xl:bottom-[180px]",
+          "bottom-[10vh] md:bottom-[15.625vh] xl:bottom-[180px]",
           "flex flex-col items-center justify-center",
           "w-fit min-h-[194px] select-none"
         )}
@@ -148,13 +151,15 @@ export default function KeywordDuel() {
         className="fixed bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-2 z-[9999]"
       >
         <p className="text-[12px]">
-          {Math.min(selectedOptions.length + 1, total)} / {total}
+          {Math.min(filled + 1, total)} / {total}
         </p>
 
         <div className="w-[128px] h-[2px] bg-white/20 relative rounded">
           <div
-            style={{ width: `${progressRatio * 100}%` }}
-            className="absolute top-0 left-0 h-[2px] bg-white/80 transition-[width] duration-500 shadow-[0_0_8px_2px_rgba(255,255,255,0.5)] rounded"
+            style={{ width: `${progressPct}%` }}
+            className={clsx("absolute top-0 left-0 h-[2px] bg-white/80 transition-[width] duration-500 rounded", {
+              "shadow-[0_0_8px_2px_rgba(255,255,255,0.5)]": hasProgress,
+            })}
           />
         </div>
 
