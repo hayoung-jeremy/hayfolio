@@ -49,10 +49,16 @@ export const useGarageStore = create<GarageState>(set => ({
   selectedBody: "XM3",
   selectedParts: {},
   selectBody: name =>
-    set({
-      selectedBody: name,
-      selectedParts: {},
+    set(state => {
+      if (state.selectedBody === name) {
+        return {};
+      }
+      return {
+        selectedBody: name,
+        selectedParts: {},
+      };
     }),
+
   selectPart: (part, meta) =>
     set(state => {
       const cameraTarget = partCameraMap[part];
