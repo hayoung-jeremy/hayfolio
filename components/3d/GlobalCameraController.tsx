@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { CameraControls as DreiCameraControls } from "@react-three/drei";
 import CameraControls from "camera-controls";
@@ -24,7 +24,7 @@ const GlobalCameraController = () => {
 
   const isPreview = currentScene === "garage preview" || currentScene === "xperiencemor3 preview";
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ref.current) return;
     setRef(ref.current);
     ref.current.saveState();
