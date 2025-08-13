@@ -1,3 +1,5 @@
+import { useGLTF } from "@react-three/drei";
+
 export function getWheelXOffset({
   carType,
   bumperTheme,
@@ -69,4 +71,27 @@ export function disposeGLTF(gltf: any) {
       }
     }
   });
+}
+
+export function registerGaragePreloads() {
+  useGLTF.preload("/api/model-url?name=QM6/QM6_body.glb?1");
+  useGLTF.preload("/api/model-url?name=QM6/QM6_headlight.glb?1");
+  useGLTF.preload("/api/model-url?name=QM6/QM6_roofcarrier.glb?1");
+  useGLTF.preload("/api/model-url?name=QM6/QM6_roofcarrier_offroad.glb?1");
+  useGLTF.preload("/api/model-url?name=QM6/QM6_spoiler.glb?1");
+  useGLTF.preload("/api/model-url?name=QM6/QM6_tailLamp.glb?1");
+  useGLTF.preload("/api/model-url?name=QM6/QM6_tailLamp_futuristic_A.glb?1");
+
+  useGLTF.preload("/api/model-url?name=SM6/SM6_body.glb?1");
+  useGLTF.preload("/api/model-url?name=SM6/SM6_headlight.glb?1");
+  useGLTF.preload("/api/model-url?name=SM6/SM6_roofcarrier.glb?1");
+  useGLTF.preload("/api/model-url?name=SM6/SM6_spoiler.glb?1");
+  useGLTF.preload("/api/model-url?name=SM6/SM6_tailLamp.glb?1");
+
+  useGLTF.preload("/api/model-url?name=XM3/XM3_body.glb?1");
+  useGLTF.preload("/api/model-url?name=XM3/XM3_headlight.glb?1");
+  useGLTF.preload("/api/model-url?name=XM3/XM3_roofcarrier.glb?1");
+  useGLTF.preload("/api/model-url?name=XM3/XM3_spoiler.glb?1");
+  useGLTF.preload("/api/model-url?name=XM3/XM3_tailLamp.glb?1");
+  useGLTF.preload("/api/model-url?name=XM3/XM3_tailLamp_futuristic_A.glb?1");
 }

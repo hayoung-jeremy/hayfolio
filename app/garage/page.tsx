@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 
@@ -9,6 +9,7 @@ import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 import { useGarageStore } from "@/store/useGarageStore";
 import { useSceneStore } from "@/store/useSceneStore";
+import { registerGaragePreloads } from "@/utils/garage";
 
 const Garage = () => {
   const router = useRouter();
@@ -26,6 +27,10 @@ const Garage = () => {
   useLayoutEffect(() => {
     setScene("garage");
   }, [setScene]);
+
+  useEffect(() => {
+    registerGaragePreloads();
+  }, []);
 
   return (
     <>
