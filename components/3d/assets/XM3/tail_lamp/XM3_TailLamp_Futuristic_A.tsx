@@ -22,5 +22,3 @@ export default function XM3_TailLamp_Futuristic_A({ ...props }: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=XM3/XM3_tailLamp_futuristic_A.glb?1");

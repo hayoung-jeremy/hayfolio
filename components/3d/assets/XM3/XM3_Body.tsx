@@ -32,5 +32,3 @@ export default function XM3_Body({ ...props }: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=XM3/XM3_body.glb?1");

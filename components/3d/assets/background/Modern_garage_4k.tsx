@@ -44,5 +44,3 @@ export default function Modern_garage_4k(props: JSX.IntrinsicElements["group"]) 
     </group>
   );
 }
-
-useGLTF.preload("/assets/models/modern_garage_4k.glb?1");

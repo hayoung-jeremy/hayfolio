@@ -21,5 +21,3 @@ export default function LogoSymbol({ ...rest }: JSX.IntrinsicElements["group"]) 
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/logo_symbol.glb?1");

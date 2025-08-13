@@ -36,5 +36,3 @@ export default function SM6_Headlight_Motorsport_C(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=SM6/SM6_headlight.glb?1");

@@ -20,5 +20,3 @@ export default function DecoPedal(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/deco_pedal.glb?1");

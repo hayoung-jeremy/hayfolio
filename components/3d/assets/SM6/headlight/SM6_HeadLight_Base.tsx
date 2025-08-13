@@ -22,5 +22,3 @@ export default function SM6_HeadLight_Base(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=SM6/SM6_headlight.glb?1");

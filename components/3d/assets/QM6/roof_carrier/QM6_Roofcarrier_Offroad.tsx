@@ -23,4 +23,4 @@ export default function Model({ ...props }: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=QM6/QM6_roofcarrier_offroad.glb?1");
+

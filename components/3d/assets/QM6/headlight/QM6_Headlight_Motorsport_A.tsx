@@ -45,5 +45,3 @@ export default function QM6_Headlight_Motorsport_A(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=QM6/QM6_headlight.glb?1");

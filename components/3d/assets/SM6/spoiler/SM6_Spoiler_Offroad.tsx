@@ -24,5 +24,3 @@ export default function SM6_Spoiler_Offroad(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=SM6/SM6_spoiler.glb?1");

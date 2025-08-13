@@ -21,5 +21,3 @@ export default function SideMirror({ ...rest }: JSX.IntrinsicElements["group"]) 
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/side_mirror.glb?1");

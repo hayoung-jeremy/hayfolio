@@ -31,4 +31,4 @@ export default function QM6_Body({ ...props }: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=QM6/QM6_body.glb?1");
+

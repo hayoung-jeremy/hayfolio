@@ -31,4 +31,4 @@ export default function SM6_Roofcarrier_Futuristic(props: any) {
   );
 }
 
-useGLTF.preload("/api/model-url?name=SM6/SM6_roofcarrier.glb?1");
+

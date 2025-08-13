@@ -22,5 +22,3 @@ export default function LogoText({ ...rest }: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/logo_text.glb?1");

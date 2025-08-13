@@ -22,5 +22,3 @@ export default function Text_HYBRID(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/text_hybrid.glb?1");

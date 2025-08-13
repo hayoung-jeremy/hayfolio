@@ -24,5 +24,3 @@ export default function XM3_Spoiler_Offroad(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=XM3/XM3_spoiler.glb?1");

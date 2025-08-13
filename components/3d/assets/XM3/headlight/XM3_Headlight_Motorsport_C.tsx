@@ -36,5 +36,3 @@ export default function XM3_Headlight_Motorsport_C(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=XM3/XM3_headlight.glb?1");

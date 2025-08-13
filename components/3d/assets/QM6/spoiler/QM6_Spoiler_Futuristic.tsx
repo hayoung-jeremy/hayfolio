@@ -21,5 +21,3 @@ export default function QM6_Spoiler_Futuristic(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=QM6/QM6_spoiler.glb?1");

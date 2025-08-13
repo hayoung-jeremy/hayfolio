@@ -30,5 +30,3 @@ export default function XM3_TailLamp_Motorsport_A(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=XM3/XM3_tailLamp.glb?1");

@@ -32,5 +32,3 @@ export default function SM6_Body({ ...props }: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=SM6/SM6_body.glb?1");

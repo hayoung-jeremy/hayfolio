@@ -20,5 +20,3 @@ export default function DecoTire_0(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/deco_tire_0.glb?1");

@@ -22,5 +22,3 @@ export default function Suspension({ ...rest }: JSX.IntrinsicElements["group"]) 
     </group>
   );
 }
-
-// useGLTF.preload("/api/model-url?name=xperiencemor3/suspension.glb?1");

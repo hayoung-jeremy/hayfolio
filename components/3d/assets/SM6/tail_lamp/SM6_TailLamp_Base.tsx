@@ -34,5 +34,3 @@ export default function SM6_TailLamp_Base(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=SM6/SM6_tailLamp.glb?1");

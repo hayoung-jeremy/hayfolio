@@ -35,5 +35,3 @@ export default function XM3_Roofcarrier_Motorsport(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=XM3/XM3_roofcarrier.glb?1");

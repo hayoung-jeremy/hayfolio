@@ -41,5 +41,3 @@ export default function Model(props: any) {
     </group>
   );
 }
-
-useGLTF.preload("/api/model-url?name=QM6/QM6_tailLamp.glb?1");
