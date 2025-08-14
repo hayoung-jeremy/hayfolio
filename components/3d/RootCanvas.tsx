@@ -23,6 +23,7 @@ const RootCanvas = () => {
           height: "100vh",
           zIndex: 0,
         }}
+        frameloop="demand"
       >
         <Suspense
           fallback={

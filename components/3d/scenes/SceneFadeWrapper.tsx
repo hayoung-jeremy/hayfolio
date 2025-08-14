@@ -58,11 +58,13 @@ const SceneFadeWrapper = ({ children, inDuration = 1.0, outDuration = 0.8 }: Sce
         materials.forEach(m => {
           const ud = m.userData as any;
           const base = ud._baseOpacity ?? 1;
-          // 투명 페이드 중에는 투명 활성 & depthWrite 끔(겹침 깜빡임 방지)
-          (m as any).transparent = true;
-          (m as any).depthWrite = false;
-          (m as any).opacity = base * state.a;
-          (m as any).needsUpdate = true;
+          const hasOpacity = "opacity" in (m as any);
+          if (hasOpacity) {
+            (m as any).transparent = true;
+            (m as any).depthWrite = false;
+            (m as any).opacity = base * state.a;
+            (m as any).needsUpdate = true;
+          }
         });
       },
       onComplete: () => {
@@ -80,39 +82,16 @@ const SceneFadeWrapper = ({ children, inDuration = 1.0, outDuration = 0.8 }: Sce
       },
     });
 
-    // 언마운트: 페이드아웃 + kill, 마지막에 원복
     return () => {
       if (tweenRef.current) tweenRef.current.kill();
       gsap.killTweensOf(state);
-
-      const tw = gsap.to(state, {
-        a: 0,
-        duration: outDuration,
-        ease: "power2.in",
-        onUpdate: () => {
-          materials.forEach(m => {
-            const ud = m.userData as any;
-            const base = ud._baseOpacity ?? 1;
-            (m as any).transparent = true;
-            (m as any).depthWrite = false;
-            (m as any).opacity = base * state.a;
-            (m as any).needsUpdate = true;
-          });
-        },
-        onComplete: () => {
-          materials.forEach(m => {
-            const ud = m.userData as any;
-            // 페이드 종료 후 '원본'으로 되돌려두면 다음 진입 때도 안전
-            (m as any).opacity = ud._baseOpacity ?? 1;
-            (m as any).transparent = ud._wasTransparent ?? false;
-            (m as any).depthWrite = ud._baseDepthWrite ?? true;
-            (m as any).needsUpdate = true;
-          });
-        },
+      materials.forEach(m => {
+        const ud = m.userData as any;
+        (m as any).opacity = ud?._baseOpacity ?? 1;
+        (m as any).transparent = ud?._wasTransparent ?? false;
+        (m as any).depthWrite = ud?._baseDepthWrite ?? true;
+        (m as any).needsUpdate = true;
       });
-
-      // 언마운트 직전에 또 빠르게 씬이 교체될 수 있어 한 번 더 보증
-      tw.play();
     };
   }, [inDuration, outDuration]);
 

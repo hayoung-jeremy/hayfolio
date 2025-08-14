@@ -37,6 +37,7 @@ const DecoModelsContainer = () => {
         return (
           <Float
             key={"DECO" + idx}
+            autoInvalidate
             speed={1.2}
             rotationIntensity={1 + idx / 10}
             floatIntensity={1}

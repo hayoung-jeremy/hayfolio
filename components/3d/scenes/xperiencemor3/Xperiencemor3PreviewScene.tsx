@@ -28,7 +28,7 @@ const Xperiencemor3PreviewScene = () => {
   }, []);
   return (
     <group ref={ref}>
-      <Float speed={2.4} rotationIntensity={1} floatIntensity={1} floatingRange={[-0.2, 0.2]}>
+      <Float speed={2.4} autoInvalidate rotationIntensity={1} floatIntensity={1} floatingRange={[-0.2, 0.2]}>
         <LogoSymbol scale={2} />
       </Float>
     </group>
