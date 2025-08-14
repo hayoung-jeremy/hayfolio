@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
@@ -8,6 +7,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 
+import SmartImage from "../SmartImage";
 import { partsTypes } from "@/types/garage";
 import { partThumbnails } from "@/constants/partsThumbnails";
 import { useGarageStore } from "@/store/useGarageStore";
@@ -114,11 +114,12 @@ const PartsCarousel = () => {
                         { "border-white/60": isSelected, "hover:border-white/30": !isSelected }
                       )}
                     >
-                      <Image
+                      <SmartImage
                         src={url}
                         alt={displayName}
                         width={180}
                         height={80}
+                        loaderVariant="skeleton"
                         className={clsx("object-contain transition-all duration-200", {
                           "opacity-100": isSelected,
                           "opacity-30": !isSelected,
