@@ -12,7 +12,7 @@ import { useGarageStore } from "@/store/useGarageStore";
 import { useCameraBus } from "@/store/useCameraBus";
 
 const GarageScene = () => {
-  const { cameraTarget, selectedBody } = useGarageStore();
+  const { cameraTarget, selectedBody, setShouldResetOnFirstInteract } = useGarageStore();
   const { moveTo, setConstraints, setAutoRotate } = useCameraBus();
 
   const renderContainer = () => {
@@ -38,6 +38,10 @@ const GarageScene = () => {
     if (!cameraTarget) return;
     moveTo(cameraTarget.position, cameraTarget.target, true);
   }, [cameraTarget, moveTo]);
+
+  useEffect(() => {
+    setShouldResetOnFirstInteract(true);
+  }, [setShouldResetOnFirstInteract]);
 
   return (
     <>

@@ -47,7 +47,8 @@ const GlobalCameraController = () => {
     const onStart = () => {
       isInteractingRef.current = true;
 
-      if (currentScene === "garage") {
+      const scene = useSceneStore.getState().currentScene;
+      if (scene === "garage") {
         const { shouldResetOnFirstInteract, setShouldResetOnFirstInteract } = useGarageStore.getState();
 
         if (shouldResetOnFirstInteract) {
