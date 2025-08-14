@@ -40,7 +40,9 @@ const Navigation = () => {
         description="이미지→3D 파이프라인의 결과를 공통 뷰어로 시각화. Seed/Wireframe 토글 등 인터랙션 중심의 UI 설계."
         visible={showAI}
       />
-      <AnimatePresence>{(showCYEC || showXM3 || showCLR || showAI) && <ViewProjectDetailButton />}</AnimatePresence>
+      <AnimatePresence mode="wait">
+        {(showCYEC || showXM3 || showCLR || showAI) && <ViewProjectDetailButton />}
+      </AnimatePresence>
     </nav>
   );
 };

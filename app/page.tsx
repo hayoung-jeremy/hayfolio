@@ -3,19 +3,27 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 import { IntroText, Navigation } from "@/components/ui";
+import { ClarinsPreview } from "@/components/ui/clarins";
+import { AiPreview } from "@/components/ui/ai";
 import { PeviewScenesController } from "@/components/3d/scenes";
+
 import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 import { useSceneStore } from "@/store/useSceneStore";
 import { useScrollStore } from "@/store/useScrollStore";
+import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
   const setDomElement = useInteractionLayerStore(s => s.setDomElement);
+  const progress = useScrollStore(s => s.progress);
+
+  const showClarins = progress >= SCROLL_THRESHOLDS.clarins.min && progress < SCROLL_THRESHOLDS.clarins.max;
+  const showAI = progress >= SCROLL_THRESHOLDS.ai.min && progress < SCROLL_THRESHOLDS.ai.max;
 
   useGSAP(() => {
     gsap.to(".IntroText", {
@@ -60,6 +68,10 @@ export default function Home() {
       <IntroText />
       <div ref={ref} className="PeviewScenesController opacity-0 h-[500vh] relative z-10">
         <div className="sticky top-0 h-screen">
+          <AnimatePresence mode="wait">
+            {showClarins && <ClarinsPreview />}
+            {showAI && <AiPreview />}
+          </AnimatePresence>
           <PeviewScenesController />
           <Navigation />
         </div>
