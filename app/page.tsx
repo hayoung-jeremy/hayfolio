@@ -58,7 +58,7 @@ export default function Home() {
       transition={{ duration: 1 }}
     >
       <IntroText />
-      <div ref={ref} className="PeviewScenesController opacity-0 h-[300vh] relative z-10">
+      <div ref={ref} className="PeviewScenesController opacity-0 h-[500vh] relative z-10">
         <div className="sticky top-0 h-screen">
           <PeviewScenesController />
           <Navigation />
