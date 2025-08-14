@@ -2,8 +2,9 @@
 import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 
+import { Portal } from "@/components/ui";
+import { RootCanvas } from "@/components/3d";
 import { useLenis } from "@/hooks/useLenis";
-import { RootCanvasPortal } from "@/components/ui";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   useLenis();
@@ -16,7 +17,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </AnimatePresence>
-      <RootCanvasPortal />
+      <Portal>
+        <RootCanvas />
+      </Portal>
     </>
   );
 }
