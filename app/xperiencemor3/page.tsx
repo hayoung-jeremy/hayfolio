@@ -29,17 +29,8 @@ const Xperiencemor3 = () => {
   }, [setScene]);
 
   useEffect(() => {
-    if (gameStatus !== "questioning") {
-      setAutoRotate(false);
-      moveTo([0, 0, 5] as any, [0, 0, 0] as any, true);
-    }
-  }, [gameStatus, moveTo, setAutoRotate]);
-
-  useEffect(() => {
     return () => {
-      setAutoRotate(false);
       setGameStatus("intro");
-      moveTo([0, 0, 5] as any, [0, 0, 0] as any, false);
     };
   }, [moveTo, setAutoRotate]);
 

@@ -35,11 +35,6 @@ const GarageScene = () => {
   }, [moveTo, setConstraints, setAutoRotate]);
 
   useEffect(() => {
-    if (!cameraTarget) return;
-    moveTo(cameraTarget.position, cameraTarget.target, true);
-  }, [cameraTarget, moveTo]);
-
-  useEffect(() => {
     setShouldResetOnFirstInteract(true);
   }, [setShouldResetOnFirstInteract]);
 
