@@ -29,22 +29,21 @@ const PeviewScenesController = () => {
     return () => ctx.revert();
   }, []);
 
-  const renderGarageScene =
+  const inCYEC =
     progress >= SCROLL_THRESHOLDS.createYourEpicCar.min && progress < SCROLL_THRESHOLDS.createYourEpicCar.max;
-
-  const renderXperiencemor3Scene = progress >= SCROLL_THRESHOLDS.xperiencemor3.min;
+  const inXM3 = progress >= SCROLL_THRESHOLDS.xperiencemor3.min && progress < SCROLL_THRESHOLDS.xperiencemor3.max;
+  const inClarins = progress >= SCROLL_THRESHOLDS.clarins.min && progress < SCROLL_THRESHOLDS.clarins.max;
+  const inAI = progress >= SCROLL_THRESHOLDS.ai.min && progress < SCROLL_THRESHOLDS.ai.max;
 
   useEffect(() => {
-    if (progress < SCROLL_THRESHOLDS.createYourEpicCar.min || progress === 1) {
-      if (currentScene !== "none") {
-        setScene("none");
-      }
-    } else if (renderGarageScene && currentScene !== "garage preview") {
-      setScene("garage preview");
-    } else if (renderXperiencemor3Scene && currentScene !== "xperiencemor3 preview") {
-      setScene("xperiencemor3 preview");
+    if (progress < SCROLL_THRESHOLDS.createYourEpicCar.min || progress >= 0.9999) {
+      if (currentScene !== "none") setScene("none");
+      return;
     }
-  }, [progress, currentScene, renderGarageScene, renderXperiencemor3Scene]);
+    if (inCYEC && currentScene !== "garage preview") setScene("garage preview");
+    else if (inXM3 && currentScene !== "xperiencemor3 preview") setScene("xperiencemor3 preview");
+    else if ((inClarins || inAI) && currentScene !== "none") setScene("none");
+  }, [progress, inCYEC, inXM3, inClarins, inAI, currentScene, setScene]);
 
   return null;
 };
