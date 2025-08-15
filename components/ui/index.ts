@@ -6,3 +6,4 @@ export { default as ButtonWrapper } from "./ButtonWrapper";
 export { default as Portal } from "./Portal";
 export { default as SmartImage } from "./SmartImage";
 export { default as Footer } from "./Footer";
+export { default as BackButton } from "./BackButton";

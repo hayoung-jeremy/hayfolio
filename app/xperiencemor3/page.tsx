@@ -2,7 +2,7 @@
 import { useEffect, useLayoutEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { ModalWrapper } from "@/components/ui";
+import { BackButton, ModalWrapper } from "@/components/ui";
 import {
   BeginningQuestionOverlay,
   IntroOverlay,
@@ -60,6 +60,7 @@ const Xperiencemor3 = () => {
             </ModalWrapper>
           )}
         </AnimatePresence>
+        <BackButton to="/" label="← 되돌아가기" className="fixed top-5 left-5 z-50 xl:cursor-pointer" />
       </motion.main>
     </>
   );

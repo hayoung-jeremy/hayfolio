@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useLayoutEffect } from "react";
-import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 
+import { BackButton } from "@/components/ui";
 import { MobileBottomSheet, SideBar } from "@/components/ui/garage";
+
 import useDisplay from "@/hooks/useDisplay";
 import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
@@ -12,17 +13,11 @@ import { useSceneStore } from "@/store/useSceneStore";
 import { registerGaragePreloads } from "@/utils/garage";
 
 const Garage = () => {
-  const router = useRouter();
   const { isMobile, isTablet } = useDisplay();
   const isModelLoaded = useModelLoadProgress();
   const { resetAll } = useGarageStore();
   const { setScene } = useSceneStore();
   useCleanupOnUnmount();
-
-  const handleBack = () => {
-    router.push("/");
-    resetAll();
-  };
 
   useLayoutEffect(() => {
     setScene("garage");
@@ -41,12 +36,12 @@ const Garage = () => {
       )}
 
       {isModelLoaded && (
-        <button
-          onClick={handleBack}
-          className="fixed top-5 left-5 z-50 px-4 py-2 text-white bg-black/50 rounded backdrop-blur-2xl xl:cursor-pointer"
-        >
-          ← 되돌아가기
-        </button>
+        <BackButton
+          to="/"
+          onBeforeNavigate={resetAll}
+          label="← 되돌아가기"
+          className="fixed top-5 left-5 z-50 xl:cursor-pointer"
+        />
       )}
     </>
   );
