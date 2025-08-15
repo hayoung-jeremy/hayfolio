@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-import { IntroText, Navigation } from "@/components/ui";
+import { Footer, IntroText, Navigation } from "@/components/ui";
 import { ClarinsPreview } from "@/components/ui/clarins";
 import { AiPreview } from "@/components/ui/ai";
 import { PeviewScenesController } from "@/components/3d/scenes";
@@ -77,7 +77,7 @@ export default function Home() {
           <Navigation />
         </div>
       </div>
-      <div className="h-screen flex items-center justify-center">dummy Footer</div>
+      <Footer />
     </motion.main>
   );
 }
