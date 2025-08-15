@@ -49,9 +49,8 @@ export default function Home() {
   }, []);
 
   useLayoutEffect(() => {
-    if (ref.current) {
-      setDomElement(ref.current);
-    }
+    if (ref.current) setDomElement(ref.current);
+    return () => setDomElement(null);
   }, []);
 
   useEffect(() => {

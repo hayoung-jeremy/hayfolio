@@ -21,6 +21,7 @@ const GlobalCameraController = () => {
   const domElement = useInteractionLayerStore(s => s.domElement);
   const currentScene = useSceneStore(s => s.currentScene);
   const glDom = useThree(state => state.gl.domElement);
+  const controlsDom = domElement ?? glDom;
 
   const isPreview =
     currentScene === "garage preview" ||
@@ -122,6 +123,7 @@ const GlobalCameraController = () => {
     <DreiCameraControls
       ref={ref as any}
       makeDefault
+      domElement={controlsDom}
       smoothTime={0.35}
       draggingSmoothTime={0.35}
       mouseButtons={{
