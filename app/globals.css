@@ -55,6 +55,7 @@ body {
   color: var(--foreground);
   font-kerning: none;
   text-rendering: optimizeSpeed;
+  overflow-x: hidden;
 }
 
 .garage-colorpicker .react-colorful {
