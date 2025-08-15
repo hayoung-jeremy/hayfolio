@@ -55,7 +55,7 @@ const Navigation = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="fixed top-[80dvh] left-1/2 -translate-x-1/2 w-full pointer-events-none"
+              className="fixed top-[87dvh] left-1/2 -translate-x-1/2 w-full pointer-events-none"
               style={{ zIndex: 50 }}
             >
               <div className="pointer-events-auto will-change-transform transform-gpu flex items-center justify-center">

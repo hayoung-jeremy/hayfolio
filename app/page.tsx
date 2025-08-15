@@ -15,15 +15,16 @@ import { PeviewScenesController } from "@/components/3d/scenes";
 import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 import { useSceneStore } from "@/store/useSceneStore";
 import { useScrollStore } from "@/store/useScrollStore";
-import { SCROLL_THRESHOLDS } from "@/constants/scrollThresholds";
+import { getActivePreviewSection } from "@/utils/home";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
   const setDomElement = useInteractionLayerStore(s => s.setDomElement);
   const progress = useScrollStore(s => s.progress);
 
-  const showClarins = progress >= SCROLL_THRESHOLDS.clarins.min && progress < SCROLL_THRESHOLDS.clarins.max;
-  const showAI = progress >= SCROLL_THRESHOLDS.ai.min && progress < SCROLL_THRESHOLDS.ai.max;
+  const active = getActivePreviewSection(progress);
+  const showClarins = active?.key === "clarins";
+  const showAI = active?.key === "ai";
 
   useGSAP(() => {
     gsap.to(".IntroText", {
