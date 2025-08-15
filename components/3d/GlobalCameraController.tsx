@@ -22,7 +22,11 @@ const GlobalCameraController = () => {
   const currentScene = useSceneStore(s => s.currentScene);
   const glDom = useThree(state => state.gl.domElement);
 
-  const isPreview = currentScene === "garage preview" || currentScene === "xperiencemor3 preview";
+  const isPreview =
+    currentScene === "garage preview" ||
+    currentScene === "xperiencemor3 preview" ||
+    currentScene === "clarins preview" ||
+    currentScene === "ai preview";
 
   useLayoutEffect(() => {
     if (!ref.current) return;

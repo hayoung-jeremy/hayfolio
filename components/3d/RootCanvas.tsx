@@ -6,8 +6,11 @@ import { DynamicSceneRenderer } from "./scenes";
 import { DynamicEnvironmentRenderer } from "./envs";
 import { SceneLoader } from "../ui";
 import GlobalCameraController from "./GlobalCameraController";
+import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 
 const RootCanvas = () => {
+  const eventSource = useInteractionLayerStore(s => s.domElement);
+
   return (
     <>
       <Canvas
@@ -24,6 +27,7 @@ const RootCanvas = () => {
           zIndex: 0,
         }}
         frameloop="demand"
+        eventSource={eventSource ?? undefined}
       >
         <Suspense
           fallback={

@@ -3,16 +3,21 @@ import { Environment, Lightformer } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 import { useCameraBus } from "@/store/useCameraBus";
+import { useSceneStore } from "@/store/useSceneStore";
 
 const PreviewSceneEnvironments = () => {
   const { moveTo, setConstraints, setAutoRotate } = useCameraBus();
+  const currentScene = useSceneStore(s => s.currentScene);
+
+  const shouldAutoRotate = currentScene === "garage preview" || currentScene === "xperiencemor3 preview";
 
   useLayoutEffect(() => {
     setConstraints({ minDistance: 1.5, maxDistance: 4.5, polar: [Math.PI / 3, Math.PI / 2], fov: 65 });
-    setAutoRotate(true, 0.3);
+    setAutoRotate(shouldAutoRotate, shouldAutoRotate ? 0.3 : 0);
+
     moveTo([0, 0, 5.0], [0, 0, 0], true);
     return () => setAutoRotate(false);
-  }, [moveTo, setConstraints, setAutoRotate]);
+  }, [moveTo, setConstraints, setAutoRotate, shouldAutoRotate]);
 
   return (
     <>

@@ -1,6 +1,13 @@
 import { create } from "zustand";
 
-type SceneType = "none" | "garage preview" | "xperiencemor3 preview" | "garage" | "xperiencemor3";
+type SceneType =
+  | "none"
+  | "garage preview"
+  | "xperiencemor3 preview"
+  | "garage"
+  | "xperiencemor3"
+  | "clarins preview"
+  | "ai preview";
 
 type SceneState = {
   currentScene: SceneType;

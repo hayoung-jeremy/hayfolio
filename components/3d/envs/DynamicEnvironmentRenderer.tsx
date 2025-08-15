@@ -9,6 +9,8 @@ const DynamicEnvironmentRenderer = () => {
   switch (currentScene) {
     case "garage preview":
     case "xperiencemor3 preview":
+    case "clarins preview":
+    case "ai preview":
       return <PreviewSceneEnvironments />;
     case "garage":
       return <GarageEnvironments />;

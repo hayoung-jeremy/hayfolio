@@ -31,8 +31,13 @@ const PeviewScenesController = () => {
 
   useEffect(() => {
     const active = getActivePreviewSection(progress);
-    const targetScene =
-      active?.key === "garage" ? "garage preview" : active?.key === "xm3" ? "xperiencemor3 preview" : "none";
+    const map = {
+      garage: "garage preview",
+      xm3: "xperiencemor3 preview",
+      clarins: "clarins preview",
+      ai: "ai preview",
+    } as const;
+    const targetScene = active ? map[active.key] : "none";
 
     if (currentScene !== targetScene) setScene(targetScene);
   }, [progress, currentScene, setScene]);
