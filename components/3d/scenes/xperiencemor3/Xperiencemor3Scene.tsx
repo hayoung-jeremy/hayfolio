@@ -1,7 +1,5 @@
-import { lazy, Suspense, useEffect } from "react";
-import { Html } from "@react-three/drei";
+import { lazy, useEffect } from "react";
 
-import { SceneLoader } from "@/components/ui";
 import { CylinderGrid } from "../../assets/xperiencemor3";
 import { useCameraBus } from "@/store/useCameraBus";
 
