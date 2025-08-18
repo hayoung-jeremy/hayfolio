@@ -9,7 +9,11 @@ const PreviewSceneEnvironments = () => {
   const { moveTo, setConstraints, setAutoRotate } = useCameraBus();
   const currentScene = useSceneStore(s => s.currentScene);
 
-  const shouldAutoRotate = currentScene === "garage preview" || currentScene === "xperiencemor3 preview";
+  const shouldAutoRotate =
+    currentScene === "garage preview" ||
+    currentScene === "xperiencemor3 preview" ||
+    currentScene === "clarins preview" ||
+    currentScene === "ai preview";
 
   useLayoutEffect(() => {
     setConstraints({ minDistance: 1.5, maxDistance: 4.5, polar: [Math.PI / 3, Math.PI / 2], fov: 65 });
