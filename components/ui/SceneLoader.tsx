@@ -4,9 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useSpring } from "framer-motion";
 import { useProgress } from "@react-three/drei";
 import clsx from "clsx";
+import { useOverlayLoader } from "@/store/useOverlayLoader";
 
 const SceneLoader = () => {
   const { progress, active } = useProgress();
+  const { enabled, suppressedCount } = useOverlayLoader();
 
   const [visible, setVisible] = useState(false);
 
@@ -19,16 +21,14 @@ const SceneLoader = () => {
   }, [progress]);
 
   const spring = useSpring(0, { stiffness: 120, damping: 20, mass: 0.6 });
-
   useEffect(() => {
     spring.set(monotonic);
   }, [monotonic, spring]);
 
-  const size = 120;
-  const stroke = 6;
+  const size = 120,
+    stroke = 6;
   const r = (size - stroke) / 2;
   const C = 2 * Math.PI * r;
-
   const [dash, setDash] = useState(C);
   useEffect(() => {
     const unsub = spring.on("change", (v: number) => {
@@ -39,27 +39,49 @@ const SceneLoader = () => {
   }, [C, spring]);
 
   const prevActive = useRef(false);
+
+  const cycleSuppressedRef = useRef(false);
+
   useEffect(() => {
+    if (!enabled) return;
+
     if (active && !prevActive.current) {
       maxSeenRef.current = 0;
       spring.set(0);
       setDash(C);
-      setVisible(true);
+
+      cycleSuppressedRef.current = suppressedCount > 0;
+      setVisible(!cycleSuppressedRef.current);
     }
     prevActive.current = active;
-  }, [active, C, spring]);
+  }, [active, enabled, suppressedCount, C, spring]);
 
   useEffect(() => {
+    if (!enabled) return;
+    if (active && suppressedCount > 0 && !cycleSuppressedRef.current) {
+      cycleSuppressedRef.current = true;
+      if (visible) setVisible(false);
+    }
+  }, [active, enabled, suppressedCount, visible]);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     if (!active && maxSeenRef.current >= 100) {
       spring.set(100);
-      const t = setTimeout(() => setVisible(false), 350);
+      const t = setTimeout(() => {
+        setVisible(false);
+        cycleSuppressedRef.current = false;
+      }, 350);
       return () => clearTimeout(t);
     }
-  }, [active, spring]);
+  }, [active, enabled, spring]);
+
+  const shouldShow = enabled && visible;
 
   return (
     <AnimatePresence mode="wait">
-      {visible && (
+      {shouldShow && (
         <motion.div
           className={clsx(
             "fixed inset-0 z-[9999] w-screen h-dvh xl:w-full xl:h-screen flex items-center justify-center bg-black"

@@ -23,6 +23,7 @@ import {
   SM6_TailLamp_Transparent,
   SM6_Wheel_Transparent,
 } from "./SM6/transparent";
+import { MuteSceneOverlay } from "../scenes";
 import { PartsType } from "@/types/garage";
 
 interface SkeletonPartProps {
@@ -116,7 +117,12 @@ const SkeletonParts = ({ bodyType, partType }: SkeletonPartProps) => {
     });
   });
 
-  return <group ref={groupRef}>{renderPart()}</group>;
+  return (
+    <group ref={groupRef}>
+      {renderPart()}
+      <MuteSceneOverlay />
+    </group>
+  );
 };
 
 export default SkeletonParts;

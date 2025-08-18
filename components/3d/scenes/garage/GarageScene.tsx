@@ -6,6 +6,8 @@ import { QM6_Container } from "../../assets/QM6";
 import { BackgroundContainer } from "../../assets";
 import { GarageEnvironments } from "../../envs";
 import GarageCameraBridge from "./GarageCameraBridge";
+import MuteSceneOverlay from "../MuteSceneOverlay";
+
 import { useGarageStore } from "@/store/useGarageStore";
 import { useCameraBus } from "@/store/useCameraBus";
 
@@ -38,7 +40,16 @@ const GarageScene = () => {
 
   return (
     <>
-      <Suspense fallback={<XM3_Transparent_Container />}>{renderContainer()}</Suspense>
+      <Suspense
+        fallback={
+          <>
+            <XM3_Transparent_Container />
+            <MuteSceneOverlay />
+          </>
+        }
+      >
+        {renderContainer()}
+      </Suspense>
       <GarageEnvironments />
       <BackgroundContainer />
       <GarageCameraBridge />
