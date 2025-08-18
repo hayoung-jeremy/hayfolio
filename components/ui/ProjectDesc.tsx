@@ -20,59 +20,35 @@ const ProjectDescription = ({ title, description, visible, id }: Props) => {
   useLayoutEffect(() => {
     if (!containerRef.current || !titleRef.current || !descRef.current) return;
 
-    const splitTitle = new SplitText(titleRef.current, {
-      type: "chars",
-      preserveSpaces: true,
-    });
-    const splitDesc = new SplitText(descRef.current, {
-      type: "chars",
-      preserveSpaces: true,
-    });
+    // 이전 트윈/스플릿 정리
+    gsap.killTweensOf([containerRef.current, titleRef.current, descRef.current]);
 
-    const shouldAnimateIn = visible && prevVisible.current !== true;
-    const shouldAnimateOut = !visible && prevVisible.current !== false;
+    const splitTitle = new SplitText(titleRef.current, { type: "chars", preserveSpaces: true });
+    const splitDesc = new SplitText(descRef.current, { type: "chars", preserveSpaces: true });
 
-    if (shouldAnimateIn) {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    if (visible && prevVisible.current !== true) {
       gsap.set(containerRef.current, { autoAlpha: 1 });
 
-      gsap.fromTo(
+      tl.fromTo(
         splitTitle.chars,
         { opacity: 0, y: 40, rotateX: 90, transformOrigin: "0% 50% -20px" },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 0.4,
-          ease: "power3.out",
-          stagger: 0.03,
-        }
-      );
-
-      gsap.fromTo(
+        { opacity: 1, y: 0, rotateX: 0, duration: 0.4, stagger: 0.03 }
+      ).fromTo(
         splitDesc.chars,
         { opacity: 0, y: 30, rotateX: 90, transformOrigin: "0% 50% -20px" },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 0.5,
-          ease: "power3.out",
-          stagger: 0.015,
-        }
+        { opacity: 1, y: 0, rotateX: 0, duration: 0.5, stagger: 0.015 },
+        "<0.05"
       );
-    }
-
-    if (shouldAnimateOut) {
-      gsap.to(containerRef.current, {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      });
+    } else if (!visible && prevVisible.current !== false) {
+      tl.to(containerRef.current, { autoAlpha: 0, duration: 0.4, ease: "power2.out" });
     }
 
     prevVisible.current = visible;
 
     return () => {
+      tl.kill();
       splitTitle.revert();
       splitDesc.revert();
     };
