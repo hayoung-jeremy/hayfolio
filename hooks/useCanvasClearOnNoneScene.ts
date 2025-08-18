@@ -1,16 +1,20 @@
-import { useThree, useFrame } from "@react-three/fiber";
+"use client";
+
+import { useEffect, useRef } from "react";
+import { useThree } from "@react-three/fiber";
 import { useSceneStore } from "@/store/useSceneStore";
 
 const useCanvasClearOnNoneScene = () => {
   const { gl } = useThree();
   const { currentScene } = useSceneStore();
+  const lastSceneRef = useRef<string | null>(null);
 
-  useFrame(() => {
-    if (currentScene === "none") {
+  useEffect(() => {
+    if (lastSceneRef.current !== currentScene) {
       gl.autoClear = true;
-      gl.clear();
+      lastSceneRef.current = currentScene;
     }
-  });
+  }, [currentScene, gl]);
 };
 
 export default useCanvasClearOnNoneScene;
