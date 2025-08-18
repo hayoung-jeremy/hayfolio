@@ -47,7 +47,13 @@ export default function BackButton({
     try {
       await runAll(onBeforeNavigate);
       if (to) {
-        replace ? router.replace(to) : router.push(to);
+        const options = { scroll: false as const };
+
+        if (to === "/") {
+          sessionStorage.setItem("home-restore", "1");
+        }
+
+        replace ? router.replace(to, options) : router.push(to, options);
       } else {
         router.back();
       }

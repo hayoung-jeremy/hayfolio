@@ -26,6 +26,41 @@ export default function Home() {
   const showClarins = active?.key === "clarins";
   const showAI = active?.key === "ai";
 
+  useLayoutEffect(() => {
+    if (ref.current) setDomElement(ref.current);
+    return () => setDomElement(null);
+  }, []);
+
+  useLayoutEffect(() => {
+    const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    const isBackForward = nav?.type === "back_forward";
+    const shouldRestore = isBackForward || sessionStorage.getItem("home-restore") === "1";
+
+    if (!shouldRestore) {
+      useScrollStore.getState().setProgress(0);
+      return;
+    }
+
+    const raw = sessionStorage.getItem("home-progress") ?? sessionStorage.getItem("scroll-progress");
+    const p = raw ? parseFloat(raw) : 0;
+
+    const el = document.querySelector(".PeviewScenesController") as HTMLElement | null;
+    if (el) {
+      try {
+        window.history.scrollRestoration = "manual";
+      } catch {}
+      const start = el.offsetTop;
+      const end = start + el.offsetHeight - window.innerHeight;
+      const len = Math.max(0, end - start);
+      const y = Math.round(start + p * len);
+
+      window.scrollTo(0, y);
+    }
+
+    useScrollStore.getState().setProgress(p);
+    sessionStorage.removeItem("home-restore");
+  }, []);
+
   useGSAP(() => {
     gsap.to(".IntroText", {
       opacity: 0,
@@ -46,16 +81,20 @@ export default function Home() {
         scrub: true,
       },
     });
-  }, []);
 
-  useLayoutEffect(() => {
-    if (ref.current) setDomElement(ref.current);
-    return () => setDomElement(null);
+    requestAnimationFrame(() => ScrollTrigger.refresh());
   }, []);
 
   useEffect(() => {
     useSceneStore.getState().setScene("none");
-    useScrollStore.getState().setProgress(0);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      const p = useScrollStore.getState().progress;
+      sessionStorage.setItem("home-progress", String(p));
+      sessionStorage.setItem("scroll-progress", String(p));
+    };
   }, []);
 
   return (
