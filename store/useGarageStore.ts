@@ -13,6 +13,8 @@ export type GarageSceneCameraTarget = {
   target: [number, number, number];
 };
 
+type EditableColorType = "Body" | "Bonnet" | "Bumper" | "Wheel" | "Spoiler" | "Pattern";
+
 type GarageState = {
   selectedBody: "XM3" | "SM6" | "QM6" | null;
   selectedParts: Partial<Record<PartsType, PartMeta>>;
@@ -33,15 +35,10 @@ type GarageState = {
 
   isColorPickerOpen: boolean;
   setColorPickerOpen: (v: boolean) => void;
-  selectedColors: {
-    Body: string;
-    Bonnet: string;
-    Bumper: string;
-    Wheel: string;
-    Spoiler: string;
-    Pattern: string;
-  };
-  setSelectedColorByType: (type: "Body" | "Bonnet" | "Bumper" | "Wheel" | "Spoiler" | "Pattern", color: string) => void;
+  selectedColors: Record<EditableColorType, string>;
+  setSelectedColorByType: (type: EditableColorType, color: string) => void;
+  applyColorToAll: (color: string) => void;
+
   resetAll: () => void;
 };
 
@@ -94,13 +91,18 @@ export const useGarageStore = create<GarageState>(set => ({
     Spoiler: "#ffffff",
     Pattern: "#ffffff",
   },
-  setSelectedColorByType: (type: "Body" | "Bonnet" | "Bumper" | "Wheel" | "Spoiler" | "Pattern", color: string) =>
+  setSelectedColorByType: (type, color) =>
     set(state => ({
-      selectedColors: {
-        ...state.selectedColors,
-        [type]: color,
-      },
+      selectedColors: { ...state.selectedColors, [type]: color },
     })),
+  applyColorToAll: color =>
+    set(state => {
+      const keys: EditableColorType[] = ["Body", "Bonnet", "Bumper", "Wheel", "Spoiler", "Pattern"];
+      const next = { ...state.selectedColors };
+      for (const k of keys) next[k] = color;
+      return { selectedColors: next };
+    }),
+
   resetAll: () =>
     set({
       selectedBody: "XM3",

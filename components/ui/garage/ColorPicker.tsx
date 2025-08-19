@@ -6,14 +6,19 @@ import { useGarageStore } from "@/store/useGarageStore";
 import { partsTypes } from "@/types/garage";
 
 const ColorPicker = () => {
-  const { activePartTabIndex, selectedColors, setSelectedColorByType, setColorPickerOpen, setPartPanelOpen } =
-    useGarageStore();
+  const {
+    activePartTabIndex,
+    selectedColors,
+    setSelectedColorByType,
+    setColorPickerOpen,
+    setPartPanelOpen,
+    applyColorToAll,
+  } = useGarageStore();
 
   const currentType = partsTypes[activePartTabIndex];
   const editableTypes = ["Body", "Bonnet", "Bumper", "Wheel", "Spoiler", "Pattern"] as const;
   type EditableColorType = (typeof editableTypes)[number];
   const isEditable = editableTypes.includes(currentType as EditableColorType);
-  const colorValue = isEditable ? selectedColors[currentType as EditableColorType] : "#ffffff";
   const currentKey = currentType as EditableColorType;
 
   const [tempColor, setTempColor] = useState<string>(isEditable ? selectedColors[currentKey] : "#ffffff");
@@ -52,7 +57,15 @@ const ColorPicker = () => {
         >
           닫기
         </button>
-        <button className="flex-1 w-12 h-12 rounded-lg border border-white/20 xl:bg-black/70 cursor-pointer">
+        <button
+          onClick={() => {
+            if (!isEditable) return;
+            applyColorToAll(tempColor);
+          }}
+          aria-disabled={!isEditable}
+          className="flex-1 w-12 h-12 rounded-lg border border-white/20 xl:bg-black/70 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={!isEditable}
+        >
           전체에 적용
         </button>
       </div>
