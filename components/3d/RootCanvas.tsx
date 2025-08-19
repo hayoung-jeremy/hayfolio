@@ -5,6 +5,7 @@ import { DynamicSceneRenderer } from "./scenes";
 import { DynamicEnvironmentRenderer } from "./envs";
 import { SceneLoader } from "../ui";
 import GlobalCameraController from "./GlobalCameraController";
+import GlobalVisualDirector from "./GlobalVisualDirector";
 import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 
 const RootCanvas = () => {
@@ -14,7 +15,6 @@ const RootCanvas = () => {
     <>
       <Canvas
         shadows
-        gl={{ antialias: true }}
         dpr={[1, 1.5]}
         camera={{ position: [0, 0, 5], fov: 65 }}
         style={{
@@ -25,13 +25,21 @@ const RootCanvas = () => {
           height: "100vh",
           zIndex: 0,
         }}
-        frameloop="demand"
         eventSource={eventSource ?? undefined}
+        gl={{
+          antialias: true,
+          powerPreference: "high-performance",
+          stencil: false,
+          depth: true,
+          alpha: true,
+          preserveDrawingBuffer: false,
+        }}
       >
         <Suspense fallback={null}>
           <DynamicSceneRenderer />
           <DynamicEnvironmentRenderer />
           <GlobalCameraController />
+          <GlobalVisualDirector />
         </Suspense>
       </Canvas>
       <SceneLoader />
