@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useSpring } from "framer-motion";
 import { useProgress } from "@react-three/drei";
 import clsx from "clsx";
@@ -13,12 +13,11 @@ const SceneLoader = () => {
   const [visible, setVisible] = useState(false);
 
   const maxSeenRef = useRef(0);
-  const monotonic = useMemo(() => {
-    const raw = Math.max(0, Math.min(100, progress));
-    const next = Math.max(maxSeenRef.current, raw);
-    maxSeenRef.current = next;
-    return next;
-  }, [progress]);
+  const clamped = Math.max(0, Math.min(100, progress));
+  if (clamped > maxSeenRef.current) {
+    maxSeenRef.current = clamped;
+  }
+  const monotonic = maxSeenRef.current;
 
   const spring = useSpring(0, { stiffness: 120, damping: 20, mass: 0.6 });
   useEffect(() => {

@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
-import { useMemo } from "react";
 
 import ProjectDescription from "./ProjectDesc";
 import ButtonWrapper from "./ButtonWrapper";
@@ -24,7 +23,7 @@ const Navigation = () => {
   const progress = useScrollStore(s => s.progress);
   const router = useRouter();
 
-  const active = useMemo(() => getActiveByProgress(progress), [progress]);
+  const active = getActiveByProgress(progress);
 
   const isVisible = !!active;
   const isDisabled = active ? !active.route : true;

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGarageStore } from "@/store/useGarageStore";
 import { useCameraBus } from "@/store/useCameraBus";
 import { partsTypes } from "@/types/garage";
@@ -10,7 +10,7 @@ export default function GarageCameraBridge() {
   const activePartTabIndex = useGarageStore(s => s.activePartTabIndex);
   const moveTo = useCameraBus(s => s.moveTo);
 
-  const activeType = useMemo(() => partsTypes[activePartTabIndex], [activePartTabIndex]);
+  const activeType = partsTypes[activePartTabIndex];
   const activeOptionKey = selectedParts[activeType]?.imageUrl ?? "__none__";
 
   useEffect(() => {
