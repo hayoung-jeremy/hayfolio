@@ -24,9 +24,10 @@ const OptionSelectorCircleAnimation = ({ startsFrom, isSelected, size = 30, stro
   const cx = size / 2;
   const cy = size / 2;
 
+  const rotation = startsFrom === "top" ? "rotate(90 " + cx + " " + cy + ")" : "rotate(-90 " + cx + " " + cy + ")";
+
   return (
     <motion.svg
-      className={startsFrom === "top" ? "" : "rotate-180"}
       initial="hidden"
       animate="visible"
       height={size}
@@ -36,7 +37,7 @@ const OptionSelectorCircleAnimation = ({ startsFrom, isSelected, size = 30, stro
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* 링: circle + pathLength 애니메이션 */}
-      <motion.circle cx={cx} cy={cy} r={r} stroke="white" strokeWidth={stroke} variants={draw} />
+      <motion.circle cx={cx} cy={cy} r={r} stroke="white" strokeWidth={stroke} variants={draw} transform={rotation} />
 
       {/* 선택 점 */}
       <AnimatePresence mode="wait">
