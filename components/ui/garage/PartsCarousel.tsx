@@ -119,7 +119,6 @@ const PartsCarousel = () => {
                         alt={displayName}
                         width={180}
                         height={80}
-                        loaderVariant="skeleton"
                         className={clsx("object-contain transition-all duration-200", {
                           "opacity-100": isSelected,
                           "opacity-30": !isSelected,

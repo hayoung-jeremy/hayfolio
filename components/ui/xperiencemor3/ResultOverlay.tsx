@@ -29,7 +29,6 @@ const ResultOverlay = () => {
           priority
           sizes="320px"
           style={{ objectFit: "cover" }}
-          loaderVariant="skeleton"
         />
       </div>
 
