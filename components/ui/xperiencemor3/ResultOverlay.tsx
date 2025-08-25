@@ -30,6 +30,9 @@ const ResultOverlay = () => {
           sizes="320px"
           style={{ objectFit: "cover" }}
         />
+        <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 py-5 bg-black/65 w-[80%] md:w-[70%] text-white/80 text-[14px] md:text-base rounded-lg">
+          현재 이벤트가 종료되어 <br /> 정상적인 이미지 제공이 어렵습니다. <br /> 양해 부탁드려요🙏
+        </p>
       </div>
 
       <p className="whitespace-pre-line leading-relaxed text-sm md:text-base opacity-90">{result.text}</p>
