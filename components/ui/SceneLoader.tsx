@@ -6,6 +6,12 @@ import { useProgress } from "@react-three/drei";
 import clsx from "clsx";
 import { useOverlayLoader } from "@/store/useOverlayLoader";
 
+declare global {
+  interface Window {
+    __overlayClosed?: boolean;
+  }
+}
+
 const SceneLoader = () => {
   const { progress, active } = useProgress();
   const { enabled, suppressedCount } = useOverlayLoader();
@@ -38,13 +44,15 @@ const SceneLoader = () => {
   }, [C, spring]);
 
   const prevActive = useRef(false);
-
   const cycleSuppressedRef = useRef(false);
 
   useEffect(() => {
     if (!enabled) return;
 
     if (active && !prevActive.current) {
+      window.__overlayClosed = false;
+      window.dispatchEvent(new Event("overlayOpen"));
+
       maxSeenRef.current = 0;
       spring.set(0);
       setDash(C);
@@ -71,6 +79,8 @@ const SceneLoader = () => {
       const t = setTimeout(() => {
         setVisible(false);
         cycleSuppressedRef.current = false;
+        window.__overlayClosed = true;
+        window.dispatchEvent(new Event("overlayClosed"));
       }, 350);
       return () => clearTimeout(t);
     }
@@ -82,6 +92,7 @@ const SceneLoader = () => {
     <AnimatePresence mode="wait">
       {shouldShow && (
         <motion.div
+          id="overlay"
           className={clsx(
             "fixed inset-0 z-[9999] w-screen h-dvh xl:w-full xl:h-screen flex items-center justify-center bg-black"
           )}
