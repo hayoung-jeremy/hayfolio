@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useSpring } from "framer-motion";
 import { useProgress } from "@react-three/drei";
 import clsx from "clsx";
 import { useOverlayLoader } from "@/store/useOverlayLoader";
+import { getLenis } from "@/hooks/useLenis";
 
 declare global {
   interface Window {
@@ -58,6 +59,10 @@ const SceneLoader = () => {
       setDash(C);
 
       cycleSuppressedRef.current = suppressedCount > 0;
+      if (!cycleSuppressedRef.current) {
+        getLenis()?.stop();
+        document.documentElement.style.overflow = "hidden";
+      }
       setVisible(!cycleSuppressedRef.current);
     }
     prevActive.current = active;
@@ -79,6 +84,8 @@ const SceneLoader = () => {
       const t = setTimeout(() => {
         setVisible(false);
         cycleSuppressedRef.current = false;
+        document.documentElement.style.overflow = "";
+        getLenis()?.start();
         window.__overlayClosed = true;
         window.dispatchEvent(new Event("overlayClosed"));
       }, 350);
