@@ -9,14 +9,14 @@ import { getActivePreviewSection } from "@/utils/home";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PeviewScenesController = () => {
+const PreviewScenesController = () => {
   const progress = useScrollStore(s => s.progress);
   const { currentScene, setScene } = useSceneStore();
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
-        trigger: ".PeviewScenesController",
+        trigger: ".PreviewScenesController",
         start: "top top",
         end: "bottom bottom",
         scrub: true,
@@ -45,4 +45,4 @@ const PeviewScenesController = () => {
   return null;
 };
 
-export default PeviewScenesController;
+export default PreviewScenesController;

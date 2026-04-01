@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 let lenis: Lenis | null = null;
 
+export const getLenis = () => lenis;
+
 export const useLenis = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;

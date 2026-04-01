@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 import { Footer, IntroText, Navigation } from "@/components/ui";
 import { ClarinsPreview } from "@/components/ui/clarins";
 import { AiPreview } from "@/components/ui/ai";
-import { PeviewScenesController } from "@/components/3d/scenes";
+import { PreviewScenesController } from "@/components/3d/scenes";
 
 import { useInteractionLayerStore } from "@/store/useInteractionLayerStore";
 import { useSceneStore } from "@/store/useSceneStore";
@@ -44,7 +44,7 @@ export default function Home() {
     const raw = sessionStorage.getItem("home-progress") ?? sessionStorage.getItem("scroll-progress");
     const p = raw ? parseFloat(raw) : 0;
 
-    const el = document.querySelector(".PeviewScenesController") as HTMLElement | null;
+    const el = document.querySelector(".PreviewScenesController") as HTMLElement | null;
     if (el) {
       try {
         window.history.scrollRestoration = "manual";
@@ -72,10 +72,10 @@ export default function Home() {
       },
     });
 
-    gsap.to(".PeviewScenesController", {
+    gsap.to(".PreviewScenesController", {
       opacity: 1,
       scrollTrigger: {
-        trigger: ".PeviewScenesController",
+        trigger: ".PreviewScenesController",
         start: "top 40%",
         end: "top top",
         scrub: true,
@@ -105,13 +105,13 @@ export default function Home() {
       transition={{ duration: 1 }}
     >
       <IntroText />
-      <div ref={ref} className="PeviewScenesController opacity-0 h-[500vh] relative z-10">
+      <div ref={ref} className="PreviewScenesController opacity-0 h-[500vh] relative z-10">
         <div className="sticky top-0 h-screen">
           <AnimatePresence mode="wait">
             {showClarins && <ClarinsPreview />}
             {showAI && <AiPreview />}
           </AnimatePresence>
-          <PeviewScenesController />
+          <PreviewScenesController />
           <Navigation />
         </div>
       </div>
