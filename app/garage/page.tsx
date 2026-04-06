@@ -10,6 +10,7 @@ import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 import { useGarageStore } from "@/store/useGarageStore";
 import { useSceneStore } from "@/store/useSceneStore";
+import { useOverlayLoader } from "@/store/useOverlayLoader";
 import { registerGaragePreloads, preloadInitialThumbnails } from "@/utils/garage";
 
 const Garage = () => {
@@ -18,6 +19,7 @@ const Garage = () => {
   const [isThumbnailsReady, setThumbnailsReady] = useState(false);
   const { resetAll } = useGarageStore();
   const { setScene } = useSceneStore();
+  const { hold, unhold } = useOverlayLoader();
   useCleanupOnUnmount();
 
   const isReady = isModelLoaded && isThumbnailsReady;
@@ -27,9 +29,13 @@ const Garage = () => {
   }, [setScene]);
 
   useEffect(() => {
+    hold();
     registerGaragePreloads();
-    preloadInitialThumbnails().finally(() => setThumbnailsReady(true));
-  }, []);
+    preloadInitialThumbnails().finally(() => {
+      setThumbnailsReady(true);
+      unhold();
+    });
+  }, [hold, unhold]);
 
   return (
     <>

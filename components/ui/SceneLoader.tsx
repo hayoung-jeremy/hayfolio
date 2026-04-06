@@ -15,7 +15,7 @@ declare global {
 
 const SceneLoader = () => {
   const { progress, active } = useProgress();
-  const { enabled, suppressedCount } = useOverlayLoader();
+  const { enabled, suppressedCount, holdCount } = useOverlayLoader();
 
   const [visible, setVisible] = useState(false);
 
@@ -79,7 +79,7 @@ const SceneLoader = () => {
   useEffect(() => {
     if (!enabled) return;
 
-    if (!active && maxSeenRef.current >= 100) {
+    if (!active && maxSeenRef.current >= 100 && holdCount === 0) {
       spring.set(100);
       const t = setTimeout(() => {
         setVisible(false);
@@ -91,7 +91,7 @@ const SceneLoader = () => {
       }, 350);
       return () => clearTimeout(t);
     }
-  }, [active, enabled, spring]);
+  }, [active, enabled, holdCount, spring]);
 
   const shouldShow = enabled && visible;
 
