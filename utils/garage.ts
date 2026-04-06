@@ -1,4 +1,5 @@
 import { useGLTF } from "@react-three/drei";
+import { partThumbnails } from "@/constants/partsThumbnails";
 
 export function getWheelXOffset({
   carType,
@@ -71,6 +72,21 @@ export function disposeGLTF(gltf: any) {
       }
     }
   });
+}
+
+export function preloadInitialThumbnails(): Promise<void[]> {
+  const urls = partThumbnails["Body"];
+  return Promise.all(
+    urls.map(
+      src =>
+        new Promise<void>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve();
+          img.onerror = () => reject();
+          img.src = src;
+        })
+    )
+  );
 }
 
 export function registerGaragePreloads() {

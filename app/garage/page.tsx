@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import { BackButton } from "@/components/ui";
@@ -10,32 +10,42 @@ import useModelLoadProgress from "@/hooks/useModelLoadProgress";
 import { useCleanupOnUnmount } from "@/hooks/useCleanupOnUnmount";
 import { useGarageStore } from "@/store/useGarageStore";
 import { useSceneStore } from "@/store/useSceneStore";
-import { registerGaragePreloads } from "@/utils/garage";
+import { useOverlayLoader } from "@/store/useOverlayLoader";
+import { registerGaragePreloads, preloadInitialThumbnails } from "@/utils/garage";
 
 const Garage = () => {
   const { isMobile, isTablet } = useDisplay();
   const isModelLoaded = useModelLoadProgress();
+  const [isThumbnailsReady, setThumbnailsReady] = useState(false);
   const { resetAll } = useGarageStore();
   const { setScene } = useSceneStore();
+  const { hold, unhold } = useOverlayLoader();
   useCleanupOnUnmount();
+
+  const isReady = isModelLoaded && isThumbnailsReady;
 
   useLayoutEffect(() => {
     setScene("garage");
   }, [setScene]);
 
   useEffect(() => {
+    hold();
     registerGaragePreloads();
-  }, []);
+    preloadInitialThumbnails().finally(() => {
+      setThumbnailsReady(true);
+      unhold();
+    });
+  }, [hold, unhold]);
 
   return (
     <>
       {isMobile || isTablet ? (
-        <AnimatePresence>{isModelLoaded && <MobileBottomSheet />}</AnimatePresence>
+        <AnimatePresence>{isReady && <MobileBottomSheet />}</AnimatePresence>
       ) : (
-        isModelLoaded && <SideBar />
+        isReady && <SideBar />
       )}
 
-      {isModelLoaded && (
+      {isReady && (
         <BackButton
           to="/"
           onBeforeNavigate={resetAll}
